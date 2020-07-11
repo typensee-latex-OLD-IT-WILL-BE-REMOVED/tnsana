@@ -11,9 +11,9 @@
 
 %% \section{Analysis}
 %
-%\subsection{Tableaux de variation et de signe}
+%\section{Tableaux de variation et de signe}
 
-\subsubsection{Décorer facilement un tableau}
+\subsection{Décorer facilement un tableau}
 
 \paragraph{Motivation}
 
@@ -72,8 +72,8 @@ Deux options s'offrent à nous pour justifier comment a été rempli le tableau.
 
     \comLine[gray]{0}{$\leftarrow$ Valeurs utiles de $x$}
 
-    \graphSign{1}{ax+b, ap}{$\frac{3}{2}$}
-    \graphSign{2}{ax+b, an}{$5$}
+    \graphSign        {1}{ax+b, ap}{$\frac{3}{2}$}
+    \graphSign[purple]{2}{ax+b, an}{$5$}
 
     \comLine[gray]{3}{$\leftarrow$ Signe d'un produit.}
 \end{tikzpicture}
@@ -96,8 +96,8 @@ il a fallu ajouter les lignes données ci-dessous où sont utilisées les macros
     % ---------------------------------------------------- %
     \comLine[gray]{0}{$\leftarrow$ Valeurs utiles de $x$}
 
-    \graphSign{1}{ax+b, ap}{$\frac{3}{2}$}
-    \graphSign{2}{ax+b, an}{$5$}
+    \graphSign        {1}{ax+b, ap}{$\frac{3}{2}$}
+    \graphSign[purple]{2}{ax+b, an}{$5$}
 
     \comLine[gray]{3}{$\leftarrow$ Signe d'un produit.}
 \end{tikzpicture}
@@ -158,7 +158,7 @@ Pour le moment, la macro \macro{graphSign} propose deux types de graphiques
 Rappelons au passage que la convention est de prendre $0$ pour numéro de la toute 1\iere{} ligne contenant les valeurs utiles de la variable.
 
 \begin{enumerate}
-    \item \textbf{Fonctions affines non constantes.}
+    \item \textbf{\itshape Fonctions affines non constantes.}
           
           \smallskip
 
@@ -178,7 +178,7 @@ Rappelons au passage que la convention est de prendre $0$ pour numéro de la tou
 
 
     \medskip
-    \item \textbf{Fonctions trinômiales du 2\ieme{} degré.}
+    \item \textbf{\itshape Fonctions trinômiales du 2\ieme{} degré.}
           
           \smallskip
 
@@ -232,10 +232,10 @@ Il devient très facile de proposer un tableau décoré comme le suivant.
 
     \comLine[gray]{0}{\kern1.75em Schémas}
     
-    \graphSign{1}{ax+b, an}{$3$}
-    \comLine  {2}{Voir Q.1-a)}
-    \graphSign{3}{ax2+bx+c, ap, dp}{$-4$}{$1$} % Deux racines réelles.
-    \graphSign{4}{ax2+bx+c, an, dn}            % Aucune racine réelle.
+    \graphSign        {1}{ax+b, an}{$3$}
+    \comLine[purple]  {2}{Voir Q.1-a)}
+    \graphSign        {3}{ax2+bx+c, ap, dp}{$-4$}{$1$} % Deux racines réelles.
+    \graphSign[purple]{4}{ax2+bx+c, an, dn}            % Aucune racine réelle.
 
     \comLine[gray]{5}{$\leftarrow$ Conclusion}
 \end{tikzpicture}
@@ -253,10 +253,10 @@ En plus des deux exemples de schémas de paraboles, il faut noter dans le code s
     % ---------------------------------------------------- %
     \comLine[gray]{0}{\kern1.75em Schémas}
     
-    \graphSign{1}{ax+b, an}{$3$}
-    \comLine  {2}{Voir Q.1-a)}
-    \graphSign{3}{ax2+bx+c, ap, dp}{$-4$}{$1$} % Deux racines réelles.
-    \graphSign{4}{ax2+bx+c, an, dn}            % Aucune racine réelle.
+    \graphSign        {1}{ax+b, an}{$3$}
+    \comLine[purple]  {2}{Voir Q.1-a)}
+    \graphSign        {3}{ax2+bx+c, ap, dp}{$-4$}{$1$} % Deux racines réelles.
+    \graphSign[purple]{4}{ax2+bx+c, an, dn}            % Aucune racine réelle.
 
     \comLine[gray]{5}{$\leftarrow$ Conclusion}
 \end{tikzpicture}
@@ -294,7 +294,7 @@ Voici un exemple possible d'utilisation où le retour à la ligne a été obtenu
 % ---------------------- %
 
 
-\subsubsection{Fiche technique}
+\subsection{Fiche technique}
 
 \paragraph{Tableaux de signes -- Commentaires et graphiques explicatifs}
 
