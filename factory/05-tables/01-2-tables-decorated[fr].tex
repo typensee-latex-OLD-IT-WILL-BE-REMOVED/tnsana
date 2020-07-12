@@ -85,7 +85,10 @@ Pour produire le 2\ieme{} tableau, en plus du code \verb#tkz-tab# pour le tablea
 \footnote{
 	Ceci permet d'avoir de la place dans la 1\iere{} colonne pour le dernier produit et de réduire la largeur des colonnes pour les signes.
 },
-il a fallu ajouter les lignes données ci-dessous où sont utilisées les macros \macro{graphSign} et \macro{comLine} proposées par \verb+lymath+ \emph{(la syntaxe simple à suivre sera expliquée dans la section suivante)}.
+il a fallu ajouter les lignes données ci-dessous où sont utilisées les macros \macro{graphSign} et \macro{comLine} proposées par \verb+lymath+ \emph{(la syntaxe simple à suivre sera expliquée dans la section suivante)}
+\footnote{
+	Les lignes pour les signes doivent utiliser un coefficient minimal de \texttt{1.5} pour la hauteur afin d'éviter que la superposition des graphiques.
+}.
 
 \medskip
 
@@ -105,7 +108,7 @@ il a fallu ajouter les lignes données ci-dessous où sont utilisées les macros
 
 
 \begin{remark}
-	Les lignes pour les signes doivent utiliser un coefficient minimal de \verb#1.5# pour la hauteur afin d'éviter que la superposition des graphiques. 
+	Il est aussi possible de décorer une ligne de variation comme cela sera montré dans la section \ref{tnsana-grapgsign-com-two-lines}. 
 \end{remark}
 
 
@@ -142,7 +145,7 @@ Cette macro possède un argument optionnel et deux obligatoires.
           \smallskip
           
           Par défaut aucun retour à la ligne n'est possible.
-          Si besoin se reporter à la  page \pageref{grapgsign-com-two-lines} où est montré comment écrire sur plusieurs lignes \emph{(voir le tout dernier exemple de cette section)}.
+          Si besoin se reporter à la  page \pageref{tnsana-grapgsign-com-two-lines} où est montré comment écrire sur plusieurs lignes \emph{(voir le tout dernier exemple de cette section)}.
 \end{enumerate}
 
 
@@ -266,7 +269,7 @@ En plus des deux exemples de schémas de paraboles, il faut noter dans le code s
 % ---------------------- %
 
 
-\newparaexample{Commenter des variations} \label{grapgsign-com-two-lines}
+\newparaexample{Commenter des variations} \label{tnsana-grapgsign-com-two-lines}
 
 Pour finir, indiquons que les outils de décoration marchent aussi pour les tableaux de variation.
 Voici un exemple possible d'utilisation où le retour à la ligne a été obtenue affreusement, ou pas, via \verb#\parbox{11.5em}{Les limites sont hors programme pour cette année.}#.

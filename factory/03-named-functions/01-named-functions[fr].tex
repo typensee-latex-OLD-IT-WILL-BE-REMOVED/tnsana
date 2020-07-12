@@ -16,11 +16,10 @@
 
 \newparaexample*{}
 
-Quelques fonctions nommées supplémentaires où \prefix{fch} est pour \whyprefix{f}{rench} soit \inenglish{français} \emph{(ce choix a été fait pour éviter des incompatibilités avec quelques autres packages)}. La liste complète des fonctions nommées est donnée un peu plus bas dans une section dédiée.
+Quelques fonctions nommées supplémentaires où le \prefix{f} dans \prefix{fch} est pour \whyprefix{f}{rench} soit \inenglish{français} \emph{(ce choix a été fait pour éviter des incompatibilités avec quelques autres packages)}. La liste complète des fonctions nommées est donnée un peu plus bas dans la section  \ref{tnsana-all-named-functions}.
 
 \begin{latexex}
-$\fch x \neq ch x$ ,
-$\ppcm(x;y)$ ou
+$\fch x = \cosh x$ ou
 $\lg x$
 \end{latexex}
 
@@ -33,12 +32,6 @@ $\lg x$
 \paragraph{Fonctions nommées sans paramètre}
 
 % List of functions without parameter - START
-\foreach \k in {pgcd, ppcm}{
-
-    \IDmacro*{\k}{0}
-}
-                
-\separation
 
 \foreach \k in {acos, asin, atan}{
 
@@ -65,7 +58,15 @@ $\lg x$
 
     \IDmacro*{\k}{0}  où \quad \mwhyprefix{{f}}{{rench}}
 }
-                % List of functions without parameter - END
+                
+\separation
+
+\foreach \k in {afch, afsh, afth}{
+
+    \IDmacro*{\k}{0}
+}
+
+% List of functions without parameter - END
 
 
 % ---------------------- %
@@ -90,7 +91,6 @@ $\expb{6} y = 6^y$
 
 % List of functions with parameters - START
 
-
 \IDmacro*{expb}{1}
 
 \IDarg{} la base de l'exponentielle
@@ -107,49 +107,45 @@ $\expb{6} y = 6^y$
 % ---------------------- %
 
 
-\subsection{Toutes les fonctions nommées en plus}
+\subsection{Toutes les fonctions nommées en plus} \label{tnsana-all-named-functions}
 
 \vspace{-1em}
 
 \begin{multicols}{2}
 % Table of all - START
-\verb+pgcd+ : $\pgcd\dots$
+    \verb+acos+ : $\acos\dots$
 
-\verb+ppcm+ : $\ppcm\dots$
+    \verb+asin+ : $\asin\dots$
 
-\verb+acos+ : $\acos\dots$
+    \verb+atan+ : $\atan\dots$
 
-\verb+asin+ : $\asin\dots$
+    \verb+arccosh+ : $\arccosh\dots$
 
-\verb+atan+ : $\atan\dots$
+    \verb+arcsinh+ : $\arcsinh\dots$
 
-\verb+arccosh+ : $\arccosh\dots$
+    \verb+arctanh+ : $\arctanh\dots$
 
-\verb+arcsinh+ : $\arcsinh\dots$
+    \verb+acosh+ : $\acosh\dots$
 
-\verb+arctanh+ : $\arctanh\dots$
+    \verb+asinh+ : $\asinh\dots$
 
-\verb+acosh+ : $\acosh\dots$
+    \verb+atanh+ : $\atanh\dots$
 
-\verb+asinh+ : $\asinh\dots$
+    \verb+fch+ : $\fch\dots$
 
-\verb+atanh+ : $\atanh\dots$
+    \verb+fsh+ : $\fsh\dots$
 
-\verb+fch+ : $\fch\dots$
+    \verb+fth+ : $\fth\dots$
 
-\verb+fsh+ : $\fsh\dots$
+    \verb+afch+ : $\afch\dots$
 
-\verb+fth+ : $\fth\dots$
+    \verb+afsh+ : $\afsh\dots$
 
-\verb+afch+ : $\afch\dots$
+    \verb+afth+ : $\afth\dots$
 
-\verb+afsh+ : $\afsh\dots$
+    \verb+expb{p}+ : $\expb{p}\dots$
 
-\verb+afth+ : $\afth\dots$
-
-\verb+expb{p}+ : $\expb{p}\dots$
-
-\verb+logb{p}+ : $\logb{p}\dots$
+    \verb+logb{p}+ : $\logb{p}\dots$
 % Table of all - END
 \end{multicols}
 

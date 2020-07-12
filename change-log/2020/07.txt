@@ -1,5 +1,16 @@
 ==========
-2020-07-???
+2020-07-12
+==========
+
+**First version version::``0.1.0-beta`` of ¨tnsana:** here are the changes.
+
+    1) The french named functions `ppcm` and `pgcd` have been moved to ¨tnsarith.
+
+    1) All the labels use the prefix ``tnsarith`` to avoid conflicts when building ¨tnsmath.
+
+
+==========
+2020-07-10
 ==========
 
 **First version version::``0.0.0-beta`` of ¨tnsana:** this package tries to simplify the writting of basic analysis.

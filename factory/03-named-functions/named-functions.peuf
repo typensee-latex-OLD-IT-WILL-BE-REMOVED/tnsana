@@ -4,9 +4,6 @@ no-parameter::
 //
 // If name for humans is empty then the name is the same
 // as the latex name of the command.
-    pgcd =
-    ppcm =
-
     acos =
     asin =
     atan =

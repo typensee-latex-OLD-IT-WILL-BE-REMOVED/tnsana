@@ -172,10 +172,10 @@
 	\\%
 	{\footnotesize Code source disponible sur \url{https://github.com/typensee-latex/tnsana.git}.}%
 	\\%
-    {\footnotesize Version \texttt{0.0.0-beta} développée et testée sur \macosxname{}.}%
+    {\footnotesize Version \texttt{0.1.0-beta} développée et testée sur \macosxname{}.}%
 }
 \author{Christophe BAL}
-\date{2020-07-10}
+\date{2020-07-12}
 
 \maketitle
 
@@ -261,11 +261,10 @@ $\abs*{\dfrac{3}{5}}$
 
 \newparaexample*{}
 
-Quelques fonctions nommées supplémentaires où \prefix{fch} est pour \whyprefix{f}{rench} soit \inenglish{français} \emph{(ce choix a été fait pour éviter des incompatibilités avec quelques autres packages)}. La liste complète des fonctions nommées est donnée un peu plus bas dans une section dédiée.
+Quelques fonctions nommées supplémentaires où le \prefix{f} dans \prefix{fch} est pour \whyprefix{f}{rench} soit \inenglish{français} \emph{(ce choix a été fait pour éviter des incompatibilités avec quelques autres packages)}. La liste complète des fonctions nommées est donnée un peu plus bas dans la section  \ref{tnsana-all-named-functions}.
 
 \begin{latexex}
-$\fch x \neq ch x$ ,
-$\ppcm(x;y)$ ou
+$\fch x = \cosh x$ ou
 $\lg x$
 \end{latexex}
 
@@ -286,49 +285,45 @@ $\expb{6} y = 6^y$
 % ---------------------- %
 
 
-\subsection{Toutes les fonctions nommées en plus}
+\subsection{Toutes les fonctions nommées en plus} \label{tnsana-all-named-functions}
 
 \vspace{-1em}
 
 \begin{multicols}{2}
 % Table of all - START
-\verb+pgcd+ : $\pgcd\dots$
+    \verb+acos+ : $\acos\dots$
 
-\verb+ppcm+ : $\ppcm\dots$
+    \verb+asin+ : $\asin\dots$
 
-\verb+acos+ : $\acos\dots$
+    \verb+atan+ : $\atan\dots$
 
-\verb+asin+ : $\asin\dots$
+    \verb+arccosh+ : $\arccosh\dots$
 
-\verb+atan+ : $\atan\dots$
+    \verb+arcsinh+ : $\arcsinh\dots$
 
-\verb+arccosh+ : $\arccosh\dots$
+    \verb+arctanh+ : $\arctanh\dots$
 
-\verb+arcsinh+ : $\arcsinh\dots$
+    \verb+acosh+ : $\acosh\dots$
 
-\verb+arctanh+ : $\arctanh\dots$
+    \verb+asinh+ : $\asinh\dots$
 
-\verb+acosh+ : $\acosh\dots$
+    \verb+atanh+ : $\atanh\dots$
 
-\verb+asinh+ : $\asinh\dots$
+    \verb+fch+ : $\fch\dots$
 
-\verb+atanh+ : $\atanh\dots$
+    \verb+fsh+ : $\fsh\dots$
 
-\verb+fch+ : $\fch\dots$
+    \verb+fth+ : $\fth\dots$
 
-\verb+fsh+ : $\fsh\dots$
+    \verb+afch+ : $\afch\dots$
 
-\verb+fth+ : $\fth\dots$
+    \verb+afsh+ : $\afsh\dots$
 
-\verb+afch+ : $\afch\dots$
+    \verb+afth+ : $\afth\dots$
 
-\verb+afsh+ : $\afsh\dots$
+    \verb+expb{p}+ : $\expb{p}\dots$
 
-\verb+afth+ : $\afth\dots$
-
-\verb+expb{p}+ : $\expb{p}\dots$
-
-\verb+logb{p}+ : $\logb{p}\dots$
+    \verb+logb{p}+ : $\logb{p}\dots$
 % Table of all - END
 \end{multicols}
 \section{Calcul différentiel}
@@ -542,6 +537,53 @@ Les options possibles sont \verb+f+, valeur par défaut, \verb+sf+ et \verb+i+ a
 
 
 % ---------------------- %
+
+
+\subsection{Fiches techniques}
+
+\paragraph{Dérivation partielle}
+
+\IDmacro{pder}{1}{2} où \quad \mwhyprefix{p}{artial}
+
+\IDoption{} la valeur par défaut est \verb+f+. 
+\begin{enumerate}
+	\item \verb+f+ : écriture via une fraction en mode display.
+
+	\item \verb+sf+ : écriture via une fraction en mode non display.
+
+	\item \verb+of+ : écriture via une fraction en mode display sous la forme d'un opérateur \emph{(la fonction est à côté de la fraction)}.
+
+	\item \verb+osf+ : écriture via une fraction en mode non display sous la forme d'un opérateur \emph{(la fonction est à côté de la fraction)}.
+
+	\item \verb+i+ : écriture via un indice.
+
+	\smallskip
+	\item \verb+p+ : ajout de parenthèses extensibles autour de la fonction.
+
+	\item \verb+sp+ : ajout de parenthèses non extensibles autour de la fonction.
+\end{enumerate}
+
+
+\IDarg{1} la fonction à dériver.
+
+\IDarg{2} les variables utilisées avec leur ordre de dérivation pour la dérivation partielle en utilisant une syntaxe du type \verb+x | y^2 | ...+ qui indique de dériver suivant $x$ une fois, puis suivant $y$ trois fois... etc.
+
+\IDarg{3} l'ordre total de dérivation.
+
+
+% ---------------------- %
+
+
+\paragraph{Dérivation partielle - Opérateur fonctionnel}
+
+\IDmacro{pderope}{1}{2} où \quad \mwhyprefix{p}{artial}
+                              et \mwhyprefix{ope}{rator}
+
+\IDoption{} la valeur par défaut est \verb+f+. Les options disponibles sont \verb+f+, \verb+sf+ et \verb+i+ : voir la fiche technique de \macro{pder} juste avant.
+
+\IDarg{1} les variables utilisées avec leur ordre de dérivation via la syntaxe indiquée ci-dessus.
+
+\IDarg{2} l'ordre total de dérivation.
 % \section{Analysis}
 
 \section{Tableaux de variation et de signe}
@@ -940,8 +982,8 @@ Deux options s'offrent à nous pour justifier comment a été rempli le tableau.
 
     \comLine[gray]{0}{$\leftarrow$ Valeurs utiles de $x$}
 
-    \graphSign{1}{ax+b, ap}{$\frac{3}{2}$}
-    \graphSign{2}{ax+b, an}{$5$}
+    \graphSign        {1}{ax+b, ap}{$\frac{3}{2}$}
+    \graphSign[purple]{2}{ax+b, an}{$5$}
 
     \comLine[gray]{3}{$\leftarrow$ Signe d'un produit.}
 \end{tikzpicture}
@@ -953,7 +995,10 @@ Pour produire le 2\ieme{} tableau, en plus du code \verb#tkz-tab# pour le tablea
 \footnote{
 	Ceci permet d'avoir de la place dans la 1\iere{} colonne pour le dernier produit et de réduire la largeur des colonnes pour les signes.
 },
-il a fallu ajouter les lignes données ci-dessous où sont utilisées les macros \macro{graphSign} et \macro{comLine} proposées par \verb+lymath+ \emph{(la syntaxe simple à suivre sera expliquée dans la section suivante)}.
+il a fallu ajouter les lignes données ci-dessous où sont utilisées les macros \macro{graphSign} et \macro{comLine} proposées par \verb+lymath+ \emph{(la syntaxe simple à suivre sera expliquée dans la section suivante)}
+\footnote{
+	Les lignes pour les signes doivent utiliser un coefficient minimal de \texttt{1.5} pour la hauteur afin d'éviter que la superposition des graphiques.
+}.
 
 \medskip
 
@@ -964,8 +1009,8 @@ il a fallu ajouter les lignes données ci-dessous où sont utilisées les macros
     % ---------------------------------------------------- %
     \comLine[gray]{0}{$\leftarrow$ Valeurs utiles de $x$}
 
-    \graphSign{1}{ax+b, ap}{$\frac{3}{2}$}
-    \graphSign{2}{ax+b, an}{$5$}
+    \graphSign        {1}{ax+b, ap}{$\frac{3}{2}$}
+    \graphSign[purple]{2}{ax+b, an}{$5$}
 
     \comLine[gray]{3}{$\leftarrow$ Signe d'un produit.}
 \end{tikzpicture}
@@ -973,7 +1018,7 @@ il a fallu ajouter les lignes données ci-dessous où sont utilisées les macros
 
 
 \begin{remark}
-	Les lignes pour les signes doivent utiliser un coefficient minimal de \verb#1.5# pour la hauteur afin d'éviter que la superposition des graphiques. 
+	Il est aussi possible de décorer une ligne de variation comme cela sera montré dans la section \ref{tnsana-grapgsign-com-two-lines}. 
 \end{remark}
 
 
@@ -1010,7 +1055,7 @@ Cette macro possède un argument optionnel et deux obligatoires.
           \smallskip
           
           Par défaut aucun retour à la ligne n'est possible.
-          Si besoin se reporter à la  page \pageref{grapgsign-com-two-lines} où est montré comment écrire sur plusieurs lignes \emph{(voir le tout dernier exemple de cette section)}.
+          Si besoin se reporter à la  page \pageref{tnsana-grapgsign-com-two-lines} où est montré comment écrire sur plusieurs lignes \emph{(voir le tout dernier exemple de cette section)}.
 \end{enumerate}
 
 
@@ -1026,7 +1071,7 @@ Pour le moment, la macro \macro{graphSign} propose deux types de graphiques
 Rappelons au passage que la convention est de prendre $0$ pour numéro de la toute 1\iere{} ligne contenant les valeurs utiles de la variable.
 
 \begin{enumerate}
-    \item \textbf{Fonctions affines non constantes.}
+    \item \textbf{\itshape Fonctions affines non constantes.}
           
           \smallskip
 
@@ -1046,7 +1091,7 @@ Rappelons au passage que la convention est de prendre $0$ pour numéro de la tou
 
 
     \medskip
-    \item \textbf{Fonctions trinômiales du 2\ieme{} degré.}
+    \item \textbf{\itshape Fonctions trinômiales du 2\ieme{} degré.}
           
           \smallskip
 
@@ -1100,10 +1145,10 @@ Il devient très facile de proposer un tableau décoré comme le suivant.
 
     \comLine[gray]{0}{\kern1.75em Schémas}
     
-    \graphSign{1}{ax+b, an}{$3$}
-    \comLine  {2}{Voir Q.1-a)}
-    \graphSign{3}{ax2+bx+c, ap, dp}{$-4$}{$1$} % Deux racines réelles.
-    \graphSign{4}{ax2+bx+c, an, dn}            % Aucune racine réelle.
+    \graphSign        {1}{ax+b, an}{$3$}
+    \comLine[purple]  {2}{Voir Q.1-a)}
+    \graphSign        {3}{ax2+bx+c, ap, dp}{$-4$}{$1$} % Deux racines réelles.
+    \graphSign[purple]{4}{ax2+bx+c, an, dn}            % Aucune racine réelle.
 
     \comLine[gray]{5}{$\leftarrow$ Conclusion}
 \end{tikzpicture}
@@ -1121,10 +1166,10 @@ En plus des deux exemples de schémas de paraboles, il faut noter dans le code s
     % ---------------------------------------------------- %
     \comLine[gray]{0}{\kern1.75em Schémas}
     
-    \graphSign{1}{ax+b, an}{$3$}
-    \comLine  {2}{Voir Q.1-a)}
-    \graphSign{3}{ax2+bx+c, ap, dp}{$-4$}{$1$} % Deux racines réelles.
-    \graphSign{4}{ax2+bx+c, an, dn}            % Aucune racine réelle.
+    \graphSign        {1}{ax+b, an}{$3$}
+    \comLine[purple]  {2}{Voir Q.1-a)}
+    \graphSign        {3}{ax2+bx+c, ap, dp}{$-4$}{$1$} % Deux racines réelles.
+    \graphSign[purple]{4}{ax2+bx+c, an, dn}            % Aucune racine réelle.
 
     \comLine[gray]{5}{$\leftarrow$ Conclusion}
 \end{tikzpicture}
@@ -1134,7 +1179,7 @@ En plus des deux exemples de schémas de paraboles, il faut noter dans le code s
 % ---------------------- %
 
 
-\newparaexample{Commenter des variations} \label{grapgsign-com-two-lines}
+\newparaexample{Commenter des variations} \label{tnsana-grapgsign-com-two-lines}
 
 Pour finir, indiquons que les outils de décoration marchent aussi pour les tableaux de variation.
 Voici un exemple possible d'utilisation où le retour à la ligne a été obtenue affreusement, ou pas, via \verb#\parbox{11.5em}{Les limites sont hors programme pour cette année.}#.
@@ -1160,6 +1205,59 @@ Voici un exemple possible d'utilisation où le retour à la ligne a été obtenu
 
 
 % ---------------------- %
+
+
+\subsection{Fiche technique}
+
+\paragraph{Tableaux de signes -- Commentaires et graphiques explicatifs}
+
+\IDmacro{comLine}{1}{2}  où \quad \mwhyprefix{com}{ment}
+
+
+\IDoption{} couleur au format TikZ.
+
+
+\IDarg{1} le numéro de ligne où placer le commentaire, $0$ étant le 1\ier{} numéro.
+
+\IDarg{2} le texte du commentaire.
+
+
+\separation
+
+
+\IDmacro{graphSign}{1}{2..4}
+
+
+\IDoption{} couleur au format TikZ.
+
+
+\IDarg{1} le numéro de ligne où placer le graphique, $0$ étant le 1\ier{} numéro.
+
+
+\IDarg{2} le type de fonctions avec des contraintes en utilisant la virgule comme séparateur d'informations.
+
+\begin{enumerate}
+	\item \verb@ax+b@ sans espace indique une fonction affine avec un unique paramètre \verb@a@ non nul à caractériser.
+
+	\item \verb@ax2+bx+c@ sans espace indique une fonction trinôme du 2\ieme{} degré avec une paramètre \verb@a@ non nul à caractériser ainsi que \verb@d@ pour son discriminant.
+
+    % ==================== %
+
+	\smallskip
+	
+	\item \verb@ap@ et \verb@an@ indiquent respectivement les conditions $a > 0$ et $a < 0$.
+
+	\item \verb@dp@, \verb@dz@ et \verb@dn@ indiquent respectivement les conditions $d > 0$, $d = 0$ et $d < 0$.
+\end{enumerate}
+
+
+\IDarg{supplémentaire pour ax+b} la racine de $ax + b$.
+
+
+\IDarg{$\!$s supplémentaires pour ax2+bx+c} si $ax^2 + bx + c$ admet une ou deux racines, on donnera toutes les racines de la plus petite à la plus grande
+\footnote{
+	Notant $\Delta = b^2 - 4 ac$, si $\Delta < 0$ il n'y aura pas d'argument supplémentaire, si $\Delta = 0$ il y en aura un seul et enfin si $\Delta > 0$ il faudra en donner deux, le 1\ier{} étant le plus petit.
+}.
 \section{Calcul intégral}
 
 \subsection{Intégrales multiples}
@@ -1290,6 +1388,14 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 % Changes shown - START
 
     \medskip
+    \item[2020-07-12] Nouvelle version mineure \verb+0.1.0-beta+. 
+        
+    \begin{itemize}[itemsep=.5em]
+        \item \topic*{Fonctions nommées} \macro{ppcm} et \macro{pgcd} ont été déplacées dans \texttt{tnsarith} disponible sur \url{https://github.com/typensee-latex/tnsarith.git}.
+    \end{itemize}
+% ------------------------ %
+
+    \medskip
     \item[2020-07-10] Première version \verb+0.0.0-beta+.
 % ------------------------ %
 
@@ -1343,12 +1449,6 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 \subsubsection{Fonctions nommées sans paramètre}
 
 % List of functions without parameter - START
-\foreach \k in {pgcd, ppcm}{
-
-    \IDmacro*{\k}{0}
-}
-                
-\separation
 
 \foreach \k in {acos, asin, atan}{
 
@@ -1375,7 +1475,15 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 
     \IDmacro*{\k}{0}  où \quad \mwhyprefix{{f}}{{rench}}
 }
-                % List of functions without parameter - END
+                
+\separation
+
+\foreach \k in {afch, afsh, afth}{
+
+    \IDmacro*{\k}{0}
+}
+
+% List of functions without parameter - END
 
 
 % ---------------------- %
@@ -1385,7 +1493,6 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 \subsubsection{Fonctions nommées avec un paramètre}
 
 % List of functions with parameters - START
-
 
 \IDmacro*{expb}{1}
 
@@ -1476,99 +1583,9 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 \IDarg{1} la fonction à dériver.
 
 \IDarg{2} l'ordre de dérivation.
-\subsubsection{Dérivation partielle}
-
-\IDmacro{pder}{1}{2} où \quad \mwhyprefix{p}{artial}
-
-\IDoption{} la valeur par défaut est \verb+f+. 
-\begin{enumerate}
-	\item \verb+f+ : écriture via une fraction en mode display.
-
-	\item \verb+sf+ : écriture via une fraction en mode non display.
-
-	\item \verb+of+ : écriture via une fraction en mode display sous la forme d'un opérateur \emph{(la fonction est à côté de la fraction)}.
-
-	\item \verb+osf+ : écriture via une fraction en mode non display sous la forme d'un opérateur \emph{(la fonction est à côté de la fraction)}.
-
-	\item \verb+i+ : écriture via un indice.
-
-	\smallskip
-	\item \verb+p+ : ajout de parenthèses extensibles autour de la fonction.
-
-	\item \verb+sp+ : ajout de parenthèses non extensibles autour de la fonction.
-\end{enumerate}
 
 
-\IDarg{1} la fonction à dériver.
 
-\IDarg{2} les variables utilisées avec leur ordre de dérivation pour la dérivation partielle en utilisant une syntaxe du type \verb+x | y^2 | ...+ qui indique de dériver suivant $x$ une fois, puis suivant $y$ trois fois... etc.
-
-\IDarg{3} l'ordre total de dérivation.
-
-
-% ---------------------- %
-
-
-\subsubsection{Dérivation partielle - Opérateur fonctionnel}
-
-\IDmacro{pderope}{1}{2} où \quad \mwhyprefix{p}{artial}
-                              et \mwhyprefix{ope}{rator}
-
-\IDoption{} la valeur par défaut est \verb+f+. Les options disponibles sont \verb+f+, \verb+sf+ et \verb+i+ : voir la fiche technique de \macro{pder} juste avant.
-
-\IDarg{1} les variables utilisées avec leur ordre de dérivation via la syntaxe indiquée ci-dessus.
-
-\IDarg{2} l'ordre total de dérivation.
-
-\subsubsection{Tableaux de signes -- Commentaires et graphiques explicatifs}
-
-\IDmacro{comLine}{1}{2}  où \quad \mwhyprefix{com}{ment}
-
-
-\IDoption{} couleur au format TikZ.
-
-
-\IDarg{1} le numéro de ligne où placer le commentaire, $0$ étant le 1\ier{} numéro.
-
-\IDarg{2} le texte du commentaire.
-
-
-\separation
-
-
-\IDmacro{graphSign}{1}{2..4}
-
-
-\IDoption{} couleur au format TikZ.
-
-
-\IDarg{1} le numéro de ligne où placer le graphique, $0$ étant le 1\ier{} numéro.
-
-
-\IDarg{2} le type de fonctions avec des contraintes en utilisant la virgule comme séparateur d'informations.
-
-\begin{enumerate}
-	\item \verb@ax+b@ sans espace indique une fonction affine avec un unique paramètre \verb@a@ non nul à caractériser.
-
-	\item \verb@ax2+bx+c@ sans espace indique une fonction trinôme du 2\ieme{} degré avec une paramètre \verb@a@ non nul à caractériser ainsi que \verb@d@ pour son discriminant.
-
-    % ==================== %
-
-	\smallskip
-	
-	\item \verb@ap@ et \verb@an@ indiquent respectivement les conditions $a > 0$ et $a < 0$.
-
-	\item \verb@dp@, \verb@dz@ et \verb@dn@ indiquent respectivement les conditions $d > 0$, $d = 0$ et $d < 0$.
-\end{enumerate}
-
-
-\IDarg{supplémentaire pour ax+b} la racine de $ax + b$.
-
-
-\IDarg{$\!$s supplémentaires pour ax2+bx+c} si $ax^2 + bx + c$ admet une ou deux racines, on donnera toutes les racines de la plus petite à la plus grande
-\footnote{
-	Notant $\Delta = b^2 - 4 ac$, si $\Delta < 0$ il n'y aura pas d'argument supplémentaire, si $\Delta = 0$ il y en aura un seul et enfin si $\Delta > 0$ il faudra en donner deux, le 1\ier{} étant le plus petit.
-}.
 \subsection{Calcul intégral}
 
 \subsubsection{Intégration -- Le symbole standard}

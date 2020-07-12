@@ -9,6 +9,11 @@ from mistool.os_use import PPath
 from mistool.string_use import between, joinand
 from orpyste.data import ReadBlock
 
+
+# ------------------------ #
+# -- INTERNAL CONSTANTS -- #
+# ------------------------ #
+
 BASENAME = PPath(__file__).stem.replace("build-", "")
 BASENAME = BASENAME.replace("[slow]", "")
 
@@ -56,7 +61,7 @@ with open(
     mode     = 'r',
     encoding = 'utf-8'
 ) as styfile:
-    template_sty = styfile.read()
+    temp_sty = styfile.read()
 
 
 with open(
@@ -64,7 +69,7 @@ with open(
     mode     = 'r',
     encoding = 'utf-8'
 ) as docfile:
-    template_tex = docfile.read()
+    temp_tex = docfile.read()
 
 
 # --------------------- #
@@ -72,7 +77,7 @@ with open(
 # --------------------- #
 
 text_start, _, text_end = between(
-    text = template_sty,
+    text = temp_sty,
     seps = [
         "% Classical functions - START",
         "% Classical functions - END"
@@ -80,8 +85,7 @@ text_start, _, text_end = between(
     keepseps = True
 )
 
-text_auto = [
-    "\n",
+macro_defs = [
     "\n".join(
         r"\DeclareMathOperator{{\{0}}}{{\operatorname{{{1}}}}}".format(
             latexname,
@@ -99,11 +103,10 @@ text_auto = [
     )
 ]
 
-text_auto.append("\n")
+macro_defs = "\n".join(macro_defs)
+macro_defs = macro_defs.strip()
 
-text_auto = "\n".join(text_auto)
-
-template_sty = text_start + text_auto + text_end
+temp_sty = f"{text_start}\n\n{macro_defs}\n\n{text_end}"
 
 
 # ------------------------------ #
@@ -111,7 +114,7 @@ template_sty = text_start + text_auto + text_end
 # ------------------------------ #
 
 text_start, _, text_end = between(
-    text = template_tex,
+    text = temp_tex,
     seps = [
         "% Table of all - START",
         "% Table of all - END"
@@ -120,16 +123,16 @@ text_start, _, text_end = between(
 )
 
 tabletex = [
-    f"\\verb+{name}+ : $\\{name}\dots$"
+    f"    \\verb+{name}+ : $\\{name}\dots$"
     for name in list(functions['no-parameter'])
 ] + [
-    f"\\verb+{name}{{p}}+ : $\\{name}{{p}}\dots$"
+    f"    \\verb+{name}{{p}}+ : $\\{name}{{p}}\dots$"
     for name in list(functions['parameter'])
 ]
 
 tabletex = '\n\n'.join(tabletex)
 
-template_tex = text_start + f"\n{tabletex}\n" + text_end
+temp_tex = f"{text_start}\n{tabletex}\n{text_end}"
 
 
 # ----------------------------------------------- #
@@ -137,7 +140,7 @@ template_tex = text_start + f"\n{tabletex}\n" + text_end
 # ----------------------------------------------- #
 
 text_start, _, text_end = between(
-    text = template_tex,
+    text = temp_tex,
     seps = [
         "% List of functions without parameter - START",
         "% List of functions without parameter - END"
@@ -145,11 +148,10 @@ text_start, _, text_end = between(
     keepseps = True
 )
 
-
-template_tex = []
-lastmacros   = []
-lastfirst    = ""
-lastlenght   = -1
+docinfos   = []
+lastmacros = []
+lastfirst  = ""
+lastlenght = -1
 
 for onemacro in list(functions['no-parameter'].keys()) + ["ZZZZ-unsed-ZZZZ"]:
     if lastfirst:
@@ -163,7 +165,7 @@ for onemacro in list(functions['no-parameter'].keys()) + ["ZZZZ-unsed-ZZZZ"]:
             else:
                 extra = ""
 
-            template_tex += [
+            docinfos += [
                 f"""
 \\foreach \\k in {{{lastmacros}}}{{
 
@@ -185,8 +187,16 @@ for onemacro in list(functions['no-parameter'].keys()) + ["ZZZZ-unsed-ZZZZ"]:
     lastmacros.append(onemacro)
 
 
-template_tex = "\n".join(template_tex[:-3])
-template_tex = f"{text_start}{template_tex}{text_end}"
+if docinfos:
+# Let's remove the lase separation.
+    docinfos = "\n".join(docinfos[:-1])
+    docinfos = docinfos.strip()
+    docinfos = f"\n{docinfos}\n"
+
+else:
+    docinfos = ""
+
+temp_tex = f"{text_start}\n{docinfos}\n{text_end}"
 
 
 
@@ -195,15 +205,13 @@ template_tex = f"{text_start}{template_tex}{text_end}"
 # --------------------------------------------- #
 
 text_start, _, text_end = between(
-    text = template_tex,
+    text = temp_tex,
     seps = [
         "% List of functions with parameters - START",
         "% List of functions with parameters - END"
     ],
     keepseps = True
 )
-
-text_start += "\n"
 
 docinfos = []
 
@@ -224,10 +232,18 @@ for name, infos in functions['parameter'].items():
         for i, d in enumerate(desc, 1):
             docinfos.append(f"\\IDarg{{{i}}} {d}")
 
-docinfos.append("")
-docinfos = [""] + docinfos[1:]
 
-template_tex = text_start + "\n\n".join(docinfos) + text_end
+if docinfos:
+    docinfos.append("")
+    docinfos = [""] + docinfos[1:]
+    docinfos = "\n\n".join(docinfos)
+    docinfos = docinfos.strip()
+    docinfos = f"\n{docinfos}\n"
+
+else:
+    docinfos = ""
+
+temp_tex = f"{text_start}\n{docinfos}\n{text_end}"
 
 
 # -------------------------- #
@@ -239,11 +255,11 @@ with open(
     mode     = 'w',
     encoding = 'utf-8'
 ) as docfile:
-    docfile.write(template_tex)
+    docfile.write(temp_tex)
 
 with open(
     file     = STY_FILE,
     mode     = 'w',
     encoding = 'utf-8'
 ) as docfile:
-    docfile.write(template_sty)
+    docfile.write(temp_sty)
