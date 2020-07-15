@@ -172,7 +172,10 @@ Rappelons au passage que la convention est de prendre $0$ pour numéro de la tou
           \smallskip
 
           Le codage est assez simple.
-          Par exemple, \verb#\graphSign{2}{ax+b, an}{$5$}# indique pour la 2\ieme{} ligne d'ajouter le graphique d'une fonction affine, ce qu'indique le code \verb#ax+b# sans espace, avec la condition $a < 0$ via \prefix{an} pour \prefix{a négatif}, et enfin avec $5$ pour racine.
+          Par exemple, \verb#\graphSign{2}{ax+b, an}{$5$}# indique pour la 2\ieme{} ligne d'ajouter le graphique
+          d'une fonction affine, ce qu'indique le code \verb#ax+b# sans espace,
+          sous la condition $a < 0$ via \prefix{an} pour \prefix{a négatif}
+          et enfin avec $5$ pour racine.
           
           \smallskip
 
@@ -192,7 +195,10 @@ Rappelons au passage que la convention est de prendre $0$ pour numéro de la tou
           \smallskip
 
           Voici comment coder ceci.
-          Par exemple \verb#\graphSign{5}{ax2+bx+c, an, dp}{$r_1$}{$r_2$}# indique d'ajouter dans la 5\ieme{} ligne de signe le graphique d'un trinôme du 2\ieme{} degré via le code \verb#ax2+bx+c# sans espace, avec les conditions $a < 0$ et $\Delta > 0$ via \prefix{an} et \prefix{dp}, le trinôme ayant $r_1$ et $r_2$ pour racines réelles.
+          Par exemple \verb#\graphSign{5}{ax2+bx+c, an, dp}{$r_1$}{$r_2$}# indique d'ajouter dans la 5\ieme{} ligne de signe le graphique 
+          d'un trinôme du 2\ieme{} degré via le code \verb#ax2+bx+c# sans espace,
+          sous les conditions $a < 0$ et $\Delta > 0$ via \prefix{an} et \prefix{dp},
+          le trinôme ayant $r_1$ et $r_2$ pour racines réelles.
 
           \smallskip
 
@@ -247,7 +253,7 @@ Il devient très facile de proposer un tableau décoré comme le suivant.
 \end{center}
 
 
-En plus des deux exemples de schémas de paraboles, il faut noter dans le code supplémentaire ajouté l'utilisation de \verb#\kern1.75em# dans \verb#\comLine[gray]{0}{\kern1.75em Schémas}# afin de mettre un espace horizontal précis pour centrer à la main le texte \emph{\og Schémas \fg}.
+En plus des deux exemples de schémas de paraboles, il faut noter dans le code supplémentaire ajouté l'utilisation de \verb#\kern1.75em# dans \verb#\comLine[gray]{0}{\kern1.75em Schémas}# afin de mettre un espace horizontal précis pour centrer à la main le texte \emph{\og Schémas \fg} \emph{(un peu sâle mais ça marche)}.
 
 \medskip
 

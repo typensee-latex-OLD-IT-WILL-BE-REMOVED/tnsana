@@ -19,7 +19,8 @@
 
 \paragraph{Comment ça marche ?}
 
-Tout le boulot est fait par le package \verb+tkz-tab+ auquel on impose le choix d'une pointe de flèche plus visible via le réglage suivant \verb+\tkzTabSetup[arrowstyle = triangle 60]+.
+Pour les tableaux de variation et de signe non décorés, tout le boulot est fait par le package \verb+tkz-tab+.
+Ce package est utilisé via le réglage \verb+\tkzTabSetup[arrowstyle = triangle 60]+ afin d'obtenir des pointes de flèche plus visibles.
 
 \medskip
 
@@ -174,7 +175,7 @@ Il est assez facile de produire des choses très utiles pédagogiquement comme c
 \end{tikzpicture}
 \end{center}
 
-On en déduit le signe de la fonction $f$.
+On déduit du tableau précédent le signe de la fonction $f$.
 
 \begin{center}
 \begin{tikzpicture}
@@ -216,7 +217,7 @@ Voici le code du 1\ier{} tableau où le placement de la valeur $3$ au milieu ent
 \end{latexex-alone}
 
 
-Pour produire lee code du 2\ieme{} tableau, il a été utilisé au préalable ce qui suit en activant l'option \verb@help@ qui demande à \verb@tkz-tab@ d'afficher les noms de noeuds au sens TikZ qui ont été créés.
+Pour produire le code du 2\ieme{} tableau il a fallu utiliser au préalable ce qui suit en activant l'option \verb@help@ qui demande à \verb@tkz-tab@ d'afficher les noms de noeuds au sens TikZ qui ont été créés.
 Ceci permet alors d'utiliser ces noeuds pour des dessins TikZ faits maison
 \footnote{
     C'est grâce à ce mécanisme que \prefix{tnsana} peut proposer des outils explicatifs des tableaux de signe : voir la section suivante.

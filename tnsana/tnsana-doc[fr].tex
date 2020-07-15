@@ -227,8 +227,6 @@ et $\kk$ où $\ttau = 2 \ppi$
 
 \subsection{Constantes latines personnelles}
 
-\newparaexample*{}
-
 La macro \macro{param} est surtout là pour une utilisation pédagogique.
 
 \begin{latexex}
@@ -241,7 +239,7 @@ $a x^2 + b x + c$
 % ---------------------- %
 \section{Une variable \og symbolique \fg{}}
 
-Le package \verb+tnscom+ propose les macros \macro{symvar} et \macro{symvar*} qui produisent les symboles $\symvar$ et $\symvar*$. Le nom utilisé vient de \prefix{symvar} pour \whyprefix{symb}{olic} \whyprefix{var}{iable} soit \inenglish{variable symbolique}.
+Le package \verb+tnscom+ propose les macros \macro{symvar} et \macro{symvar*} qui produisent les symboles $\symvar$ et $\symvar*$ . Le nom utilisé vient de \prefix{symvar} pour \whyprefix{symb}{olic} \whyprefix{var}{iable} soit \inenglish{variable symbolique}.
 Ces symboles sont utiles pour indiquer un argument symboliquement sans faire référence précisément à une ou des variables nommées.
 
 
@@ -267,8 +265,6 @@ $\abs*{\dfrac{3}{5}}$
 
 \subsection{Sans paramètre}
 
-\newparaexample*{}
-
 Quelques fonctions nommées supplémentaires où le \prefix{f} dans \prefix{fch} est pour \whyprefix{f}{rench} soit \inenglish{français} \emph{(ce choix a été fait pour éviter des incompatibilités avec quelques autres packages)}. La liste complète des fonctions nommées est donnée un peu plus bas dans la section  \ref{tnsana-all-named-functions}.
 
 \begin{latexex}
@@ -282,7 +278,7 @@ $\lg x$
 
 \subsection{Avec un paramètre}
 
-\newparaexample*{}
+Pour le moment il y a juste deux fonctions avec un paramètre. Les voici.
 
 \begin{latexex}
 $\logb{2} x = \lg x$ ou
@@ -339,7 +335,7 @@ $\expb{6} y = 6^y$
 \subsection{\texorpdfstring{Les opérateurs $\pp{}$ et $\dd{}$}%
                            {Les opérateurs "d rond" et "d droit"}}
 
-\newparaexample{}
+Voici deux opérateurs utiles aussi bien pour du calcul différentiel que du calcul intégral. 
 
 \begin{latexex}
 $\dd{t} = \dd[1]{t}$ ou $\dd[n]{x}$
@@ -356,7 +352,7 @@ $\pp{t} = \pp[1]{t}$ ou $\pp[n]{x}$
 \newparaexample{Différentes écritures possibles}
 
 La macro \macro{der} est stricte du point de vue sémantique car on doit lui fournir la fonction, l'ordre de dérivation et la variable de dérivation
-\emph{(voir la section \ref{short-der} qui présente la macro \macro{sder} permettant une rédaction efficace pour obtenir $\sder[e]{f}{1}$ ou $\sder{f}{1}$)}.
+\emph{(voir la section \ref{tnsana-short-der} qui présente la macro \macro{sder} permettant une rédaction efficace pour obtenir $\sder[e]{f}{1}$ ou $\sder{f}{1}$)}.
 Voici plusieurs mises en forme faciles à taper via l'option de \macro{der}.
 Attention bien entendu à n'utiliser l'option par défaut \prefix{u} qu'avec un ordre de dérivation de valeur naturelle connue !
 
@@ -428,7 +424,7 @@ Ci-dessous on montre aussi une écriture du type \emph{\og opérateur fonctionne
 % ---------------------- %
 
 
-\subsection{Dérivations totales d'une fonction -- Version courte pour les écritures standard} \label{short-der}
+\subsection{Dérivations totales d'une fonction -- Version courte pour les écritures standard} \label{tnsana-short-der}
 
 Dans l'exemple suivant le code manque de sémantique car on n'indique pas la variable de dérivation.
 Ceci étant dit à l'usage la macro \macro{sder} rend de grands services.
@@ -553,7 +549,8 @@ Les options possibles sont \verb+f+, valeur par défaut, \verb+sf+ et \verb+i+ a
 
 \paragraph{Comment ça marche ?}
 
-Tout le boulot est fait par le package \verb+tkz-tab+ auquel on impose le choix d'une pointe de flèche plus visible via le réglage suivant \verb+\tkzTabSetup[arrowstyle = triangle 60]+.
+Pour les tableaux de variation et de signe non décorés, tout le boulot est fait par le package \verb+tkz-tab+.
+Ce package est utilisé via le réglage \verb+\tkzTabSetup[arrowstyle = triangle 60]+ afin d'obtenir des pointes de flèche plus visibles.
 
 \medskip
 
@@ -708,7 +705,7 @@ Il est assez facile de produire des choses très utiles pédagogiquement comme c
 \end{tikzpicture}
 \end{center}
 
-On en déduit le signe de la fonction $f$.
+On déduit du tableau précédent le signe de la fonction $f$.
 
 \begin{center}
 \begin{tikzpicture}
@@ -750,7 +747,7 @@ Voici le code du 1\ier{} tableau où le placement de la valeur $3$ au milieu ent
 \end{latexex-alone}
 
 
-Pour produire lee code du 2\ieme{} tableau, il a été utilisé au préalable ce qui suit en activant l'option \verb@help@ qui demande à \verb@tkz-tab@ d'afficher les noms de noeuds au sens TikZ qui ont été créés.
+Pour produire le code du 2\ieme{} tableau il a fallu utiliser au préalable ce qui suit en activant l'option \verb@help@ qui demande à \verb@tkz-tab@ d'afficher les noms de noeuds au sens TikZ qui ont été créés.
 Ceci permet alors d'utiliser ces noeuds pour des dessins TikZ faits maison
 \footnote{
     C'est grâce à ce mécanisme que \prefix{tnsana} peut proposer des outils explicatifs des tableaux de signe : voir la section suivante.
@@ -1041,7 +1038,10 @@ Rappelons au passage que la convention est de prendre $0$ pour numéro de la tou
           \smallskip
 
           Le codage est assez simple.
-          Par exemple, \verb#\graphSign{2}{ax+b, an}{$5$}# indique pour la 2\ieme{} ligne d'ajouter le graphique d'une fonction affine, ce qu'indique le code \verb#ax+b# sans espace, avec la condition $a < 0$ via \prefix{an} pour \prefix{a négatif}, et enfin avec $5$ pour racine.
+          Par exemple, \verb#\graphSign{2}{ax+b, an}{$5$}# indique pour la 2\ieme{} ligne d'ajouter le graphique
+          d'une fonction affine, ce qu'indique le code \verb#ax+b# sans espace,
+          sous la condition $a < 0$ via \prefix{an} pour \prefix{a négatif}
+          et enfin avec $5$ pour racine.
           
           \smallskip
 
@@ -1061,7 +1061,10 @@ Rappelons au passage que la convention est de prendre $0$ pour numéro de la tou
           \smallskip
 
           Voici comment coder ceci.
-          Par exemple \verb#\graphSign{5}{ax2+bx+c, an, dp}{$r_1$}{$r_2$}# indique d'ajouter dans la 5\ieme{} ligne de signe le graphique d'un trinôme du 2\ieme{} degré via le code \verb#ax2+bx+c# sans espace, avec les conditions $a < 0$ et $\Delta > 0$ via \prefix{an} et \prefix{dp}, le trinôme ayant $r_1$ et $r_2$ pour racines réelles.
+          Par exemple \verb#\graphSign{5}{ax2+bx+c, an, dp}{$r_1$}{$r_2$}# indique d'ajouter dans la 5\ieme{} ligne de signe le graphique 
+          d'un trinôme du 2\ieme{} degré via le code \verb#ax2+bx+c# sans espace,
+          sous les conditions $a < 0$ et $\Delta > 0$ via \prefix{an} et \prefix{dp},
+          le trinôme ayant $r_1$ et $r_2$ pour racines réelles.
 
           \smallskip
 
@@ -1116,7 +1119,7 @@ Il devient très facile de proposer un tableau décoré comme le suivant.
 \end{center}
 
 
-En plus des deux exemples de schémas de paraboles, il faut noter dans le code supplémentaire ajouté l'utilisation de \verb#\kern1.75em# dans \verb#\comLine[gray]{0}{\kern1.75em Schémas}# afin de mettre un espace horizontal précis pour centrer à la main le texte \emph{\og Schémas \fg}.
+En plus des deux exemples de schémas de paraboles, il faut noter dans le code supplémentaire ajouté l'utilisation de \verb#\kern1.75em# dans \verb#\comLine[gray]{0}{\kern1.75em Schémas}# afin de mettre un espace horizontal précis pour centrer à la main le texte \emph{\og Schémas \fg} \emph{(un peu sâle mais ça marche)}.
 
 \medskip
 
