@@ -4,9 +4,9 @@
     \input{../config/header[fr].sty}
 
     \usepackage{01-differential-calculus}
-\makeatother
 
 
+   
 \begin{document}
 
 \section{Calcul différentiel}
@@ -49,11 +49,12 @@ $\pp{t} = \pp[1]{t}$ ou $\pp[n]{x}$
 La macro \macro{der} est stricte du point de vue sémantique car on doit lui fournir la fonction, l'ordre de dérivation et la variable de dérivation
 \emph{(voir la section \ref{tnsana-short-der} qui présente la macro \macro{sder} permettant une rédaction efficace pour obtenir $\sder[e]{f}{1}$ ou $\sder{f}{1}$)}.
 Voici plusieurs mises en forme faciles à taper via l'option de \macro{der}.
-Attention bien entendu à n'utiliser l'option par défaut \prefix{u} qu'avec un ordre de dérivation de valeur naturelle connue !
+Attention bien entendu à n'utiliser l'option par défaut \prefix{u} ou l'option \prefix{d} qu'avec un ordre de dérivation de valeur naturelle connue !
 
 \begin{latexex}
  $\der   {f}{3}{x}
-= \der[e]{f}{3}{x}$
+= \der[e]{f}{3}{x}
+= \der[d]{f}{3}{x}$
 
  $\der[i] {u}{k}{x}
 = \der[f] {u}{k}{x}
@@ -61,12 +62,20 @@ Attention bien entendu à n'utiliser l'option par défaut \prefix{u} qu'avec un 
 \end{latexex}
 
 
-On peut aussi ajouter autour de la fonction des parenthèses extensibles ou non.
-Ci-dessous on montre aussi une écriture du type \emph{\og opérateur fonctionnel \fg}.
+On peut aussi ajouter autour de la fonction des parenthèses extensibles ou non sauf pour le mode \prefix{d} \emph{(voir juste après)}.
+Ci-dessous on montre au passage une écriture du type \emph{\og opérateur fonctionnel \fg}.
 
 \begin{latexex}
- $\der[osf,sp]{\frac{1}{2} uv}{k}{x}
+ $\der[osf,sp]{\frac{1}{2}  uv}{k}{x}
 = \der[of,p]  {\dfrac{1}{2} uv}{k}{x}$
+\end{latexex}
+
+
+Avec l'option \prefix{d} les parenthèses étant sans utilité on obtient une autre mise en forme. En voici un exemple. Notez au passage qu'ici \prefix{sp} n'apporte rien de nouveau.
+
+\begin{latexex}
+ $\der[d,p] {\frac{1}{2}  uv}{2}{x}
+= \der[d,sp]{\dfrac{1}{2} uv}{2}{x}$
 \end{latexex}
 
 
@@ -77,6 +86,9 @@ Ci-dessous on montre aussi une écriture du type \emph{\og opérateur fonctionne
 
 		\item \prefix{e} est pour \whyprefix{e}{xposant}.
 
+		\item \prefix{d} est pour \whyprefix{d}{ot} soit \inenglish{point}.
+
+		\smallskip
 		\item \prefix{i} est pour \whyprefix{i}{ndice}.
 
 		\item \prefix{f} est pour \whyprefix{f}{raction} avec aussi \prefix{sf} pour une écriture réduite où \prefix{s} est pour \whyprefix{s}{mall} soit \inenglish{petit}.
@@ -84,9 +96,9 @@ Ci-dessous on montre aussi une écriture du type \emph{\og opérateur fonctionne
 		\item \prefix{of} et \prefix{osf} utilisent le préfixe \prefix{o} pour \whyprefix{o}{pérateur}.
 		
 		\smallskip
-		\item \prefix{p} est pour \whyprefix{p}{arenthèse} : dans ce cas les parenthèses seront extensibles.
+		\item \prefix{p} est pour \whyprefix{p}{arenthèse} : dans ce cas les parenthèses seront extensibles. Le fonctionnement est différent avec l'option \prefix{d} comme nous l'avons vu avant.
 
-		\item \prefix{sp} est pour des parenthèses non extensibles.
+		\item \prefix{sp} est pour des parenthèses non extensibles. Là aussi le fonctionnement est différent avec l'option \prefix{d}.
 	\end{enumerate}
 \end{remark}
 
@@ -105,7 +117,7 @@ Ci-dessous on montre aussi une écriture du type \emph{\og opérateur fonctionne
 
 
 \begin{remark}
-	Voici comment forcer les exposants $1$ si besoin.
+	Voici comment forcer les exposants $1$ si besoin. Fonctionnel mais un peu moche...
 
 	\begin{latexex}
  $\der[i ]{u}{\,\!1}{x}
@@ -124,16 +136,26 @@ Ci-dessous on montre aussi une écriture du type \emph{\og opérateur fonctionne
 Dans l'exemple suivant le code manque de sémantique car on n'indique pas la variable de dérivation.
 Ceci étant dit à l'usage la macro \macro{sder} rend de grands services.
 Ici le préfixe \prefix{s} est pour \whyprefix{s}{imple} voire \whyprefix{s}{impliste}...
-Voici des exemples où de nouveau l'option par défaut \prefix{u} ne sera fonctionnelle qu'avec un ordre de dérivation de valeur naturelle connue !
+Voici des exemples où de nouveau l'option par défaut \prefix{u} et l'option \prefix{d} ne seront fonctionnelles qu'avec un ordre de dérivation de valeur naturelle connue !
+
+
+\newparaexample{}
 
 \begin{latexex}
  $\sder{f}{1} = \der{f}{1}{x}$
 
  $\sder{f}{1}
-= \sder[e]{f}{1}$
+= \sder[e]{f}{1}
+= \sder[d]{f}{1}$
+\end{latexex}
 
+
+\newparaexample{}
+
+\begin{latexex}
  $\sder[sp ]{\dfrac{1}{2} uv}{2}
-= \sder[e,p]{\dfrac{1}{2} uv}{2}$
+= \sder[e,p]{\dfrac{1}{2} uv}{2}
+= \sder[d,p]{\dfrac{1}{2} uv}{2}$
 \end{latexex}
 
 

@@ -1,12 +1,13 @@
 % == PACKAGES USED == %
 
+\RequirePackage{amsmath}
+\RequirePackage{mathtools}
+
 \RequirePackage{commado}
 \RequirePackage{etoolbox}
-
-\RequirePackage{yhmath}
+\RequirePackage{forloop}
 \RequirePackage{ifmtarg}
 \RequirePackage{xstring}
-\RequirePackage{forloop}
 
 \RequirePackage{tnscom}
 
@@ -18,6 +19,7 @@
 %    * http://forum.mathematex.net/latex-f6/derivee-avec-un-d-droit-et-espace-t12932.html#p124930
 %    * http://forum.mathematex.net/latex-f6/remplacer-des-espaces-par-autre-chose-t12952.html#p125062
 %    * http://forum.mathematex.net/latex-f6/probleme-de-remplacement-de-cdots-t13047.html#p125782
+%     * https://tex.stackexchange.com/a/42445/6880
 
 
 % dd, partial and pp useful operators
@@ -31,24 +33,28 @@
 \newcommand{\tnsana@diffOpe}[5]{%
     #3%
     \ifx0#1\else%
-    	^{\kern#4#1\kern#5}\!%
-	\fi%
+        ^{\kern#4#1\kern#5}\!%
+    \fi%
     \hspace{0.07em}#2%
 }
+
 
 \DeclareRobustCommand\@dder{
     \mathop{}\mathopen{}\mathrm{d}
 }
 
+
 \newcommand\dd[2][0]{\tnsana@diffOpe{#1}{#2}{\@dder}{.05ex}{0.15ex}}
 
+
 \let\tnsana@original@partial\partial
+
 \renewcommand{\partial}{%
     \tnsana@original@partial\mathopen{}%
 }
 
-\newcommand\pp[2][0]{\tnsana@diffOpe{#1}{#2}{\partial}{.15ex}{0.15ex}}
 
+\newcommand\pp[2][0]{\tnsana@diffOpe{#1}{#2}{\partial}{.15ex}{0.15ex}}
 
 
 % Common tools
@@ -56,22 +62,29 @@
 \newcounter{tnsana@der@prime@counter}
 
 \newcommand\tnsana@der@func@no@par[1]{%
-	#1%
+    #1%
 }
 
 \newcommand\tnsana@der@func@ext@par[1]{%
-	\left( #1 \right)%
+    \left( #1 \right)%
 }
 
 \newcommand\tnsana@der@func@no@ext@par[1]{%
-	( #1 )%
+    ( #1 )%
 }
+
+\newcommand\tnsana@der@func@over@bracket[1]{%
+    \overbracket[.75pt]{#1}%
+}
+
+
 
 
 \newbool{tnsana@der@option@u}
 \newbool{tnsana@der@option@e}
 \newbool{tnsana@der@option@i}
 \newbool{tnsana@der@option@f}
+\newbool{tnsana@der@option@d}
 
 \newbool{tnsana@der@option@of}
 \newbool{tnsana@der@option@sf}
@@ -86,57 +99,79 @@
 %     + Abstraction
 
 \newcommand\tnsana@der@usual[3]{%
-	#1{#2}^{%
-		\,%
-       	\forloop[1]{tnsana@der@prime@counter}{0}{\value{tnsana@der@prime@counter} < #3}{%
-        	\prime%
-        }
-    }
+    #1{#2}^{%
+        \,%
+        \forloop[1]{tnsana@der@prime@counter}{0}{\value{tnsana@der@prime@counter} < #3}{%
+            \prime%
+        }%
+    }%
 }
 
 
 \newcommand\tnsana@der@exp[3]{%
-	#1{#2}^{\left( #3 \right)}%
+    #1{#2}^{\left( #3 \right)}%
+}
+
+
+\newcommand\tnsana@der@dot[3]{%
+    \mathop{%
+        \kern\z@{#1{#2}}%
+    }\limits^{%
+        \vbox to-1.4\ex@{%
+            \kern-\tw@\ex@%
+            \hbox{\normalfont%
+                %
+                \forloop[1]{tnsana@der@prime@counter}{0}{\value{tnsana@der@prime@counter} < #3}{%
+                    .%
+                }%
+            }%
+            \vss%
+        }%
+    }%
 }
 
 
 \newcommand\tnsana@der@sub[3]{
     \@dder%
     \IfStrEq{#2}{1}{}{%
-	    ^{\kern.15ex#2\kern.15ex}%
-	}%
-	_{\kern.15ex#3\kern.15ex} #1%
+        ^{\kern.15ex#2\kern.15ex}%
+    }%
+    _{\kern.15ex#3\kern.15ex} #1%
 }
 
 
 \newcommand\tnsana@der@abstract@frac[4]{%
-	#1{%
-		\IfStrEq{#3}{1}{%
-			\dd{#2}%
-		}{%
-			\dd[#3]{#2}%
-		}%
-	}{%
-		{%
-			\dd{#4}%
-			\IfStrEq{#3}{1}{}{%
-				^{#3}%
-			}%
-		}%
-	}%
+    #1{%
+        \IfStrEq{#3}{1}{%
+            \dd{#2}%
+        }{%
+            \dd[#3]{#2}%
+        }%
+    }{%
+        {%
+            \dd{#4}%
+            \IfStrEq{#3}{1}{}{%
+                ^{#3}%
+            }%
+        }%
+    }%
 }
+
 
 \newcommand\tnsana@der@dfrac[3]{%
     \tnsana@der@abstract@frac{\dfrac}{#1}{#2}{#3}%
 }
 
+
 \newcommand\tnsana@der@frac[3]{
     \tnsana@der@abstract@frac{\frac}{#1}{#2}{#3}%
 }
 
+
 \newcommand\tnsana@der@ope@frac[3]{
     \tnsana@der@abstract@frac{\frac}{}{#2}{#3}#1%
 }
+
 
 \newcommand\tnsana@der@ope@dfrac[3]{
     \tnsana@der@abstract@frac{\dfrac}{}{#2}{#3}#1%
@@ -146,175 +181,200 @@
 %     + Simple version (no var. of derivation)
 
 \newcommand\tnsana@validate@simple@der@option[1]{
-	\IfEqCase{#1}{%
-		{u}{\booltrue{tnsana@der@option@u}}%
-		{e}{\booltrue{tnsana@der@option@e}}%
-		{p}{\booltrue{tnsana@der@option@p}}%
-		{sp}{\booltrue{tnsana@der@option@sp}}%
-	}[%
+    \IfEqCase{#1}{%
+        {u}{\booltrue{tnsana@der@option@u}}%
+        {e}{\booltrue{tnsana@der@option@e}}%
+        {d}{\booltrue{tnsana@der@option@d}}%
+        {p}{\booltrue{tnsana@der@option@p}}%
+        {sp}{\booltrue{tnsana@der@option@sp}}%
+    }[%
         \PackageError{tnsana}{unknown option}%
-                             {you can use u (default), e , p and sp}%
-	]%
+                             {you can use u (default), e , t , p and sp}%
+    ]%
 }
 
 
 \newcommand\sder[3][u]{%
-	\boolfalse{tnsana@der@option@u}%
-	\boolfalse{tnsana@der@option@e}%
-	\boolfalse{tnsana@der@option@p}%
-	\boolfalse{tnsana@der@option@sp}%
-	%
-	\DoWithCSL\tnsana@validate@simple@der@option{#1}
-	%
-	\ifbool{tnsana@der@option@e}{}{%
-		\booltrue{tnsana@der@option@u}%
-	}%
-	%
-	\ifbool{tnsana@der@option@p}{%
-		\let\parithere\tnsana@der@func@ext@par%
-	}{%
-		\ifbool{tnsana@der@option@sp}{%
-			\let\parithere\tnsana@der@func@no@ext@par%
-		}{%
-			\let\parithere\tnsana@der@func@no@par%
-		}%
-	}%
-	%
-	\ifbool{tnsana@der@option@u}{%
-		\let\callithere\tnsana@der@usual%
+    \boolfalse{tnsana@der@option@u}%
+    \boolfalse{tnsana@der@option@e}%
+    \boolfalse{tnsana@der@option@d}%
+    \boolfalse{tnsana@der@option@p}%
+    \boolfalse{tnsana@der@option@sp}%
+    %
+    \DoWithCSL\tnsana@validate@simple@der@option{#1}
+    %
+    \ifboolexpr{
+        not(
+            bool {tnsana@der@option@e}
+            or
+            bool {tnsana@der@option@d}
+        )
     }{%
-		\let\callithere\tnsana@der@exp%
-	}%
-	\callithere{\parithere}{#2}{#3}%
+        \booltrue{tnsana@der@option@u}%
+    }{}%   
+    %
+    \ifbool{tnsana@der@option@p}{%
+    	\ifbool{tnsana@der@option@d}{%
+	        \let\parithere\tnsana@der@func@over@bracket%
+	    }{%
+	    	\let\parithere\tnsana@der@func@ext@par%
+	    }%
+    }{%
+        \ifbool{tnsana@der@option@sp}{%
+    		\ifbool{tnsana@der@option@d}{%
+	        	\let\parithere\tnsana@der@func@over@bracket%
+	    	}{%
+	    		\let\parithere\tnsana@der@func@no@ext@par%
+	        }%
+        }{%
+            \let\parithere\tnsana@der@func@no@par%
+        }%
+    }%
+    %
+    \ifbool{tnsana@der@option@u}{%
+        \let\callithere\tnsana@der@usual%
+    }{%
+        \ifbool{tnsana@der@option@e}{%
+            \let\callithere\tnsana@der@exp%
+        }{%
+            \let\callithere\tnsana@der@dot%
+        }%
+    }%
+    \callithere{\parithere}{#2}{#3}%
 }
 
 
 %     + Strict version (this one needs the var. of derivation)
 
 \newcommand\tnsana@validate@der@option[1]{
-	\IfEqCase{#1}{%
-		{u}{\booltrue{tnsana@der@option@u}}%
-		{e}{\booltrue{tnsana@der@option@e}}%
-		{i}{\booltrue{tnsana@der@option@i}}%
-		{f}{\booltrue{tnsana@der@option@f}}%
-		{of}{\booltrue{tnsana@der@option@of}}%
-		{sf}{\booltrue{tnsana@der@option@sf}}%
-		{osf}{\booltrue{tnsana@der@option@osf}}%
-		{p}{\booltrue{tnsana@der@option@p}}%
-		{sp}{\booltrue{tnsana@der@option@sp}}%
-	}[%
+    \IfEqCase{#1}{%
+        {u}{\booltrue{tnsana@der@option@u}}%
+        {e}{\booltrue{tnsana@der@option@e}}%
+        {d}{\booltrue{tnsana@der@option@d}}%
+        {i}{\booltrue{tnsana@der@option@i}}%
+        {f}{\booltrue{tnsana@der@option@f}}%
+        {of}{\booltrue{tnsana@der@option@of}}%
+        {sf}{\booltrue{tnsana@der@option@sf}}%
+        {osf}{\booltrue{tnsana@der@option@osf}}%
+        {p}{\booltrue{tnsana@der@option@p}}%
+        {sp}{\booltrue{tnsana@der@option@sp}}%
+    }[%
         \PackageError{tnsana}{unknown option}%
                              {you can use u (default), e , i , f , sf , oi , of , osf , p and sp}%
-	]%
+    ]%
 }
 
 
 \newcommand\der[4][u]{%
-	\boolfalse{tnsana@der@option@u}%
-	\boolfalse{tnsana@der@option@e}%
-	\boolfalse{tnsana@der@option@i}%
-	\boolfalse{tnsana@der@option@f}%
-	\boolfalse{tnsana@der@option@of}%
-	\boolfalse{tnsana@der@option@sf}%
-	\boolfalse{tnsana@der@option@osf}%
-	\boolfalse{tnsana@der@option@p}%
-	\boolfalse{tnsana@der@option@sp}%
-	%
-	\DoWithCSL\tnsana@validate@der@option{#1}
-	%
-	\ifboolexpr{
-		not(
-			bool {tnsana@der@option@e}
-			or
-			bool {tnsana@der@option@i}
-			or
-			bool {tnsana@der@option@f}
-			or
-			bool {tnsana@der@option@of}
-			or
-			bool {tnsana@der@option@sf}
-			or
-			bool {tnsana@der@option@osf}
-		)
+    \boolfalse{tnsana@der@option@u}%
+    \boolfalse{tnsana@der@option@e}%
+    \boolfalse{tnsana@der@option@d}%
+    \boolfalse{tnsana@der@option@i}%
+    \boolfalse{tnsana@der@option@f}%
+    \boolfalse{tnsana@der@option@of}%
+    \boolfalse{tnsana@der@option@sf}%
+    \boolfalse{tnsana@der@option@osf}%
+    \boolfalse{tnsana@der@option@p}%
+    \boolfalse{tnsana@der@option@sp}%
+    %
+    \DoWithCSL\tnsana@validate@der@option{#1}
+    %
+    \ifboolexpr{
+        not(
+            bool {tnsana@der@option@e}
+            or
+            bool {tnsana@der@option@d}
+            or
+            bool {tnsana@der@option@i}
+            or
+            bool {tnsana@der@option@f}
+            or
+            bool {tnsana@der@option@of}
+            or
+            bool {tnsana@der@option@sf}
+            or
+            bool {tnsana@der@option@osf}
+        )
     }{%
-    	\booltrue{tnsana@der@option@u}%
+        \booltrue{tnsana@der@option@u}%
     }{}
-	% Usual
-	\ifbool{tnsana@der@option@u}{%
-		\sder[#1]{#2}{#3}
-	% Exponent
-	}{
-    	\ifbool{tnsana@der@option@e}{%
-    		\sder[#1]{#2}{#3}
-    	}{
+    % Usual, exponent or dot
+    \ifboolexpr{
+        bool {tnsana@der@option@u}
+        or
+        bool {tnsana@der@option@e}
+        or
+        bool {tnsana@der@option@d}
+    }{%
+        \sder[#1]{#2}{#3}
+    }{%    
     % Indice or fraction like
-        	\ifbool{tnsana@der@option@p}{%
-        		\let\parithere\tnsana@der@func@ext@par%
-        	}{%
-        		\ifbool{tnsana@der@option@sp}{%
-        			\let\parithere\tnsana@der@func@no@ext@par%
-        		}{%
-        			\let\parithere\tnsana@der@func@no@par%
-        		}%
-        	}%
-	 % Big frac
-	 		\ifbool{tnsana@der@option@f}{%
-				\let\callithere\tnsana@der@dfrac%
-	 % Small frac
-	 		}{%
-				\ifbool{tnsana@der@option@sf}{%
-					\let\callithere\tnsana@der@frac%
-	 % Indice
-	 			}{%
-					\ifbool{tnsana@der@option@i}{%
-						\let\callithere\tnsana@der@sub%
-	% Big frac ope
-					}{
-						\ifbool{tnsana@der@option@of}{%
-							\let\callithere\tnsana@der@ope@dfrac%
-						}{
-	% Small frac ope
-							\ifbool{tnsana@der@option@osf}{%
-								\let\callithere\tnsana@der@ope@frac%
-							}{}%
-						}%
-					}%
-				}%
-	 		}%
-	% Let's do the job
-			\callithere{\parithere{#2}}{#3}{#4}%
-		}%
-	}%
+        \ifbool{tnsana@der@option@p}{%
+                \let\parithere\tnsana@der@func@ext@par%
+        }{%
+            \ifbool{tnsana@der@option@sp}{%
+                \let\parithere\tnsana@der@func@no@ext@par%
+            }{%
+                \let\parithere\tnsana@der@func@no@par%
+            }%
+        }%
+     % Big frac
+        \ifbool{tnsana@der@option@f}{%
+            \let\callithere\tnsana@der@dfrac%
+     % Small frac
+        }{%
+            \ifbool{tnsana@der@option@sf}{%
+                \let\callithere\tnsana@der@frac%
+     % Indice
+            }{%
+                \ifbool{tnsana@der@option@i}{%
+                    \let\callithere\tnsana@der@sub%
+    % Big frac ope
+                }{
+                    \ifbool{tnsana@der@option@of}{%
+                        \let\callithere\tnsana@der@ope@dfrac%
+                    }{
+    % Small frac ope
+                        \ifbool{tnsana@der@option@osf}{%
+                            \let\callithere\tnsana@der@ope@frac%
+                        }{}%
+                    }%
+                }%
+             }%
+        }%
+    % Let's do the job
+        \callithere{\parithere{#2}}{#3}{#4}%
+    }%
 }
 
 
 %     + Operator for total derivations
 
 \newcommand\tnsana@validate@der@operator@option[1]{
-	\IfEqCase{#1}{%
-		{f}{\booltrue{tnsana@der@option@f}}%
-		{sf}{\booltrue{tnsana@der@option@sf}}%
-		{i}{\booltrue{tnsana@der@option@i}}%
-	}[%
+    \IfEqCase{#1}{%
+        {f}{\booltrue{tnsana@der@option@f}}%
+        {sf}{\booltrue{tnsana@der@option@sf}}%
+        {i}{\booltrue{tnsana@der@option@i}}%
+    }[%
         \PackageError{tnsana}{unknown option}%
                              {you can use f (default), sf and i}%
-	]%
+    ]%
 }
 
 
 \newcommand\derope[3][f]{%
-	\boolfalse{tnsana@der@option@f}%
-	\boolfalse{tnsana@der@option@sf}%
-	\boolfalse{tnsana@der@option@i}%
-	%
-	\DoWithCSL\tnsana@validate@der@operator@option{#1}
-	%
-	\ifbool{tnsana@der@option@sf}{}{%
-		\ifbool{tnsana@der@option@i}{}{%
-			\booltrue{tnsana@der@option@f}%
-		}%
-	}%
-	\der[#1]{}{#2}{#3}%
+    \boolfalse{tnsana@der@option@f}%
+    \boolfalse{tnsana@der@option@sf}%
+    \boolfalse{tnsana@der@option@i}%
+    %
+    \DoWithCSL\tnsana@validate@der@operator@option{#1}
+    %
+    \ifbool{tnsana@der@option@sf}{}{%
+        \ifbool{tnsana@der@option@i}{}{%
+            \booltrue{tnsana@der@option@f}%
+        }%
+    }%
+    \der[#1]{}{#2}{#3}%
 }
 
 
@@ -337,21 +397,20 @@
 }
 
 \newcommand\tnsana@pder@dfrac[3]{%
-	\tnsana@pder@abstract@frac{\dfrac}{#1}{#2}{#3}%
+    \tnsana@pder@abstract@frac{\dfrac}{#1}{#2}{#3}%
 }
 
 \newcommand\tnsana@pder@frac[3]{%
-	\tnsana@pder@abstract@frac{\frac}{#1}{#2}{#3}%
+    \tnsana@pder@abstract@frac{\frac}{#1}{#2}{#3}%
 }
 
 \newcommand\tnsana@pder@ope@dfrac[3]{%
-	\tnsana@pder@abstract@frac{\dfrac}{}{#2}{#3}#1%
+    \tnsana@pder@abstract@frac{\dfrac}{}{#2}{#3}#1%
 }
 
 \newcommand\tnsana@pder@ope@frac[3]{%
-	\tnsana@pder@abstract@frac{\frac}{}{#2}{#3}#1%
+    \tnsana@pder@abstract@frac{\frac}{}{#2}{#3}#1%
 }
-
 
 
 \newcommand\tnsana@pder@sub[3]{
@@ -369,88 +428,88 @@
 %     + With the function given
 
 \newcommand\tnsana@validate@pder@option[1]{
-	\IfEqCase{#1}{%
-		{f}{\booltrue{tnsana@der@option@f}}%
-		{of}{\booltrue{tnsana@der@option@of}}%
-		{sf}{\booltrue{tnsana@der@option@sf}}%
-		{osf}{\booltrue{tnsana@der@option@osf}}%
-		{i}{\booltrue{tnsana@der@option@i}}%
-		{p}{\booltrue{tnsana@der@option@p}}%
-		{sp}{\booltrue{tnsana@der@option@sp}}%
-	}[%
+    \IfEqCase{#1}{%
+        {f}{\booltrue{tnsana@der@option@f}}%
+        {of}{\booltrue{tnsana@der@option@of}}%
+        {sf}{\booltrue{tnsana@der@option@sf}}%
+        {osf}{\booltrue{tnsana@der@option@osf}}%
+        {i}{\booltrue{tnsana@der@option@i}}%
+        {p}{\booltrue{tnsana@der@option@p}}%
+        {sp}{\booltrue{tnsana@der@option@sp}}%
+    }[%
         \PackageError{tnsana}{unknown option}%
                              {you can use f (default), sf, of, osf, i, p and sp}%
-	]%
+    ]%
 }
 
 
 \newcommand\pder[4][f]{%
-	\boolfalse{tnsana@der@option@f}%
-	\boolfalse{tnsana@der@option@of}%
-	\boolfalse{tnsana@der@option@sf}%
-	\boolfalse{tnsana@der@option@osf}%
-	\boolfalse{tnsana@der@option@i}%
-	\boolfalse{tnsana@der@option@p}%
-	\boolfalse{tnsana@der@option@sp}%
-	%
-	\DoWithCSL\tnsana@validate@pder@option{#1}
-	%
-	%
-	\ifboolexpr{
-		not(
-			bool {tnsana@der@option@of}
-			or
-			bool {tnsana@der@option@sf}
-			or
-			bool {tnsana@der@option@osf}
-			or
-			bool {tnsana@der@option@i}
-		)
+    \boolfalse{tnsana@der@option@f}%
+    \boolfalse{tnsana@der@option@of}%
+    \boolfalse{tnsana@der@option@sf}%
+    \boolfalse{tnsana@der@option@osf}%
+    \boolfalse{tnsana@der@option@i}%
+    \boolfalse{tnsana@der@option@p}%
+    \boolfalse{tnsana@der@option@sp}%
+    %
+    \DoWithCSL\tnsana@validate@pder@option{#1}
+    %
+    %
+    \ifboolexpr{
+        not(
+            bool {tnsana@der@option@of}
+            or
+            bool {tnsana@der@option@sf}
+            or
+            bool {tnsana@der@option@osf}
+            or
+            bool {tnsana@der@option@i}
+        )
     }{%
-    	\booltrue{tnsana@der@option@f}%
+        \booltrue{tnsana@der@option@f}%
     }{}%
     % Parentheses or not
     \ifbool{tnsana@der@option@p}{%
-    	\let\parithere\tnsana@der@func@ext@par%
+        \let\parithere\tnsana@der@func@ext@par%
     }{%
-    	\ifbool{tnsana@der@option@sp}{%
-        	\let\parithere\tnsana@der@func@no@ext@par%
+        \ifbool{tnsana@der@option@sp}{%
+            \let\parithere\tnsana@der@func@no@ext@par%
         }{%
-        	\let\parithere\tnsana@der@func@no@par%
+            \let\parithere\tnsana@der@func@no@par%
         }%
     }%
     % Expo total
     \IfStrEq{#4}{1}{%
-    	\def\expotot{}
+        \def\expotot{}
     }{%
-    	\def\expotot{#4}
+        \def\expotot{#4}
     }%
-	% Big frac
-	\ifbool{tnsana@der@option@f}{%
-		\let\callithere\tnsana@pder@dfrac%
-	}{%
+    % Big frac
+    \ifbool{tnsana@der@option@f}{%
+        \let\callithere\tnsana@pder@dfrac%
+    }{%
     % Big frac ope
-		\ifbool{tnsana@der@option@of}{%
-			\let\callithere\tnsana@pder@ope@dfrac%
-		}{%
-	% Small frac
-			\ifbool{tnsana@der@option@sf}{%
-				\let\callithere\tnsana@pder@frac%
-			}{%
-	% Small frac ope
-				\ifbool{tnsana@der@option@osf}{%
-					\let\callithere\tnsana@pder@ope@frac%
-				}{%
-	% Indice
-					\ifbool{tnsana@der@option@i}{%
-						\let\callithere\tnsana@pder@sub%
-					}{}%
-				}%
-			}%
-		}%
-	}%
-	% Let's do the job
-	\callithere{\parithere{#2}}{#3}{\expotot}%
+        \ifbool{tnsana@der@option@of}{%
+            \let\callithere\tnsana@pder@ope@dfrac%
+        }{%
+    % Small frac
+            \ifbool{tnsana@der@option@sf}{%
+                \let\callithere\tnsana@pder@frac%
+            }{%
+    % Small frac ope
+                \ifbool{tnsana@der@option@osf}{%
+                    \let\callithere\tnsana@pder@ope@frac%
+                }{%
+    % Indice
+                    \ifbool{tnsana@der@option@i}{%
+                        \let\callithere\tnsana@pder@sub%
+                    }{}%
+                }%
+            }%
+        }%
+    }%
+    % Let's do the job
+    \callithere{\parithere{#2}}{#3}{\expotot}%
 }
 
 
@@ -458,16 +517,16 @@
 %     + Operator for partiaal derivations
 
 \newcommand\pderope[3][f]{%
-	\boolfalse{tnsana@der@option@f}%
-	\boolfalse{tnsana@der@option@sf}%
-	\boolfalse{tnsana@der@option@i}%
-	%
-	\DoWithCSL\tnsana@validate@der@operator@option{#1}
-	%
-	\ifbool{tnsana@der@option@sf}{}{%
-		\ifbool{tnsana@der@option@i}{}{%
-			\booltrue{tnsana@der@option@f}%
-		}%
-	}%
-	\pder[#1]{}{#2}{#3}%
+    \boolfalse{tnsana@der@option@f}%
+    \boolfalse{tnsana@der@option@sf}%
+    \boolfalse{tnsana@der@option@i}%
+    %
+    \DoWithCSL\tnsana@validate@der@operator@option{#1}
+    %
+    \ifbool{tnsana@der@option@sf}{}{%
+        \ifbool{tnsana@der@option@i}{}{%
+            \booltrue{tnsana@der@option@f}%
+        }%
+    }%
+    \pder[#1]{}{#2}{#3}%
 }

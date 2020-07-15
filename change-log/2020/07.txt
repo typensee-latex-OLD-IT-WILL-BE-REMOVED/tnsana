@@ -1,4 +1,11 @@
 ==========
+2020-07-16
+==========
+
+**Derivation :** the dot version of the total derivation with known exponent has been added.
+
+
+==========
 2020-07-15
 ==========
 
