@@ -5,7 +5,7 @@
 **New minor version version::``0.2.0-beta`` of ¨tnsana:** see the changes below.
 
 
-**Symbolic variable :** one new macro `\symvar` can be used to indicate variables in functional operators for example (this macro comes from ¨tnscom).
+**Symbolic variable :** one new macro `\symvar` can be used to indicate variables in functional operators for example (this macro comes directly from ¨tnscom).
 
 
 ==========
