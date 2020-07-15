@@ -168,14 +168,15 @@
 \renewcommand{\labelitemii}{---}
 
 \title{ %
-	Le package \texttt{tnsana}%
+	Le package \texttt{tnsana}:\\%
+	de l'analyse élémentaire%
 	\\%
 	{\footnotesize Code source disponible sur \url{https://github.com/typensee-latex/tnsana.git}.}%
 	\\%
-    {\footnotesize Version \texttt{0.1.0-beta} développée et testée sur \macosxname{}.}%
+    {\footnotesize Version \texttt{0.2.0-beta} développée et testée sur \macosxname{}.}%
 }
 \author{Christophe BAL}
-\date{2020-07-12}
+\date{2020-07-15}
 
 \maketitle
 
@@ -194,7 +195,7 @@
 
 \section{Introduction}
 
-Le package \verb+tnsana+ propose des macros pour écrire de l'analyse mathématique basique.
+Le package \verb+tnsana+ propose des macros pour écrire de l'analyse mathématique basique via un codage sémantique simple.
 
 \begin{remark}
 	Ce package s'appuie sur \verb+tnscom+ disponible sur \url{https://github.com/typensee-latex/tnscom.git}.
@@ -235,6 +236,13 @@ $\param{a} x^2 + \param{b} x + \param{c}$
 ou
 $a x^2 + b x + c$
 \end{latexex}
+
+
+% ---------------------- %
+\section{Une variable \og symbolique \fg{}}
+
+Le package \verb+tnscom+ propose les macros \macro{symvar} et \macro{symvar*} qui produisent les symboles $\symvar$ et $\symvar*$. Le nom utilisé vient de \prefix{symvar} pour \whyprefix{symb}{olic} \whyprefix{var}{iable} soit \inenglish{variable symbolique}.
+Ces symboles sont utiles pour indiquer un argument symboliquement sans faire référence précisément à une ou des variables nommées.
 
 
 % ---------------------- %
@@ -537,58 +545,11 @@ Les options possibles sont \verb+f+, valeur par défaut, \verb+sf+ et \verb+i+ a
 
 
 % ---------------------- %
-
-
-\subsection{Fiches techniques}
-
-\paragraph{Dérivation partielle}
-
-\IDmacro{pder}{1}{2} où \quad \mwhyprefix{p}{artial}
-
-\IDoption{} la valeur par défaut est \verb+f+. 
-\begin{enumerate}
-	\item \verb+f+ : écriture via une fraction en mode display.
-
-	\item \verb+sf+ : écriture via une fraction en mode non display.
-
-	\item \verb+of+ : écriture via une fraction en mode display sous la forme d'un opérateur \emph{(la fonction est à côté de la fraction)}.
-
-	\item \verb+osf+ : écriture via une fraction en mode non display sous la forme d'un opérateur \emph{(la fonction est à côté de la fraction)}.
-
-	\item \verb+i+ : écriture via un indice.
-
-	\smallskip
-	\item \verb+p+ : ajout de parenthèses extensibles autour de la fonction.
-
-	\item \verb+sp+ : ajout de parenthèses non extensibles autour de la fonction.
-\end{enumerate}
-
-
-\IDarg{1} la fonction à dériver.
-
-\IDarg{2} les variables utilisées avec leur ordre de dérivation pour la dérivation partielle en utilisant une syntaxe du type \verb+x | y^2 | ...+ qui indique de dériver suivant $x$ une fois, puis suivant $y$ trois fois... etc.
-
-\IDarg{3} l'ordre total de dérivation.
-
-
-% ---------------------- %
-
-
-\paragraph{Dérivation partielle - Opérateur fonctionnel}
-
-\IDmacro{pderope}{1}{2} où \quad \mwhyprefix{p}{artial}
-                              et \mwhyprefix{ope}{rator}
-
-\IDoption{} la valeur par défaut est \verb+f+. Les options disponibles sont \verb+f+, \verb+sf+ et \verb+i+ : voir la fiche technique de \macro{pder} juste avant.
-
-\IDarg{1} les variables utilisées avec leur ordre de dérivation via la syntaxe indiquée ci-dessus.
-
-\IDarg{2} l'ordre total de dérivation.
 % \section{Analysis}
 
 \section{Tableaux de variation et de signe}
 
-\subsection{Les bases}
+\subsection{Les bases de \texttt{tkz-tab}}
 
 \paragraph{Comment ça marche ?}
 
@@ -699,7 +660,7 @@ Reportez vous à la documentation de \verb+tkz-tab+ pour des compléments d'info
     \tkzTabVal{1}{2}{0.35} % Position entre les 1re et 2e valeurs puis en proportion.
               {1}{0}       % x_1 et f(x_1)
     \tkzTabVal{1}{2}{0.65} % Position entre les 1re et 2e valeurs puis en proportion.
-              {$e$}{1}   % x_2 et f(x_2)
+              {$\ee$}{1}   % x_2 et f(x_2)
 \end{tikzpicture}
 \end{latexex-flat}
 
@@ -712,15 +673,15 @@ Voici un autre exemple pour comprendre comment utiliser \macro{tkzTabVal} avec e
         $f'(x)$ / 1    ,
         $f(x)$  / 1.5
     }{
-                $0$                , $e$         , $+\infty$
+                $0$                , $\ee$     , $+\infty$
     }
     \tkzTabLine{d              , + , 0         , - ,          }
-    \tkzTabVar {D- / $-\infty$     , + / $e$     , - / $0$  }
+    \tkzTabVar {D- / $-\infty$     , + / $\ee$ , - / $0$  }
     %
     \tkzTabVal[draw]{1}{2}{0.5} % Position entre les 1re et 2e valeurs au milieu.
-                    {$1$}{$\frac{1}{e}$}
+                    {$1$}{$\frac{1}{\ee}$}
     \tkzTabVal[draw]{2}{3}{0.5} % Position entre les 2e et 3e valeurs au milieu.
-                    {$e^2$}{$1$}
+                    {$\ee^2$}{$1$}
 \end{tikzpicture}
 \end{latexex-flat}
 
@@ -792,7 +753,7 @@ Voici le code du 1\ier{} tableau où le placement de la valeur $3$ au milieu ent
 Pour produire lee code du 2\ieme{} tableau, il a été utilisé au préalable ce qui suit en activant l'option \verb@help@ qui demande à \verb@tkz-tab@ d'afficher les noms de noeuds au sens TikZ qui ont été créés.
 Ceci permet alors d'utiliser ces noeuds pour des dessins TikZ faits maison
 \footnote{
-    C'est grâce à ce mécanisme que \prefix{lymath} peut proposer des outils explicatifs des tableaux de signe : voir la section suivante.
+    C'est grâce à ce mécanisme que \prefix{tnsana} peut proposer des outils explicatifs des tableaux de signe : voir la section suivante.
 }.
 	
 \medskip
@@ -995,7 +956,7 @@ Pour produire le 2\ieme{} tableau, en plus du code \verb#tkz-tab# pour le tablea
 \footnote{
 	Ceci permet d'avoir de la place dans la 1\iere{} colonne pour le dernier produit et de réduire la largeur des colonnes pour les signes.
 },
-il a fallu ajouter les lignes données ci-dessous où sont utilisées les macros \macro{graphSign} et \macro{comLine} proposées par \verb+lymath+ \emph{(la syntaxe simple à suivre sera expliquée dans la section suivante)}
+il a fallu ajouter les lignes données ci-dessous où sont utilisées les macros \macro{graphSign} et \macro{comLine} proposées par \verb+tnsana+ \emph{(la syntaxe simple à suivre sera expliquée dans la section suivante)}
 \footnote{
 	Les lignes pour les signes doivent utiliser un coefficient minimal de \texttt{1.5} pour la hauteur afin d'éviter que la superposition des graphiques.
 }.
@@ -1018,7 +979,7 @@ il a fallu ajouter les lignes données ci-dessous où sont utilisées les macros
 
 
 \begin{remark}
-	Il est aussi possible de décorer une ligne de variation comme cela sera montré dans la section \ref{tnsana-grapgsign-com-two-lines}. 
+	Il est aussi possible de décorer une ligne de variation comme cela sera montré dans l'exemple \ref{tnsana-grapgsign-com-two-lines} page \pageref{tnsana-grapgsign-com-two-lines}. 
 \end{remark}
 
 
@@ -1029,7 +990,7 @@ il a fallu ajouter les lignes données ci-dessous où sont utilisées les macros
 
 L'ajout de commentaires courts se fait via la macro \macro{comLine} pour \whyprefix{com}{ment a line} soit \inenglish{commenter une ligne}
 \footnote{
-    L'auteur de \prefix{lymath} n'est absolument pas un fan de la casse en bosses de chameau mais par souci de cohérence avec ce que propose \prefix{tkz-tab}, le nom \macro{comLine} a été proposé à la place de \macro{comline}.
+    L'auteur de \prefix{tnsana} n'est absolument pas un fan de la casse en bosses de chameau mais par souci de cohérence avec ce que propose \prefix{tkz-tab}, le nom \macro{comLine} a été proposé à la place de \macro{comline}.
 }.
 Cette macro possède un argument optionnel et deux obligatoires.
 
@@ -1191,10 +1152,10 @@ Voici un exemple possible d'utilisation où le retour à la ligne a été obtenu
         $f'(x)$ / 1    ,
         $f(x)$  / 1.5
     }{
-                $0$                , $e$         , $+\infty$
+                $0$                , $\ee$         , $+\infty$
     }
     \tkzTabLine{d              , + , 0         , - ,          }
-    \tkzTabVar {D- / $-\infty$     , + / $e$     , - / $0$  }
+    \tkzTabVar {D- / $-\infty$     , + / $\ee$     , - / $0$  }
     %
 
     \comLine{2}{%
@@ -1205,59 +1166,6 @@ Voici un exemple possible d'utilisation où le retour à la ligne a été obtenu
 
 
 % ---------------------- %
-
-
-\subsection{Fiche technique}
-
-\paragraph{Tableaux de signes -- Commentaires et graphiques explicatifs}
-
-\IDmacro{comLine}{1}{2}  où \quad \mwhyprefix{com}{ment}
-
-
-\IDoption{} couleur au format TikZ.
-
-
-\IDarg{1} le numéro de ligne où placer le commentaire, $0$ étant le 1\ier{} numéro.
-
-\IDarg{2} le texte du commentaire.
-
-
-\separation
-
-
-\IDmacro{graphSign}{1}{2..4}
-
-
-\IDoption{} couleur au format TikZ.
-
-
-\IDarg{1} le numéro de ligne où placer le graphique, $0$ étant le 1\ier{} numéro.
-
-
-\IDarg{2} le type de fonctions avec des contraintes en utilisant la virgule comme séparateur d'informations.
-
-\begin{enumerate}
-	\item \verb@ax+b@ sans espace indique une fonction affine avec un unique paramètre \verb@a@ non nul à caractériser.
-
-	\item \verb@ax2+bx+c@ sans espace indique une fonction trinôme du 2\ieme{} degré avec une paramètre \verb@a@ non nul à caractériser ainsi que \verb@d@ pour son discriminant.
-
-    % ==================== %
-
-	\smallskip
-	
-	\item \verb@ap@ et \verb@an@ indiquent respectivement les conditions $a > 0$ et $a < 0$.
-
-	\item \verb@dp@, \verb@dz@ et \verb@dn@ indiquent respectivement les conditions $d > 0$, $d = 0$ et $d < 0$.
-\end{enumerate}
-
-
-\IDarg{supplémentaire pour ax+b} la racine de $ax + b$.
-
-
-\IDarg{$\!$s supplémentaires pour ax2+bx+c} si $ax^2 + bx + c$ admet une ou deux racines, on donnera toutes les racines de la plus petite à la plus grande
-\footnote{
-	Notant $\Delta = b^2 - 4 ac$, si $\Delta < 0$ il n'y aura pas d'argument supplémentaire, si $\Delta = 0$ il y en aura un seul et enfin si $\Delta > 0$ il faudra en donner deux, le 1\ier{} étant le plus petit.
-}.
 \section{Calcul intégral}
 
 \subsection{Intégrales multiples}
@@ -1295,7 +1203,7 @@ $\displaystyle
 
 \newparaexample{À quoi bon ?}
 
-Le 1\ier{} exemple qui suit semblera être une hérésie pour les habitués de \LaTeX{} mais rappelons que le but de \verb+lymath+ est de rendre les documents facilement modifiables globalement ou localement comme le montre le 2\ieme{} exemple.
+Le 1\ier{} exemple qui suit semblera être une hérésie pour les habitués de \LaTeX{} mais rappelons que le but de \verb+tnsana+ est de rendre les documents facilement modifiables globalement ou localement comme le montre le 2\ieme{} exemple.
 
 \begin{latexex}
  $\displaystyle
@@ -1336,7 +1244,7 @@ La macro \macro{dintegrate*} présentée ci-dessous possède aussi une version n
 
 
 \begin{remark}
-	Il faut savoir que \macro{hook} signifie \inenglish{crochet} mais la bonne traduction du terme mathématique est en fait \emph{\og square bracket \fg}. Ceci étant dit l'auteur de \verb+lymath+ trouve plus efficace d'utiliser \macro{hook} comme nom de macro.
+	Il faut savoir que \macro{hook} signifie \inenglish{crochet} mais la bonne traduction du terme mathématique est en fait \emph{\og square bracket \fg}. Ceci étant dit l'auteur de \verb+tnsana+ trouve plus efficace d'utiliser \macro{hook} comme nom de macro.
 \end{remark}
 
 
@@ -1365,10 +1273,10 @@ Dans l'exemple suivant, on utilise l'option \prefix{sb} pour \whyprefix{s}{mall}
 Via les options \prefix{r} et \prefix{sr} pour \whyprefix{s}{mall} et \whyprefix{r}{ull} soit \inenglish*{petit} et \inenglish{trait}, on obtient ce qui suit.
 
 \begin{latexex}
- $\hook[r] {a}{b}%
-           {\dfrac{x - 1}{5 + x^2}}{x}
-= \hook[sr]{a}{b}%
-           {\dfrac{x - 1}{5 + x^2}}{x}$
+ $\hook[r]  {a}{b}%
+            {\dfrac{x - 1}{5 + x^2}}{x}
+= \hook*[sr]{a}{b}%
+            {\dfrac{x - 1}{5 + x^2}}{x}$
 \end{latexex}
 
 
@@ -1388,15 +1296,29 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 % Changes shown - START
 
     \medskip
+    \item[2020-07-15] Nouvelle version mineure \verb+0.2.0-beta+.
+    
+    \begin{itemize}[itemsep=.5em]
+        \item \topic*{Symboles} les nouvelles macros \macro{symvar} et \macro{symvar*} produisent un disque plein et un carré plein permettant par exemple d'indiquer symboliquement une ou des variables.
+        
+        \separation
+    \end{itemize}
+% ------------------------ %
+
+    \medskip
     \item[2020-07-12] Nouvelle version mineure \verb+0.1.0-beta+. 
         
     \begin{itemize}[itemsep=.5em]
         \item \topic*{Fonctions nommées} \macro{ppcm} et \macro{pgcd} ont été déplacées dans \texttt{tnsarith} disponible sur \url{https://github.com/typensee-latex/tnsarith.git}.
     \end{itemize}
+    
+    
+    \separation
 % ------------------------ %
 
     \medskip
     \item[2020-07-10] Première version \verb+0.0.0-beta+.
+
 % ------------------------ %
 
 % Changes shown - END 
@@ -1406,7 +1328,7 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 \newpage
 \section{Toutes les fiches techniques} \label{techincal-ids}
 
-
+\subsection{Introduction}
 \subsection{Constantes et paramètres}
 
 \subsubsection{Constantes classiques}
@@ -1435,6 +1357,13 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 \IDmacro*{param}{1}
 
 \IDarg{} un texte utilisant l'alphabet latin.
+\subsection{Une variable \og symbolique \fg{}}
+
+\subsubsection{Symbole pour les opérateurs fonctionnels}
+
+\IDmacro*{symvar}{0}
+
+\IDmacro*{symvar*}{0}
 \subsection{La fonction valeur absolue}
 
 \subsubsection{Valeur absolue}
@@ -1583,9 +1512,99 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 \IDarg{1} la fonction à dériver.
 
 \IDarg{2} l'ordre de dérivation.
+\subsubsection{Dérivation partielle}
+
+\IDmacro{pder}{1}{2} où \quad \mwhyprefix{p}{artial}
+
+\IDoption{} la valeur par défaut est \verb+f+. 
+\begin{enumerate}
+	\item \verb+f+ : écriture via une fraction en mode display.
+
+	\item \verb+sf+ : écriture via une fraction en mode non display.
+
+	\item \verb+of+ : écriture via une fraction en mode display sous la forme d'un opérateur \emph{(la fonction est à côté de la fraction)}.
+
+	\item \verb+osf+ : écriture via une fraction en mode non display sous la forme d'un opérateur \emph{(la fonction est à côté de la fraction)}.
+
+	\item \verb+i+ : écriture via un indice.
+
+	\smallskip
+	\item \verb+p+ : ajout de parenthèses extensibles autour de la fonction.
+
+	\item \verb+sp+ : ajout de parenthèses non extensibles autour de la fonction.
+\end{enumerate}
 
 
+\IDarg{1} la fonction à dériver.
 
+\IDarg{2} les variables utilisées avec leur ordre de dérivation pour la dérivation partielle en utilisant une syntaxe du type \verb+x | y^2 | ...+ qui indique de dériver suivant $x$ une fois, puis suivant $y$ trois fois... etc.
+
+\IDarg{3} l'ordre total de dérivation.
+
+
+% ---------------------- %
+
+
+\subsubsection{Dérivation partielle - Opérateur fonctionnel}
+
+\IDmacro{pderope}{1}{2} où \quad \mwhyprefix{p}{artial}
+                              et \mwhyprefix{ope}{rator}
+
+\IDoption{} la valeur par défaut est \verb+f+. Les options disponibles sont \verb+f+, \verb+sf+ et \verb+i+ : voir la fiche technique de \macro{pder} juste avant.
+
+\IDarg{1} les variables utilisées avec leur ordre de dérivation via la syntaxe indiquée ci-dessus.
+
+\IDarg{2} l'ordre total de dérivation.
+
+\subsubsection{Tableaux de signes -- Commentaires et graphiques explicatifs}
+
+\IDmacro{comLine}{1}{2}  où \quad \mwhyprefix{com}{ment}
+
+
+\IDoption{} couleur au format TikZ.
+
+
+\IDarg{1} le numéro de ligne où placer le commentaire, $0$ étant le 1\ier{} numéro.
+
+\IDarg{2} le texte du commentaire.
+
+
+\separation
+
+
+\IDmacro{graphSign}{1}{2..4}
+
+
+\IDoption{} couleur au format TikZ.
+
+
+\IDarg{1} le numéro de ligne où placer le graphique, $0$ étant le 1\ier{} numéro.
+
+
+\IDarg{2} le type de fonctions avec des contraintes en utilisant la virgule comme séparateur d'informations.
+
+\begin{enumerate}
+	\item \verb@ax+b@ sans espace indique une fonction affine avec un unique paramètre \verb@a@ non nul à caractériser.
+
+	\item \verb@ax2+bx+c@ sans espace indique une fonction trinôme du 2\ieme{} degré avec une paramètre \verb@a@ non nul à caractériser ainsi que \verb@d@ pour son discriminant.
+
+    % ==================== %
+
+	\smallskip
+	
+	\item \verb@ap@ et \verb@an@ indiquent respectivement les conditions $a > 0$ et $a < 0$.
+
+	\item \verb@dp@, \verb@dz@ et \verb@dn@ indiquent respectivement les conditions $d > 0$, $d = 0$ et $d < 0$.
+\end{enumerate}
+
+
+\IDarg{supplémentaire pour ax+b} la racine de $ax + b$.
+
+
+\IDarg{$\!$s supplémentaires pour ax2+bx+c} si $ax^2 + bx + c$ admet une ou deux racines, on donnera toutes les racines de la plus petite à la plus grande
+\footnote{
+	Notant $\Delta = b^2 - 4 ac$, si $\Delta < 0$ il n'y aura pas d'argument supplémentaire, si $\Delta = 0$ il y en aura un seul et enfin si $\Delta > 0$ il faudra en donner deux, le 1\ier{} étant le plus petit.
+}.
 \subsection{Calcul intégral}
 
 \subsubsection{Intégration -- Le symbole standard}
@@ -1609,9 +1628,9 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 
 \IDmacro*{dintegrate*}{4}  où \quad \mwhyprefix{d}{isplaystyle}
 
-\IDarg{1} ce qui est en bas du symbole $\int_{\bullet}$ .
+\IDarg{1} ce qui est en bas du symbole $\int_{\symvar}$ .
 
-\IDarg{2} ce qui est en haut du symbole $\int^{\bullet}$ .
+\IDarg{2} ce qui est en haut du symbole $\int^{\symvar}$ .
 
 \IDarg{3} la fonction intégrée.
 
@@ -1646,6 +1665,6 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 \IDarg{3} la fonction sur laquelle effectuer le calcul.
 
 \IDarg{4} la variable pour les calculs.
-
+\newpage
 
 \end{document}

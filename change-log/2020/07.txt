@@ -1,8 +1,18 @@
 ==========
+2020-07-15
+==========
+
+**New minor version version::``0.2.0-beta`` of ¨tnsana:** see the changes below.
+
+
+**Symbolic variable :** one new macro `\symvar` can be used to indicate variables in functional operators for example (this macro comes from ¨tnscom).
+
+
+==========
 2020-07-12
 ==========
 
-**First version version::``0.1.0-beta`` of ¨tnsana:** here are the changes.
+**New minor version version::``0.1.0-beta`` of ¨tnsana:** here are the changes.
 
     1) The french named functions `ppcm` and `pgcd` have been moved to ¨tnsarith.
 

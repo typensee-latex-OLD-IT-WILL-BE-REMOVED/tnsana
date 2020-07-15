@@ -2,7 +2,7 @@
 
 \makeatletter
 	\input{../config/header[fr].sty}
-	\input{../04-differential-calculus/01-differential-calculus.sty}
+	\input{../05-differential-calculus/01-differential-calculus.sty}
 
 	\usepackage{01-integral-calculus}
 \makeatother
@@ -61,7 +61,7 @@ $\displaystyle
 
 \newparaexample{À quoi bon ?}
 
-Le 1\ier{} exemple qui suit semblera être une hérésie pour les habitués de \LaTeX{} mais rappelons que le but de \verb+lymath+ est de rendre les documents facilement modifiables globalement ou localement comme le montre le 2\ieme{} exemple.
+Le 1\ier{} exemple qui suit semblera être une hérésie pour les habitués de \LaTeX{} mais rappelons que le but de \verb+tnsana+ est de rendre les documents facilement modifiables globalement ou localement comme le montre le 2\ieme{} exemple.
 
 \begin{latexex}
  $\displaystyle
@@ -101,9 +101,9 @@ La macro \macro{dintegrate*} présentée ci-dessous possède aussi une version n
 
 \IDmacro*{dintegrate*}{4}  où \quad \mwhyprefix{d}{isplaystyle}
 
-\IDarg{1} ce qui est en bas du symbole $\int_{\bullet}$ .
+\IDarg{1} ce qui est en bas du symbole $\int_{\symvar}$ .
 
-\IDarg{2} ce qui est en haut du symbole $\int^{\bullet}$ .
+\IDarg{2} ce qui est en haut du symbole $\int^{\symvar}$ .
 
 \IDarg{3} la fonction intégrée.
 
@@ -128,7 +128,7 @@ La macro \macro{dintegrate*} présentée ci-dessous possède aussi une version n
 
 
 \begin{remark}
-	Il faut savoir que \macro{hook} signifie \inenglish{crochet} mais la bonne traduction du terme mathématique est en fait \emph{\og square bracket \fg}. Ceci étant dit l'auteur de \verb+lymath+ trouve plus efficace d'utiliser \macro{hook} comme nom de macro.
+	Il faut savoir que \macro{hook} signifie \inenglish{crochet} mais la bonne traduction du terme mathématique est en fait \emph{\og square bracket \fg}. Ceci étant dit l'auteur de \verb+tnsana+ trouve plus efficace d'utiliser \macro{hook} comme nom de macro.
 \end{remark}
 
 
@@ -157,10 +157,10 @@ Dans l'exemple suivant, on utilise l'option \prefix{sb} pour \whyprefix{s}{mall}
 Via les options \prefix{r} et \prefix{sr} pour \whyprefix{s}{mall} et \whyprefix{r}{ull} soit \inenglish*{petit} et \inenglish{trait}, on obtient ce qui suit.
 
 \begin{latexex}
- $\hook[r] {a}{b}%
-           {\dfrac{x - 1}{5 + x^2}}{x}
-= \hook[sr]{a}{b}%
-           {\dfrac{x - 1}{5 + x^2}}{x}$
+ $\hook[r]  {a}{b}%
+            {\dfrac{x - 1}{5 + x^2}}{x}
+= \hook*[sr]{a}{b}%
+            {\dfrac{x - 1}{5 + x^2}}{x}$
 \end{latexex}
 
 

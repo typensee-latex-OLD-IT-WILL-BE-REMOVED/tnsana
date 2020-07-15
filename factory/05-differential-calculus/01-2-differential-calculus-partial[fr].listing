@@ -1,0 +1,3 @@
+ $\pderope    {x | y^2}{3}
+= \pderope[sf]{x | y^2}{3}
+= \pderope[i] {x | y^2}{3}$

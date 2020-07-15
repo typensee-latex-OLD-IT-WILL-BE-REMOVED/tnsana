@@ -2,6 +2,8 @@
 
 \makeatletter
     \input{../config/header[fr].sty}
+    \input{../01-constants/01-constants.sty}
+	\usepackage{amsmath}
 
     \usepackage{01-tables}
 \makeatother
@@ -85,7 +87,7 @@ Pour produire le 2\ieme{} tableau, en plus du code \verb#tkz-tab# pour le tablea
 \footnote{
 	Ceci permet d'avoir de la place dans la 1\iere{} colonne pour le dernier produit et de réduire la largeur des colonnes pour les signes.
 },
-il a fallu ajouter les lignes données ci-dessous où sont utilisées les macros \macro{graphSign} et \macro{comLine} proposées par \verb+lymath+ \emph{(la syntaxe simple à suivre sera expliquée dans la section suivante)}
+il a fallu ajouter les lignes données ci-dessous où sont utilisées les macros \macro{graphSign} et \macro{comLine} proposées par \verb+tnsana+ \emph{(la syntaxe simple à suivre sera expliquée dans la section suivante)}
 \footnote{
 	Les lignes pour les signes doivent utiliser un coefficient minimal de \texttt{1.5} pour la hauteur afin d'éviter que la superposition des graphiques.
 }.
@@ -108,7 +110,7 @@ il a fallu ajouter les lignes données ci-dessous où sont utilisées les macros
 
 
 \begin{remark}
-	Il est aussi possible de décorer une ligne de variation comme cela sera montré dans la section \ref{tnsana-grapgsign-com-two-lines}. 
+	Il est aussi possible de décorer une ligne de variation comme cela sera montré dans l'exemple \ref{tnsana-grapgsign-com-two-lines} page \pageref{tnsana-grapgsign-com-two-lines}. 
 \end{remark}
 
 
@@ -119,7 +121,7 @@ il a fallu ajouter les lignes données ci-dessous où sont utilisées les macros
 
 L'ajout de commentaires courts se fait via la macro \macro{comLine} pour \whyprefix{com}{ment a line} soit \inenglish{commenter une ligne}
 \footnote{
-    L'auteur de \prefix{lymath} n'est absolument pas un fan de la casse en bosses de chameau mais par souci de cohérence avec ce que propose \prefix{tkz-tab}, le nom \macro{comLine} a été proposé à la place de \macro{comline}.
+    L'auteur de \prefix{tnsana} n'est absolument pas un fan de la casse en bosses de chameau mais par souci de cohérence avec ce que propose \prefix{tkz-tab}, le nom \macro{comLine} a été proposé à la place de \macro{comline}.
 }.
 Cette macro possède un argument optionnel et deux obligatoires.
 
@@ -281,10 +283,10 @@ Voici un exemple possible d'utilisation où le retour à la ligne a été obtenu
         $f'(x)$ / 1    ,
         $f(x)$  / 1.5
     }{
-                $0$                , $e$         , $+\infty$
+                $0$                , $\ee$         , $+\infty$
     }
     \tkzTabLine{d              , + , 0         , - ,          }
-    \tkzTabVar {D- / $-\infty$     , + / $e$     , - / $0$  }
+    \tkzTabVar {D- / $-\infty$     , + / $\ee$     , - / $0$  }
     %
 
     \comLine{2}{%

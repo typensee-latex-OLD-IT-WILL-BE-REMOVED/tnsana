@@ -2,7 +2,9 @@
 
 \makeatletter
     \input{../config/header[fr].sty}
-
+    \input{../01-constants/01-constants.sty}
+	\usepackage{amsmath}
+	
     \usepackage{01-tables}
 \makeatother
 
@@ -13,7 +15,7 @@
 
 \section{Tableaux de variation et de signe}
 
-\subsection{Les bases}
+\subsection{Les bases de \texttt{tkz-tab}}
 
 \paragraph{Comment ça marche ?}
 
@@ -124,7 +126,7 @@ Reportez vous à la documentation de \verb+tkz-tab+ pour des compléments d'info
     \tkzTabVal{1}{2}{0.35} % Position entre les 1re et 2e valeurs puis en proportion.
               {1}{0}       % x_1 et f(x_1)
     \tkzTabVal{1}{2}{0.65} % Position entre les 1re et 2e valeurs puis en proportion.
-              {$e$}{1}   % x_2 et f(x_2)
+              {$\ee$}{1}   % x_2 et f(x_2)
 \end{tikzpicture}
 \end{latexex-flat}
 
@@ -137,15 +139,15 @@ Voici un autre exemple pour comprendre comment utiliser \macro{tkzTabVal} avec e
         $f'(x)$ / 1    ,
         $f(x)$  / 1.5
     }{
-                $0$                , $e$         , $+\infty$
+                $0$                , $\ee$     , $+\infty$
     }
     \tkzTabLine{d              , + , 0         , - ,          }
-    \tkzTabVar {D- / $-\infty$     , + / $e$     , - / $0$  }
+    \tkzTabVar {D- / $-\infty$     , + / $\ee$ , - / $0$  }
     %
     \tkzTabVal[draw]{1}{2}{0.5} % Position entre les 1re et 2e valeurs au milieu.
-                    {$1$}{$\frac{1}{e}$}
+                    {$1$}{$\frac{1}{\ee}$}
     \tkzTabVal[draw]{2}{3}{0.5} % Position entre les 2e et 3e valeurs au milieu.
-                    {$e^2$}{$1$}
+                    {$\ee^2$}{$1$}
 \end{tikzpicture}
 \end{latexex-flat}
 
@@ -217,7 +219,7 @@ Voici le code du 1\ier{} tableau où le placement de la valeur $3$ au milieu ent
 Pour produire lee code du 2\ieme{} tableau, il a été utilisé au préalable ce qui suit en activant l'option \verb@help@ qui demande à \verb@tkz-tab@ d'afficher les noms de noeuds au sens TikZ qui ont été créés.
 Ceci permet alors d'utiliser ces noeuds pour des dessins TikZ faits maison
 \footnote{
-    C'est grâce à ce mécanisme que \prefix{lymath} peut proposer des outils explicatifs des tableaux de signe : voir la section suivante.
+    C'est grâce à ce mécanisme que \prefix{tnsana} peut proposer des outils explicatifs des tableaux de signe : voir la section suivante.
 }.
 	
 \medskip
