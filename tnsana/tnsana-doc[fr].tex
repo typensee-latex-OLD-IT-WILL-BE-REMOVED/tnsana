@@ -49,6 +49,16 @@
 	listing side text
 }
 
+\newtcbinputlisting{\inputlatexex}[2][]{%
+	listing file={#2},%
+	sharp corners,%
+	left=1mm, right=1mm,%
+	bottom=1mm, top=1mm,%
+	colupper=red!75!blue,%
+	listing side text
+}
+
+
 \newtcblisting{latexex-flat}{%
 	sharp corners,%
 	left=1mm, right=1mm,%
@@ -56,12 +66,56 @@
 	colupper=red!75!blue,%
 }
 
+\newtcbinputlisting{\inputlatexexflat}[2][]{%
+	listing file={#2},%
+	sharp corners,%
+	left=1mm, right=1mm,%
+	bottom=1mm, top=1mm,%
+	colupper=red!75!blue,%
+}
+
+
 \newtcblisting{latexex-alone}{%
 	sharp corners,%
 	left=1mm, right=1mm,%
 	bottom=1mm, top=1mm,%
 	colupper=red!75!blue,%
 	listing only
+}
+
+\newtcbinputlisting{\inputlatexexalone}[2][]{%
+	listing file={#2},%
+	sharp corners,%
+	left=1mm, right=1mm,%
+	bottom=1mm, top=1mm,%
+	colupper=red!75!blue,%
+	listing only
+}
+
+
+\newcommand\inputlatexexcodeafter[1]{%
+	\begin{center}
+		\input{#1}
+	\end{center}
+
+	\vspace{-.5em}
+	
+	Le rendu précédent a été obtenu via le code suivant.
+	
+	\inputlatexexalone{#1}
+}
+
+
+\newcommand\inputlatexexcodebefore[1]{%
+	\inputlatexexalone{#1}
+	\vspace{-.75em}
+	\begin{center}
+		\textit{\footnotesize Rendu du code précédent}
+		
+		\medskip
+		
+		\input{#1}
+	\end{center}
 }
 
 
@@ -227,8 +281,6 @@ et $\kk$ où $\ttau = 2 \ppi$
 
 \subsection{Constantes latines personnelles}
 
-\newparaexample*{}
-
 La macro \macro{param} est surtout là pour une utilisation pédagogique.
 
 \begin{latexex}
@@ -241,7 +293,7 @@ $a x^2 + b x + c$
 % ---------------------- %
 \section{Une variable \og symbolique \fg{}}
 
-Le package \verb+tnscom+ propose les macros \macro{symvar} et \macro{symvar*} qui produisent les symboles $\symvar$ et $\symvar*$. Le nom utilisé vient de \prefix{symvar} pour \whyprefix{symb}{olic} \whyprefix{var}{iable} soit \inenglish{variable symbolique}.
+Le package \verb+tnscom+ propose les macros \macro{symvar} et \macro{symvar*} qui produisent les symboles $\symvar$ et $\symvar*$ . Le nom utilisé vient de \prefix{symvar} pour \whyprefix{symb}{olic} \whyprefix{var}{iable} soit \inenglish{variable symbolique}.
 Ces symboles sont utiles pour indiquer un argument symboliquement sans faire référence précisément à une ou des variables nommées.
 
 
@@ -267,8 +319,6 @@ $\abs*{\dfrac{3}{5}}$
 
 \subsection{Sans paramètre}
 
-\newparaexample*{}
-
 Quelques fonctions nommées supplémentaires où le \prefix{f} dans \prefix{fch} est pour \whyprefix{f}{rench} soit \inenglish{français} \emph{(ce choix a été fait pour éviter des incompatibilités avec quelques autres packages)}. La liste complète des fonctions nommées est donnée un peu plus bas dans la section  \ref{tnsana-all-named-functions}.
 
 \begin{latexex}
@@ -282,7 +332,7 @@ $\lg x$
 
 \subsection{Avec un paramètre}
 
-\newparaexample*{}
+Pour le moment il y a juste deux fonctions avec un paramètre. Les voici.
 
 \begin{latexex}
 $\logb{2} x = \lg x$ ou
@@ -339,7 +389,7 @@ $\expb{6} y = 6^y$
 \subsection{\texorpdfstring{Les opérateurs $\pp{}$ et $\dd{}$}%
                            {Les opérateurs "d rond" et "d droit"}}
 
-\newparaexample{}
+Voici deux opérateurs utiles aussi bien pour du calcul différentiel que du calcul intégral. 
 
 \begin{latexex}
 $\dd{t} = \dd[1]{t}$ ou $\dd[n]{x}$
@@ -358,11 +408,12 @@ $\pp{t} = \pp[1]{t}$ ou $\pp[n]{x}$
 La macro \macro{der} est stricte du point de vue sémantique car on doit lui fournir la fonction, l'ordre de dérivation et la variable de dérivation
 \emph{(voir la section \ref{tnsana-short-der} qui présente la macro \macro{sder} permettant une rédaction efficace pour obtenir $\sder[e]{f}{1}$ ou $\sder{f}{1}$)}.
 Voici plusieurs mises en forme faciles à taper via l'option de \macro{der}.
-Attention bien entendu à n'utiliser l'option par défaut \prefix{u} qu'avec un ordre de dérivation de valeur naturelle connue !
+Attention bien entendu à n'utiliser l'option par défaut \prefix{u} ou l'option \prefix{d} qu'avec un ordre de dérivation de valeur naturelle connue !
 
 \begin{latexex}
  $\der   {f}{3}{x}
-= \der[e]{f}{3}{x}$
+= \der[e]{f}{3}{x}
+= \der[d]{f}{3}{x}$
 
  $\der[i] {u}{k}{x}
 = \der[f] {u}{k}{x}
@@ -370,12 +421,22 @@ Attention bien entendu à n'utiliser l'option par défaut \prefix{u} qu'avec un 
 \end{latexex}
 
 
-On peut aussi ajouter autour de la fonction des parenthèses extensibles ou non.
-Ci-dessous on montre aussi une écriture du type \emph{\og opérateur fonctionnel \fg}.
+On peut aussi ajouter autour de la fonction des parenthèses extensibles ou non sauf même si cela n'est pas utile pour le mode \prefix{d} \emph{(voir juste après le mode \prefix{bd})}.
+Ci-dessous on montre au passage une écriture du type \emph{\og opérateur fonctionnel \fg} : voir la section \ref{tnsana-ope-total-der} page \pageref{tnsana-ope-total-der} à ce sujet.
 
 \begin{latexex}
- $\der[osf,sp]{\frac{1}{2} uv}{k}{x}
+ $\der[osf,sp]{\frac{1}{2}  uv}{k}{x}
 = \der[of,p]  {\dfrac{1}{2} uv}{k}{x}$
+\end{latexex}
+
+
+Avec l'option \prefix{d} les parenthèses seules sont sans utilité car on peut obtenir des choses non souhaitées comme $\der[d, p]{u + v}{2}{x}$.
+À la place on utilisera l'option \prefix{bd} où le \prefix{b} est pour \whyprefix{b}{racket} soit \inenglish{crochet}. Notez au passage que \prefix{p} et \prefix{sp} restent utilisables.
+
+\begin{latexex}
+ $\der[bd]   {\frac{1}{2}  uv}{2}{x}
+= \der[bd,p] {\frac{1}{2}  uv}{2}{x}
+= \der[bd,sp]{\dfrac{1}{2} uv}{2}{x}$
 \end{latexex}
 
 
@@ -388,14 +449,21 @@ Ci-dessous on montre aussi une écriture du type \emph{\og opérateur fonctionne
 
 		\item \prefix{i} est pour \whyprefix{i}{ndice}.
 
+		\item \prefix{d} est pour \whyprefix{d}{ot} soit \inenglish{point}.
+
+		\item \prefix{bd} est pour \whyprefix{b}{racket} \whyprefix{d}{ot} où \inenglish*{bracket} est pour \inenglish{crochet}.
+
+		\medskip
+		
 		\item \prefix{f} est pour \whyprefix{f}{raction} avec aussi \prefix{sf} pour une écriture réduite où \prefix{s} est pour \whyprefix{s}{mall} soit \inenglish{petit}.
 
 		\item \prefix{of} et \prefix{osf} utilisent le préfixe \prefix{o} pour \whyprefix{o}{pérateur}.
 		
-		\smallskip
-		\item \prefix{p} est pour \whyprefix{p}{arenthèse} : dans ce cas les parenthèses seront extensibles.
+		\medskip
+		
+		\item \prefix{p} est pour \whyprefix{p}{arenthèse} : dans ce cas les parenthèses seront extensibles. Le fonctionnement est différent avec l'option \prefix{d} comme nous l'avons vu avant.
 
-		\item \prefix{sp} est pour des parenthèses non extensibles.
+		\item \prefix{sp} est pour des parenthèses non extensibles. Là aussi le fonctionnement est différent avec l'option \prefix{d}.
 	\end{enumerate}
 \end{remark}
 
@@ -414,7 +482,7 @@ Ci-dessous on montre aussi une écriture du type \emph{\og opérateur fonctionne
 
 
 \begin{remark}
-	Voici comment forcer les exposants $1$ si besoin.
+	Voici comment forcer les exposants $1$ si besoin. Fonctionnel mais très moche...
 
 	\begin{latexex}
  $\der[i ]{u}{\,\!1}{x}
@@ -433,28 +501,38 @@ Ci-dessous on montre aussi une écriture du type \emph{\og opérateur fonctionne
 Dans l'exemple suivant le code manque de sémantique car on n'indique pas la variable de dérivation.
 Ceci étant dit à l'usage la macro \macro{sder} rend de grands services.
 Ici le préfixe \prefix{s} est pour \whyprefix{s}{imple} voire \whyprefix{s}{impliste}...
-Voici des exemples où de nouveau l'option par défaut \prefix{u} ne sera fonctionnelle qu'avec un ordre de dérivation de valeur naturelle connue !
+Voici des exemples où de nouveau l'option par défaut \prefix{u} et l'option \prefix{d} ne seront fonctionnelles qu'avec un ordre de dérivation de valeur naturelle connue !
+
+
+\newparaexample{}
 
 \begin{latexex}
  $\sder{f}{1} = \der{f}{1}{x}$
 
- $\sder{f}{1}
-= \sder[e]{f}{1}$
+ $\sder   {f}{3}
+= \sder[e]{f}{3}
+= \sder[d]{f}{3}$
+\end{latexex}
 
- $\sder[sp ]{\dfrac{1}{2} uv}{2}
-= \sder[e,p]{\dfrac{1}{2} uv}{2}$
+
+\newparaexample{}
+
+\begin{latexex}
+ $\sder[sp] {\dfrac{1}{2} uv}{2}
+= \sder[e,p]{\dfrac{1}{2} uv}{2}
+= \sder[bd] {\dfrac{1}{2} uv}{2}$
 \end{latexex}
 
 
 \begin{remark}
-	Ici les seules options disponibles sont \prefix{u}, \prefix{e}, \prefix{p} et \prefix{sp}.
+	Ici les seules options disponibles sont \prefix{u}, \prefix{e}, \prefix{b}, \prefix{bd}, \prefix{p} et \prefix{sp}.
 \end{remark}
 
 
 % ---------------------- %
 
 
-\subsection{L'opérateur de dérivation totale}
+\subsection{L'opérateur de dérivation totale} \label{tnsana-ope-total-der}
 
 Ce qui suit peut rendre service au niveau universitaire.
 Les options possibles sont \verb+f+, valeur par défaut, \verb+sf+ et \verb+i+ avec les mêmes significations que pour la macro \macro{der}.
@@ -466,7 +544,7 @@ Les options possibles sont \verb+f+, valeur par défaut, \verb+sf+ et \verb+i+ a
 \end{latexex}
 
 
-Ici non plus il n'y a pas de uns inutiles.
+Ici non plus il n'y a pas de uns inutiles mais l'astuce \verb+\,\!1+ reste utilisable.
 
 \begin{latexex}
  $\derope    {1}{x}
@@ -489,31 +567,46 @@ La macro \macro{pder}
 avec \prefix{p} pour \whyprefix{p}{artielle}
 permet de rédiger des dérivées partielles en utilisant facilement plusieurs mises en forme via une option qui vaut \verb+f+ par défaut.
 Cette macro attend une fonction, les dérivées partielles effectuées et l'ordre total de dérivation.
-Voici les deux types de mise en forme où vous noterez comment \verb+x | y^2+ est interprété.
+Voici deux types de mise en forme classiques où vous noterez comment \verb+x | y^2+ est interprété.
 
 \begin{latexex}
  $\pder    {f}{x | y^2}{3}
 = \pder[sf]{f}{x | y^2}{3}$
-ou
- $\pder[i] {f}{x | y^2}{3}$
 \end{latexex}
 
 
-On peut aussi ajouter autour de la fonction des parenthèses extensibles ou non.
-Ci-dessous on montre aussi une écriture du type \emph{\og opérateur fonctionnel \fg}.
+Il existe en plus deux notations indicielles données en exemple ci-dessous.
+Notez qu'avec l'option \verb+ei+ l'exposant total n'est pas imprimé et que les exposants partiels doivent être des naturels connus.
 
 \begin{latexex}
- $\pder[of] {f}{x | y^2}{}
-= \pder[osf]{f}{x | y^2}{}$
-ou
- $\pder[i,sp]{u + v}{x | y^2}{}$
+ $\pder[i] {f}{x | y^2}{3}
+= \pder[ei]{f}{x | y^2}{3}$
+\end{latexex}
+
+
+\begin{remark}
+	L'option \verb+ei+ ne marche pas avec des variables indicées pour le moment.
+\end{remark}
+
+
+\medskip
+
+
+On peut aussi ajouter autour de la fonction à différencier des parenthèses extensibles ou non via \verb+p+ et \verb+sp+ respectivement.
+Ci-dessous on montre aussi une écriture du type \emph{\og opérateur fonctionnel \fg} : voir la section \ref{tnsana-ope-partial-der} page \pageref{tnsana-ope-partial-der} à ce sujet.
+
+\begin{latexex}
+ $\pder[of,sp] {u + v}{x | y^2}{}
+= \pder[osf,sp]{u + v}{x | y^2}{}
+= \pder[i,sp]  {u + v}{x | y^2}{}$
 \end{latexex}
 
 
 \begin{remark}
 	Les options disponibles sont 
-	\verb+f+, \verb+sf+, \verb+of+, \verb+osf+, \verb+i+, \verb+p+ et \verb+sp+  
-	avec des significations similaires à celles pour la macro \macro{der}.
+	\verb+f+, \verb+sf+, \verb+of+, \verb+osf+, \verb+p+ et \verb+sp+  
+	avec des significations similaires à celles pour la macro \macro{der}
+	auxquelles s'ajoutent \verb+i+ et \verb+ei+ pour les écritures indicielles où le \prefix{e} dans \prefix{ei} est pour \whyprefix{e}{xpand} soit \inenglish{développer}.
 \end{remark}
 
 
@@ -529,10 +622,15 @@ ou
 \end{latexex}
 
 
+\begin{remark}
+	Rappelons que pour obtenir $\pder[i]{u}{x}{\,\!1}$ on peut taper \verb+\pder[i]{u}{x}{\,\!1}+.
+\end{remark}
+
+
 % ---------------------- %
 
 
-\subsection{L'opérateur de dérivation partielle}
+\subsection{L'opérateur de dérivation partielle} \label{tnsana-ope-partial-der}
 
 Ce qui suit peut rendre service au niveau universitaire.
 Les options possibles sont \verb+f+, valeur par défaut, \verb+sf+ et \verb+i+ avec les mêmes significations que pour la macro \macro{pder}.
@@ -553,7 +651,17 @@ Les options possibles sont \verb+f+, valeur par défaut, \verb+sf+ et \verb+i+ a
 
 \paragraph{Comment ça marche ?}
 
-Tout le boulot est fait par le package \verb+tkz-tab+ auquel on impose le choix d'une pointe de flèche plus visible via le réglage suivant \verb+\tkzTabSetup[arrowstyle = triangle 60]+.
+Pour les tableaux de variation et de signe non décorés, tout le boulot est fait par le package \verb+tkz-tab+.
+Ce package est utilisé avec les réglages par défaut \emph{\og maison \fg} suivants via l'utilisation de \macro{tkzTabSetup}.
+
+\begin{enumerate}
+	\item \verb+arrowstyle = triangle 60+ permet d'obtenir des pointes de flèche plus visibles.
+	
+	\item \verb+doubledistance = 3pt+ améliore la visibilité des doubles barres pour les valeurs interdites.
+\end{enumerate}
+
+
+ 
 
 \medskip
 
@@ -566,17 +674,7 @@ Reportez vous à la documentation de \verb+tkz-tab+ pour des compléments d'info
 
 \newparaexample{Avec des signes}
 
-\begin{latexex-flat}
-\begin{tikzpicture}
-    \tkzTabInit{
-        $x$       / 0.75 , % Facteur d'échelle de 0.75 pour la hauteur de la 1er ligne.
-        $\cos(x)$ / 1      % Facteur d'échelle de  1   pour la hauteur de la 2e ligne.
-    }{
-                $0$     , $\frac{\pi}{2}$     , $\pi$  % Valeurs utiles de x.
-    }
-    \tkzTabLine{    , + , z               , - ,      } % Signes et zéro.
-\end{tikzpicture}
-\end{latexex-flat}
+\inputlatexexcodeafter{examples/cos-sign.tkz}
 
 
 % ---------------------- %
@@ -584,17 +682,7 @@ Reportez vous à la documentation de \verb+tkz-tab+ pour des compléments d'info
 
 \newparaexample{Avec des variations (sans cadre)}
 
-\begin{latexex-flat}
-\begin{tikzpicture}
-    \tkzTabInit[nocadre]{
-        $x$    / 0.75 ,
-        $f(x)$ / 1.5
-    }{
-               $-\infty$ , $p$        , $+\infty$
-    }
-    \tkzTabVar{+ /       , - / $f(p)$ , + /      } % Variations via position / valeur.
-\end{tikzpicture}
-\end{latexex-flat}
+\inputlatexexcodeafter{examples/basic-var.tkz}
 
 
 % ---------------------- %
@@ -602,19 +690,7 @@ Reportez vous à la documentation de \verb+tkz-tab+ pour des compléments d'info
 
 \newparaexample{Variations via une dérivée (sans cadre)}
 
-\begin{latexex-flat}
-\begin{tikzpicture}
-    \tkzTabInit[nocadre]{
-        $x$       / 0.75 ,
-        $\cos(x)$ / 1    ,
-        $\sin(x)$ / 1.5
-    }{
-                $0$     , $\frac{\pi}{2}$     , $\pi$
-    }
-    \tkzTabLine{    , + , z               , - ,      }
-    \tkzTabVar {- / 0   , + / 1               , - / 0}
-\end{tikzpicture}
-\end{latexex-flat}
+\inputlatexexcodeafter{examples/sin-var-via-cos.tkz}
 
 
 % ---------------------- %
@@ -622,22 +698,7 @@ Reportez vous à la documentation de \verb+tkz-tab+ pour des compléments d'info
 
 \newparaexample{Une image intermédiaire avec une seule flèche}
 
-\begin{latexex-flat}
-\begin{tikzpicture}
-    \tkzTabInit{
-        $x$     / 0.75 ,
-        $3 x^2$ / 1    ,
-        $x^3$   / 1.5
-    }{
-                $-\infty$         , $0$     , $+\infty$
-    }
-    \tkzTabLine{              , + , 0   , + ,              }
-    \tkzTabVar {- / $-\infty$     , R       , + / $+\infty$}
-    %
-    \tkzTabIma{1}{3}{2} % Position entre les 1re et 3e valeurs puis rang relatif.
-              {$0$}     % Valeur de l'image.
-\end{tikzpicture}
-\end{latexex-flat}
+\inputlatexexcodeafter{examples/inter-img.tkz}
 
 
 % ---------------------- %
@@ -645,45 +706,12 @@ Reportez vous à la documentation de \verb+tkz-tab+ pour des compléments d'info
 
 \newparaexample{Valeurs interdites et valeurs supplémentaires}
 
-\begin{latexex-flat}
-\begin{tikzpicture}
-    \tkzTabInit[espcl = 6]{    % Largeur entre les valeurs du tableau.
-        $x$            / 0.75 ,
-        $\frac{1}{x}$ / 1.25 ,
-        $\ln$          / 1.75
-    }{
-                $0$                , $+\infty$
-    }
-    \tkzTabLine{d              , + ,              }
-    \tkzTabVar {D- / $-\infty$     , + / $+\infty$}
-    %
-    \tkzTabVal{1}{2}{0.35} % Position entre les 1re et 2e valeurs puis en proportion.
-              {1}{0}       % x_1 et f(x_1)
-    \tkzTabVal{1}{2}{0.65} % Position entre les 1re et 2e valeurs puis en proportion.
-              {$\ee$}{1}   % x_2 et f(x_2)
-\end{tikzpicture}
-\end{latexex-flat}
+\inputlatexexcodeafter{examples/illegal-n-inter-img-1.tkz}
+
 
 Voici un autre exemple pour comprendre comment utiliser \macro{tkzTabVal} avec en plus l'option \verb+draw+ qui peut rendre service.
 
-\begin{latexex-flat}
-\begin{tikzpicture}
-    \tkzTabInit[espcl = 4]{
-        $x$     / 0.75 ,
-        $f'(x)$ / 1    ,
-        $f(x)$  / 1.5
-    }{
-                $0$                , $\ee$     , $+\infty$
-    }
-    \tkzTabLine{d              , + , 0         , - ,          }
-    \tkzTabVar {D- / $-\infty$     , + / $\ee$ , - / $0$  }
-    %
-    \tkzTabVal[draw]{1}{2}{0.5} % Position entre les 1re et 2e valeurs au milieu.
-                    {$1$}{$\frac{1}{\ee}$}
-    \tkzTabVal[draw]{2}{3}{0.5} % Position entre les 2e et 3e valeurs au milieu.
-                    {$\ee^2$}{$1$}
-\end{tikzpicture}
-\end{latexex-flat}
+\inputlatexexcodeafter{examples/illegal-n-inter-img-2.tkz}
 
 
 % ---------------------- %
@@ -694,39 +722,13 @@ Voici un autre exemple pour comprendre comment utiliser \macro{tkzTabVal} avec e
 Il est assez facile de produire des choses très utiles pédagogiquement comme ce qui suit en se salissant un peu les mains avec du code TikZ.
 
 \begin{center}
-\begin{tikzpicture}
-    \tkzTabInit[espcl = 4]{
-        $x$    / 0.75 ,
-        $f(x)$ / 1.5
-    }{
-               $-\infty$ , $-1$     , $2$ , $+\infty$
-    }
-    \tkzTabVar{- /       , + / $-9$ , - / , + /      }
-    %
-    \tkzTabVal[draw]{3}{4}{0.5} % Position entre les 3e et 4e valeurs au milieu.
-              {$3$}{$0$}
-\end{tikzpicture}
+	\input{examples/align-sign-from-var-1.tkz}
 \end{center}
 
-On en déduit le signe de la fonction $f$.
+On déduit du tableau précédent le signe de la fonction $f$.
 
 \begin{center}
-\begin{tikzpicture}
-    \tkzTabInit[
-        espcl = 4,
-%        help       % <-- Pour voir les noms des noeuds.
-    ]{
-        $x$    / 0.75 ,
-        $f(x)$ / 1
-    }{
-        $-\infty$ , , , $+\infty$ % ATTENTION ! Ne pas oublier de virgules.
-    }
-    %
-    \node at ($(N31)!0.5!(N40)$){$3$};
-    \node at ($(M31)!0.5!(M32)$){$0$};
-    \node at ($(M31)!0.5!(N42)$){$+$};
-    \node at ($(N11)!0.5!(M32)$){$-$};
-\end{tikzpicture}
+	\input{examples/align-sign-from-var-2.tkz}
 \end{center}
 
 
@@ -734,68 +736,23 @@ Voici le code du 1\ier{} tableau où le placement de la valeur $3$ au milieu ent
 
 \medskip
 
-\begin{latexex-alone}
-\begin{tikzpicture}
-    \tkzTabInit[espcl = 4]{
-        $x$    / 0.75 ,
-        $f(x)$ / 1.5
-    }{
-               $-\infty$ , $-1$     , $2$ , $+\infty$
-    }
-    \tkzTabVar{- /       , + / $-9$ , - / , + /      }
-    %
-    \tkzTabVal[draw]{3}{4}{0.5} % Position entre les 3e et 4e valeurs au milieu.
-              {$3$}{$0$}
-\end{tikzpicture}
-\end{latexex-alone}
+\inputlatexexalone{examples/align-sign-from-var-1.tkz}
 
 
-Pour produire lee code du 2\ieme{} tableau, il a été utilisé au préalable ce qui suit en activant l'option \verb@help@ qui demande à \verb@tkz-tab@ d'afficher les noms de noeuds au sens TikZ qui ont été créés.
+Pour produire le code du 2\ieme{} tableau il a fallu utiliser au préalable ce qui suit en activant l'option \verb@help@ qui demande à \verb@tkz-tab@ d'afficher les noms de noeuds au sens TikZ qui ont été créés.
 Ceci permet alors d'utiliser ces noeuds pour des dessins TikZ faits maison
 \footnote{
     C'est grâce à ce mécanisme que \prefix{tnsana} peut proposer des outils explicatifs des tableaux de signe : voir la section suivante.
 }.
 	
-\medskip
 
-\begin{latexex-flat}
-\begin{tikzpicture}
-    \tkzTabInit[
-        espcl = 4,
-        help       % <-- Pour voir les noms des noeuds.
-    ]{
-        $x$    / 0.75 ,
-        $f(x)$ / 1
-    }{
-       $-\infty$ , $-1$ , $2$ , $+\infty$
-    }
-\end{tikzpicture}
-\end{latexex-flat}
+\inputlatexexcodeafter{examples/node-name.tkz}
 
 
-Maintenant que ls noms des noeuds sont connus, il devient facile de produire le code ci-après.
+Maintenant que les noms des noeuds sont connus, il devient facile de produire le code ci-après.
 Bien noter l'usage de valeurs utiles \og vides \fg{} de $x$ ainsi que les mystiques \verb@\node at ($(A)!0.5!(B)$)@ permettant de placer un noeud au milieu entre les deux noeuds \verb@A@ et \verb@B@. 
 
-\medskip
-
-\begin{latexex-alone}
-\begin{tikzpicture}
-    \tkzTabInit[
-        espcl = 4,
-%        help       % <-- Pour voir les noms des noeuds.
-    ]{
-        $x$    / 0.75 ,
-        $f(x)$ / 1
-    }{
-        $-\infty$ , , , $+\infty$ % ATTENTION ! Ne pas oublier de virgules.
-    }
-    %
-    \node at ($(N31)!0.5!(N40)$){$3$};
-    \node at ($(M31)!0.5!(M32)$){$0$};
-    \node at ($(M31)!0.5!(N42)$){$+$};
-    \node at ($(N11)!0.5!(M32)$){$-$};
-\end{tikzpicture}
-\end{latexex-alone}
+\inputlatexexalone{examples/align-sign-from-var-2.tkz}
 
 
 % ---------------------- %
@@ -886,27 +843,12 @@ Le code utilisé est le suivant.
 
 \subsection{Décorer facilement un tableau}
 
-\paragraph{Motivation}
+\subsubsection{Motivation}
 
 Considérons le tableau suivant et imaginons que nous voulions l'expliquer à un débutant.
 
 \begin{center}
-\begin{tikzpicture}
-    \tkzTabInit[
-        lgt   = 3.5,  % Il faut de la place pour le dernier produit !
-        espcl = 2.5   % On réduit la largeur des colonnes pour les signes.
-    ]{
-        $x$                             / 0.75 ,
-        Signe de \\ $2 x - 3$           / 1.5  ,
-        Signe de \\ $-x + 5$            / 1.5  ,
-        Signe de \\ $(2 x - 3)(-x + 5)$ / 1.5
-    }{
-                $-\infty$     , $\frac{3}{2}$     , $5$     , $+\infty$
-    }
-    \tkzTabLine{          , - , z              , + , t   , + ,          }
-    \tkzTabLine{          , + , t              , + , z   , - ,          }
-    \tkzTabLine{          , - , z              , + , z   , - ,          }
-\end{tikzpicture}
+	\input{examples/deco-basic-1.tkz}
 \end{center}
 
 Deux options s'offrent à nous pour justifier comment a été rempli le tableau.
@@ -925,247 +867,272 @@ Deux options s'offrent à nous pour justifier comment a été rempli le tableau.
 \end{enumerate}
 
 \begin{center}
-\begin{tikzpicture}
-    \tkzTabInit[
-        lgt   = 3.5,  % Il faut de la place pour le dernier produit !
-        espcl = 2.5   % On réduit la largeur des colonnes pour les signes.
-    ]{
-        $x$                             / 0.75 ,
-        Signe de \\ $2 x - 3$           / 1.5  ,
-        Signe de \\ $-x + 5$            / 1.5  ,
-        Signe de \\ $(2 x - 3)(-x + 5)$ / 1.5
-    }{
-                $-\infty$     , $\frac{3}{2}$     , $5$     , $+\infty$
-    }
-    \tkzTabLine{          , - , z              , + , t   , + ,          }
-    \tkzTabLine{          , + , t              , + , z   , - ,          }
-    \tkzTabLine{          , - , z              , + , z   , - ,          }
-
-    \comLine[gray]{0}{$\leftarrow$ Valeurs utiles de $x$}
-
-    \graphSign        {1}{ax+b, ap}{$\frac{3}{2}$}
-    \graphSign[purple]{2}{ax+b, an}{$5$}
-
-    \comLine[gray]{3}{$\leftarrow$ Signe d'un produit.}
-\end{tikzpicture}
+	\input{examples/deco-basic-2.tkz}
 \end{center}
 
 
-Pour produire le 2\ieme{} tableau, en plus du code \verb#tkz-tab# pour le tableau de signe qui utilise les réglages optionnels \verb#lgt = 3.5# et 
-\verb#espcl = 2.5# de \macro{tkzTabInit}
+Pour produire le 2\ieme{} tableau, en plus du code \verb#tkz-tab# pour le tableau de signe
 \footnote{
-	Ceci permet d'avoir de la place dans la 1\iere{} colonne pour le dernier produit et de réduire la largeur des colonnes pour les signes.
+	Nous avons utilisé les réglages optionnels
+	\texttt{lgt = 3.5} et \texttt{espcl = 2.5} de \macro{tkzTabInit}
+	pour avoir de la place dans la 1\iere{} colonne pour le dernier produit
+	et aussi réduire la largeur des colonnes pour les signes.
 },
-il a fallu ajouter les lignes données ci-dessous où sont utilisées les macros \macro{graphSign} et \macro{comLine} proposées par \verb+tnsana+ \emph{(la syntaxe simple à suivre sera expliquée dans la section suivante)}
-\footnote{
-	Les lignes pour les signes doivent utiliser un coefficient minimal de \texttt{1.5} pour la hauteur afin d'éviter que la superposition des graphiques.
-}.
+il a fallu ajouter les lignes données ci-dessous où sont utilisées les macros     \macro{backLine}, \macro{graphSign} et \macro{comLine} proposées par \verb+tnsana+ \emph{(la syntaxe simple à suivre sera expliquée dans les trois sections suivantes)}.
+	Indiquons que les lignes pour les signes doivent utiliser un coefficient minimal de \texttt{1.5} pour la hauteur afin d'éviter la superposition des graphiques.
 
 \medskip
 
-\begin{latexex-alone}
-\begin{tikzpicture}
-    % ---------------------------------------------------- %
-    % -- Code tkz-tab pour les signes non reproduit ici -- %
-    % ---------------------------------------------------- %
-    \comLine[gray]{0}{$\leftarrow$ Valeurs utiles de $x$}
-
-    \graphSign        {1}{ax+b, ap}{$\frac{3}{2}$}
-    \graphSign[purple]{2}{ax+b, an}{$5$}
-
-    \comLine[gray]{3}{$\leftarrow$ Signe d'un produit.}
-\end{tikzpicture}
-\end{latexex-alone}
+\inputlatexexalone{examples/deco-basic-2-short.tkz}
 
 
 \begin{remark}
-	Il est aussi possible de décorer une ligne de variation comme cela sera montré dans l'exemple \ref{tnsana-grapgsign-com-two-lines} page \pageref{tnsana-grapgsign-com-two-lines}. 
+	Il est aussi possible de décorer une ligne de variation comme cela sera montré dans l'exemple \ref{tnsana-graphsign-com-two-lines} page \pageref{tnsana-graphsign-com-two-lines}. 
 \end{remark}
 
 
 % ---------------------- %
 
 
-\paragraph{Commenter une ligne}
+\subsubsection{Ajouter une couleur de fond à une ligne}
 
-L'ajout de commentaires courts se fait via la macro \macro{comLine} pour \whyprefix{com}{ment a line} soit \inenglish{commenter une ligne}
+La modification de la couleur de fond d'une ligne se fait via la macro \macro{backLine}
 \footnote{
-    L'auteur de \prefix{tnsana} n'est absolument pas un fan de la casse en bosses de chameau mais par souci de cohérence avec ce que propose \prefix{tkz-tab}, le nom \macro{comLine} a été proposé à la place de \macro{comline}.
-}.
-Cette macro possède un argument optionnel et deux obligatoires.
+    L'auteur de \prefix{tnsana} n'est absolument pas un fan de la casse en bosses de chameau mais par souci de cohérence avec ce que propose \prefix{tkz-tab} le nom \macro{backLine} a été proposé à la place de \macro{backline}.
+}
+pour \whyprefix{back}{ground} \prefix{of the line} soit \inenglish{fond de la ligne}.
+Cette macro possède un argument optionnel et un obligatoire.
 
-\begin{enumerate}
-    \item \textbf{\emph{L'argument optionnel : choix de la couleur du texte.}}
+\begin{itemize}[label=\small\textbullet, itemsep=.25em]
+    \item \textit{L'argument optionnel : choix de la couleur de fond.}
           
           \smallskip
           
-          Ci-dessus, nous avons utilisé \verb#\comLine[gray]{0}{...}# pour avoir un texte en gris.
+          Ci-dessus nous avons utilisé la couleur par défaut qui est  \verb#gray!30#.
 
 
     \medskip
-    \item \textbf{\emph{Le 1\ier{} argument : numéro de ligne.}}
+    \item \textit{L'argument obligatoire : les numéros de ligne séparés par des virgules.}
           
           \smallskip
           
-          Par convention $0$ est le numéro de la toute 1\iere{} ligne contenant les valeurs utiles de la variable.
-          \verb#\comLine{3}{...}# correspond donc à la 3\ieme{} ligne de signes ou moins intuitivement à la (3+1)\ieme{} ligne pour un humain non codeur.
+          La numérotation des lignes commence à $0$ comme en informatique. Ainsi \verb#\backLine{0,3}# ajoute une couleur de fond à la ligne des valeurs utiles de $x$ et à la 3\ieme{} ligne de signes, ou moins intuitivement à la (3+1)\ieme{} ligne du tableau.
+\end{itemize}
 
-    \medskip
-    \item \textbf{\emph{Le 2\ieme{} argument : texte du commentaire.}}
-          
-          \smallskip
-          
-          Par défaut aucun retour à la ligne n'est possible.
-          Si besoin se reporter à la  page \pageref{tnsana-grapgsign-com-two-lines} où est montré comment écrire sur plusieurs lignes \emph{(voir le tout dernier exemple de cette section)}.
-\end{enumerate}
 
 
 % ---------------------- %
 
 
-\paragraph{Graphiques pour expliquer des signes}
+\subsubsection{Commenter une ligne}
 
-Pour le moment, la macro \macro{graphSign} propose deux types de graphiques
-\footnote{
-    Le choix de la casse en bosses de chameau a été expliqué pour la macro \macro{comLine}.
-}.
-Rappelons au passage que la convention est de prendre $0$ pour numéro de la toute 1\iere{} ligne contenant les valeurs utiles de la variable.
+L'ajout de commentaires courts se fait via la macro \macro{comLine} pour \whyprefix{com}{ment a} \prefix{line} soit \inenglish{commenter une ligne}.
+Cette macro possède un argument optionnel et deux obligatoires.
+
+\begin{itemize}[label=\small\textbullet, itemsep=.25em]
+    \item \textit{L'argument optionnel : choix de la couleur du texte.}
+          
+          \smallskip
+          
+          Ci-dessus nous avons utilisé \verb#\comLine[gray]{0}{...}# pour avoir un texte en gris.
+
+
+    \item \textit{Le 1\ier{} argument : le numéro de ligne \emph{(comme pour \macro{backLine})}.}
+
+
+    \item \textit{Le 2\ieme{} argument : texte du commentaire.}
+          
+          \smallskip
+          
+          Par défaut aucun retour à la ligne n'est possible.
+          Si besoin se reporter à l'exemple \ref{tnsana-graphsign-com-two-lines},  page \pageref{tnsana-graphsign-com-two-lines} section \ref{tnsana-graphsign-examples}, où est montré comment écrire sur plusieurs lignes.
+\end{itemize}
+
+
+% ---------------------- %
+
+
+\subsubsection{Graphiques pour expliquer des signes}
+
+Pour le moment, la macro \macro{graphSign} propose différents types de graphiques de fonctions dites de référence.
+Avant de voir ce qui est proposé rappelons que la convention est de prendre $0$ pour numéro de la toute 1\iere{} ligne contenant les valeurs utiles de la variable.
 
 \begin{enumerate}
-    \item \textbf{\itshape Fonctions affines non constantes.}
+    \item \textbf{\itshape Fonctions affines non constantes avec des contraintes.}
           
           \smallskip
 
           Pour les fonctions du type $f(x) = a x + b$ avec $a \neq 0$, nous devons connaître le signe de $a$ et la racine $r$ de $f$.
-          
-          \smallskip
+          Le codage est simple : considérons par exemple \verb#\graphSign{2}{ax+b, an}{$5$}#.
+		  %
+          \begin{itemize}[label=\small\textbullet, itemsep=.25em]
+          		\item \textit{1\ier{} argument $2$.}
 
-          Le codage est assez simple.
-          Par exemple, \verb#\graphSign{2}{ax+b, an}{$5$}# indique pour la 2\ieme{} ligne d'ajouter le graphique d'une fonction affine, ce qu'indique le code \verb#ax+b# sans espace, avec la condition $a < 0$ via \prefix{an} pour \prefix{a négatif}, et enfin avec $5$ pour racine.
-          
-          \smallskip
+		              \smallskip
+		              Ceci indique d'ajouter le graphique dans la 2\ieme{} ligne de signes.
 
-          Donc si l'on veut ajouter pour la 4\ieme{} ligne de signe le graphique de $f(x) = 3x$, on utilisera dans ce cas \verb#\graphSign{4}{ax+b, ap}{$0$}# où \prefix{ap} pour \prefix{a positif} code la condition $a > 0$.
+
+          		\item \textit{\texttt{ax+b} dans le 2\ieme{} argument.}
+
+		              \smallskip
+		              Ce code sans espace indique une fonction affine.
+		              
+
+          		\item \textit{\texttt{an} dans le 2\ieme{} argument.}
+
+		              \smallskip
+		              Ce code venant de \prefix{a négatif} ajoute la condition $a < 0$.
+
+		
+				\item \textit{3\ieme{} argument $5$.}
+
+		              \smallskip
+		              Ceci donne la racine.
+          \end{itemize}
+
+          Donc pour ajouter dans la 4\ieme{} ligne de signe le graphique de $f(x) = 3x$, on utilisera dans ce cas \verb#\graphSign{4}{ax+b, ap}{$0$}# où \prefix{ap} pour \prefix{a positif} code la condition $a > 0$.
 
 
     % ==================== %
 
 
-    \medskip
-    \item \textbf{\itshape Fonctions trinômiales du 2\ieme{} degré.}
+    \bigskip
+    \item \textbf{\itshape Fonctions trinômiales du 2\ieme{} degré avec des contraintes.}
           
           \smallskip
 
-          Pour les fonctions du type $f(x) = a x^2 + b x + c$ avec $a \neq 0$, nous devons connaître le signe de $a$, celui du discriminant $\Delta = b^2 - 4ac$, ce dernier pouvant être nul, et les racines réelles éventuelles du trinôme $f$.
+          Pour les fonctions du type $f(x) = a x^2 + b x + c$ avec $a \neq 0$, en plus du signe de $a$ nous devons connaître celui du discriminant $\Delta = b^2 - 4ac$, ce dernier pouvant être nul, sans oublier les racines réelles éventuelles.
+		  Voyons comment coder ce genre de chose via par exemple \verb#\graphSign{5}{ax2+bx+c, an, dp}{$r_1$}{$r_2$}#.
+		  %
+          \begin{itemize}[label=\small\textbullet, itemsep=.25em]
+          		\item \textit{1\ier{} argument $5$.}
 
-          \smallskip
+		              \smallskip
+		              On indique la 5\ieme{} ligne de signes.
 
-          Voici comment coder ceci.
-          Par exemple \verb#\graphSign{5}{ax2+bx+c, an, dp}{$r_1$}{$r_2$}# indique d'ajouter dans la 5\ieme{} ligne de signe le graphique d'un trinôme du 2\ieme{} degré via le code \verb#ax2+bx+c# sans espace, avec les conditions $a < 0$ et $\Delta > 0$ via \prefix{an} et \prefix{dp}, le trinôme ayant $r_1$ et $r_2$ pour racines réelles.
+          		\item \textit{\texttt{ax2+bx+c} dans le 2\ieme{} argument.}
 
-          \smallskip
+		              \smallskip
+		              Ce code sans espace indique un trinôme du 2\ieme{} degré.
 
-          En plus de \prefix{dn} et \prefix{dp}, il y a \prefix{dz} pour \prefix{discriminant zéro}.
+
+          		\item \textit{\texttt{an} dans le 2\ieme{} argument \emph{(comme avant).}}
+
+
+          		\item \textit{\texttt{dp} dans le 2\ieme{} argument.}
+
+		              \smallskip
+		              Ce code venant de \prefix{discriminant positif} ajoute la condition $\Delta > 0$.
+		              En plus de \prefix{dn} et \prefix{dp} il y a aussi \prefix{dz} pour \prefix{discriminant zéro}.
+		
+		
+				\item \textit{3\ieme{} et 4\ieme{} arguments $r_1$ et $r_2$.}
+
+		              \smallskip
+		              Ceci donne les deux racines réelles avec obligatoirement $r_1 < r_2$.
+          \end{itemize}
+
+
           Ainsi pour indiquer dans la 3\ieme{} ligne de signe la courbe relative à $f(x) = - 4 x^2$, on utilisera \verb#\graphSign{3}{ax2+bx+c, an, dz}{$0$}#.
+
 
           \smallskip
 
           Enfin le graphique associé au trinôme $f(x) = 7 x^2 + 3$, qui est sans racine réelle, s'obtiendra dans la 4\ieme{} ligne de signe via \verb#\graphSign{4}{ax2+bx+c, ap, dn}#.
+
+
+    % ==================== %
+
+
+    \bigskip
+    \item \textbf{\itshape Fonctions sans contrainte.}
+          
+          \smallskip
+
+          Voici ce qui est disponible via \verb#\graphSign{noligne}{codefonc}# où les valeurs possibles de \verb#codefonc# sont les suivantes.
+		  %
+          \begin{itemize}[label=\small\textbullet, itemsep=.25em]
+          		\item \verb#x2# produira le graphique de $f(x) = x^2$.
+
+          		\item \verb#sqrt# produira le graphique de $f(x) = \sqrt{x}$.
+
+          		\item \verb#1/x# produira le graphique de $f(x) = \frac{1}{x}$.
+
+          		\item \verb#abs# produira le graphique de $f(x) = \abs{x}$.
+
+          		\item \verb#exp# produira le graphique de $f(x) = \exp x$.
+
+          		\item \verb#ln# produira le graphique de $f(x) = \ln x$.
+          \end{itemize}
 \end{enumerate}
+%% \section{Analysis}
+%
+%\section{Tableaux de variation et de signe}
 
+\subsubsection{Quelques exemples}  \label{tnsana-graphsign-examples}
 
-% ---------------------- %
-
-
-\newparaexample{Un exemple avec une parabole}
+\newparaexample{Avec une parabole}
 
 Il devient très facile de proposer un tableau décoré comme le suivant.
 
 \begin{center}
-\begin{tikzpicture}
-    \tkzTabInit[
-        lgt   = 3   , % Il faut de la place pour le dernier produit !
-        espcl = 1.5
-    ]{
-        $x$                        / 0.75 ,
-        Signe de \\ $-x+3$         / 1.5  ,
-        Signe de \\ $f(x)$         / 1.5  ,
-        Signe de \\ $x^2 + 3x - 4$ / 1.5  ,
-        Signe de \\ $-x^2 + x - 4$ / 1.5  ,
-        Signe du \\ produit        / 1.5
-    }{%
-                $-\infty$     , $-4$     , $1$     , $3$ , $+\infty$
-    }
-
-    \tkzTabLine{          , + , t    , + , t   , + , z   , -        }
-    \tkzTabLine{          , - , z    , + , z   , + , z   , -        }
-    \tkzTabLine{          , - , z    , + , z   , - , t   , -        }
-    \tkzTabLine{          , - , t    , - , t   , - , t   , -        }
-
-    \tkzTabLine{          , - , z    , - , z   , + , z   , +        }
-
-    \comLine[gray]{0}{\kern1.75em Schémas}
-    
-    \graphSign        {1}{ax+b, an}{$3$}
-    \comLine[purple]  {2}{Voir Q.1-a)}
-    \graphSign        {3}{ax2+bx+c, ap, dp}{$-4$}{$1$} % Deux racines réelles.
-    \graphSign[purple]{4}{ax2+bx+c, an, dn}            % Aucune racine réelle.
-
-    \comLine[gray]{5}{$\leftarrow$ Conclusion}
-\end{tikzpicture}
+	\input{examples/deco-parabola.tkz}
 \end{center}
 
 
-En plus des deux exemples de schémas de paraboles, il faut noter dans le code supplémentaire ajouté l'utilisation de \verb#\kern1.75em# dans \verb#\comLine[gray]{0}{\kern1.75em Schémas}# afin de mettre un espace horizontal précis pour centrer à la main le texte \emph{\og Schémas \fg}.
+En plus des deux exemples de schémas de paraboles, il faut noter dans le code supplémentaire ajouté l'utilisation de \verb#\kern1.75em# dans \verb#\comLine[gray]{0}{\kern1.75em Schémas}# afin de mettre un espace horizontal précis pour centrer à la main le texte \emph{\og Schémas \fg} \emph{(un peu sâle mais ça marche)}.
 
 \medskip
 
-\begin{latexex-alone}
-\begin{tikzpicture}
-    % ---------------------------------------------------- %
-    % -- Code tkz-tab pour les signes non reproduit ici -- %
-    % ---------------------------------------------------- %
-    \comLine[gray]{0}{\kern1.75em Schémas}
-    
-    \graphSign        {1}{ax+b, an}{$3$}
-    \comLine[purple]  {2}{Voir Q.1-a)}
-    \graphSign        {3}{ax2+bx+c, ap, dp}{$-4$}{$1$} % Deux racines réelles.
-    \graphSign[purple]{4}{ax2+bx+c, an, dn}            % Aucune racine réelle.
-
-    \comLine[gray]{5}{$\leftarrow$ Conclusion}
-\end{tikzpicture}
-\end{latexex-alone}
+\inputlatexexalone{examples/deco-parabola-short.tkz}
 
 
 % ---------------------- %
 
 
-\newparaexample{Commenter des variations} \label{tnsana-grapgsign-com-two-lines}
+\newparaexample{Avec des fonctions sans paramètre}
 
-Pour finir, indiquons que les outils de décoration marchent aussi pour les tableaux de variation.
-Voici un exemple possible d'utilisation où le retour à la ligne a été obtenue affreusement, ou pas, via \verb#\parbox{11.5em}{Les limites sont hors programme pour cette année.}#.
+Voici un 1\ier{} tableau avec certaines des fonctions sans paramètre.
 
 \begin{center}
-\begin{tikzpicture}
-    \tkzTabInit[espcl = 3]{
-        $x$     / 0.75 ,
-        $f'(x)$ / 1    ,
-        $f(x)$  / 1.5
-    }{
-                $0$                , $\ee$         , $+\infty$
-    }
-    \tkzTabLine{d              , + , 0         , - ,          }
-    \tkzTabVar {D- / $-\infty$     , + / $\ee$     , - / $0$  }
-    %
-
-    \comLine{2}{%
-    	\parbox{11.5em}{Les limites sont hors programme pour cette année.}%
-	}
-\end{tikzpicture}
+	\input{examples/deco-ref-1.tkz}
 \end{center}
+
+Le code correspondant est le suivant.
+
+\medskip
+
+\inputlatexexalone{examples/deco-ref-1-short.tkz}
+
+\medskip
+
+Voici un 2\ieme{} tableau avec les fonctions sans paramètre manquantes ci-dessus.
+
+\begin{center}
+	\input{examples/deco-ref-2.tkz}
+\end{center}
+
+Le code correspondant est le suivant.
+
+\medskip
+
+\inputlatexexalone{examples/deco-ref-2-short.tkz}
 
 
 % ---------------------- %
+
+
+\newparaexample{Commenter des variations} \label{tnsana-graphsign-com-two-lines}
+
+Pour finir, indiquons que les outils de décoration marchent aussi pour les tableaux de variation.
+Voici un exemple possible d'utilisation où les retours à la ligne ont été obtenus affreusement, ou pas, via \verb#\parbox{11.5em}{...}#.
+
+\begin{center}
+	\input{examples/deco-var.tkz}
+\end{center}
+%% \section{Analysis}
+%
+%\section{Tableaux de variation et de signe}
 \section{Calcul intégral}
 
 \subsection{Intégrales multiples}
@@ -1466,6 +1433,12 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 	
 	\item \verb+i+ : écriture via un indice.
 
+	\item \verb+d+ : écriture pointée à la physicienne \emph{(cf. la dérivation par rapport au temps)}.
+
+	\item \verb+bd+ : écriture pointée avec un crochet entre les points et la fonction.
+
+	\medskip
+	
 	\item \verb+f+ : écriture via une fraction en mode display.
 
 	\item \verb+sf+ : écriture via une fraction en mode non display.
@@ -1474,7 +1447,8 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 
 	\item \verb+osf+ : écriture via une fraction en mode non display sous la forme d'un opérateur \emph{(la fonction est à côté de la fraction)}.
 
-	\smallskip
+	\medskip
+	
 	\item \verb+p+ : ajout de parenthèses extensibles autour de la fonction.
 
 	\item \verb+sp+ : ajout de parenthèses non extensibles autour de la fonction.
@@ -1493,7 +1467,7 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 
 \IDmacro{sder}{1}{2} où \quad \mwhyprefix{s}{imple}
 
-\IDoption{} la valeur par défaut est \verb+u+. Les options disponibles sont \verb+u+, \verb+e+, \verb+p+ et \verb+sp+ : voir la fiche technique de \macro{sder} ci-dessus.
+\IDoption{} la valeur par défaut est \verb+u+. Les options disponibles sont \verb+u+, \verb+e+, \verb+d+, \verb+bd+, \verb+p+ et \verb+sp+ : voir la fiche technique de \macro{sder} ci-dessus.
 
 \IDarg{1} la fonction à dériver.
 
@@ -1526,9 +1500,14 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 
 	\item \verb+osf+ : écriture via une fraction en mode non display sous la forme d'un opérateur \emph{(la fonction est à côté de la fraction)}.
 
+	\medskip
+
 	\item \verb+i+ : écriture via un indice.
 
-	\smallskip
+	\item \verb+ei+ : écriture via un indice mais en \emph{\og développant \fg}.
+
+	\medskip
+
 	\item \verb+p+ : ajout de parenthèses extensibles autour de la fonction.
 
 	\item \verb+sp+ : ajout de parenthèses non extensibles autour de la fonction.
@@ -1537,7 +1516,7 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 
 \IDarg{1} la fonction à dériver.
 
-\IDarg{2} les variables utilisées avec leur ordre de dérivation pour la dérivation partielle en utilisant une syntaxe du type \verb+x | y^2 | ...+ qui indique de dériver suivant $x$ une fois, puis suivant $y$ trois fois... etc.
+\IDarg{2} les variables utilisées avec leur ordre de dérivation pour la dérivation partielle en utilisant une syntaxe du type \verb+x | y^2 | ...+ qui indique de dériver suivant $x$ une fois, puis suivant $y$ deux fois... etc.
 
 \IDarg{3} l'ordre total de dérivation.
 
@@ -1556,15 +1535,31 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 
 \IDarg{2} l'ordre total de dérivation.
 
-\subsubsection{Tableaux de signes -- Commentaires et graphiques explicatifs}
+
+
+\subsubsection{Tableaux de signes -- Couleur de fond, commentaire et graphique explicatif}
+
+\IDmacro{backLine}{1}{1}  où \quad \mwhyprefix{back}{ground}
+
+
+\IDoption{} couleur au format TikZ.
+            La valeur par défaut est \verb+gray!30+.
+
+
+\IDarg{1} les numéros de ligne séparés par des virgules, $0$ étant le 1\ier{} numéro.
+
+
+\separation
+
 
 \IDmacro{comLine}{1}{2}  où \quad \mwhyprefix{com}{ment}
 
 
 \IDoption{} couleur au format TikZ.
+            La valeur par défaut est \verb+blue+.
 
 
-\IDarg{1} le numéro de ligne où placer le commentaire, $0$ étant le 1\ier{} numéro.
+\IDarg{1} le numéro de ligne, $0$ étant le 1\ier{} numéro.
 
 \IDarg{2} le texte du commentaire.
 
@@ -1576,21 +1571,38 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 
 
 \IDoption{} couleur au format TikZ.
+            La valeur par défaut est \verb+blue+.
 
 
-\IDarg{1} le numéro de ligne où placer le graphique, $0$ étant le 1\ier{} numéro.
+\IDarg{1} le numéro de ligne, $0$ étant le 1\ier{} numéro.
 
 
-\IDarg{2} le type de fonctions avec des contraintes en utilisant la virgule comme séparateur d'informations.
+\IDarg{2} le type de fonctions avec des contraintes éventuelles en utilisant la virgule comme séparateur d'informations.
 
 \begin{enumerate}
-	\item \verb@ax+b@ sans espace indique une fonction affine avec un unique paramètre \verb@a@ non nul à caractériser.
+	\item \verb@x2@ sans espace indique $f(x) = x^2$.
 
-	\item \verb@ax2+bx+c@ sans espace indique une fonction trinôme du 2\ieme{} degré avec une paramètre \verb@a@ non nul à caractériser ainsi que \verb@d@ pour son discriminant.
+	\item \verb@srqt@ sans espace indique $f(x) = \sqrt{x}$.
+
+	\item \verb@1/x@ sans espace indique $f(x) = \frac{1}{x}$.
+
+	\item \verb@abs@ sans espace indique $f(x) = \abs{x}$.
+
+	\item \verb@exp@ sans espace indique $f(x) = \exp x$.
+
+	\item \verb@ln@ sans espace indique $f(x) = \ln x$.
 
     % ==================== %
 
-	\smallskip
+	\medskip
+	
+	\item \verb@ax+b@ sans espace indique $f(x) = ax + b$ avec $a \neq 0$ à caractériser.
+
+	\item \verb@ax2+bx+c@ sans espace indique $f(x) = ax^2 + bx + c$ avec $a \neq 0$ et le discriminant $d$ à caractériser.
+
+    % ==================== %
+
+	\medskip
 	
 	\item \verb@ap@ et \verb@an@ indiquent respectivement les conditions $a > 0$ et $a < 0$.
 
@@ -1598,10 +1610,10 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 \end{enumerate}
 
 
-\IDarg{supplémentaire pour ax+b} la racine de $ax + b$.
+\IDarg{3 supplémentaire pour ax+b} la racine réelle de $ax + b$.
 
 
-\IDarg{$\!$s supplémentaires pour ax2+bx+c} si $ax^2 + bx + c$ admet une ou deux racines, on donnera toutes les racines de la plus petite à la plus grande
+\IDarg{$\!$s supplémentaires éventuels pour ax2+bx+c} si $ax^2 + bx + c$ admet une ou deux racines réelles, on donnera toutes les racines de la plus petite à la plus grande
 \footnote{
 	Notant $\Delta = b^2 - 4 ac$, si $\Delta < 0$ il n'y aura pas d'argument supplémentaire, si $\Delta = 0$ il y en aura un seul et enfin si $\Delta > 0$ il faudra en donner deux, le 1\ier{} étant le plus petit.
 }.
