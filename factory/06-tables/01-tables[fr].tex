@@ -20,7 +20,16 @@
 \paragraph{Comment ça marche ?}
 
 Pour les tableaux de variation et de signe non décorés, tout le boulot est fait par le package \verb+tkz-tab+.
-Ce package est utilisé via le réglage \verb+\tkzTabSetup[arrowstyle = triangle 60]+ afin d'obtenir des pointes de flèche plus visibles.
+Ce package est utilisé avec les réglages par défaut \emph{\og maison \fg} suivants via l'utilisation de \macro{tkzTabSetup}.
+
+\begin{enumerate}
+	\item \verb+arrowstyle = triangle 60+ permet d'obtenir des pointes de flèche plus visibles.
+	
+	\item \verb+doubledistance = 3pt+ améliore la visibilité des doubles barres pour les valeurs interdites.
+\end{enumerate}
+
+
+ 
 
 \medskip
 
@@ -108,7 +117,7 @@ Ceci permet alors d'utiliser ces noeuds pour des dessins TikZ faits maison
 \inputlatexexcodeafter{examples/node-name.tkz}
 
 
-Maintenant que ls noms des noeuds sont connus, il devient facile de produire le code ci-après.
+Maintenant que les noms des noeuds sont connus, il devient facile de produire le code ci-après.
 Bien noter l'usage de valeurs utiles \og vides \fg{} de $x$ ainsi que les mystiques \verb@\node at ($(A)!0.5!(B)$)@ permettant de placer un noeud au milieu entre les deux noeuds \verb@A@ et \verb@B@. 
 
 \inputlatexexalone{examples/align-sign-from-var-2.tkz}

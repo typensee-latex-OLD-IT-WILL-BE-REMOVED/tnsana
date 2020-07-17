@@ -3,7 +3,7 @@
 \makeatletter
     \input{../config/header[fr].sty}
 
-    \usepackage{01-differential-calculus}
+    \usepackage{01-total-diff-calculus}
 
 
    
@@ -62,8 +62,8 @@ Attention bien entendu à n'utiliser l'option par défaut \prefix{u} ou l'option
 \end{latexex}
 
 
-On peut aussi ajouter autour de la fonction des parenthèses extensibles ou non sauf pour le mode \prefix{d} \emph{(voir juste après)}.
-Ci-dessous on montre au passage une écriture du type \emph{\og opérateur fonctionnel \fg}.
+On peut aussi ajouter autour de la fonction des parenthèses extensibles ou non sauf même si cela n'est pas utile pour le mode \prefix{d} \emph{(voir juste après le mode \prefix{bd})}.
+Ci-dessous on montre au passage une écriture du type \emph{\og opérateur fonctionnel \fg} : voir la section \ref{tnsana-ope-total-der} page \pageref{tnsana-ope-total-der} à ce sujet.
 
 \begin{latexex}
  $\der[osf,sp]{\frac{1}{2}  uv}{k}{x}
@@ -71,11 +71,13 @@ Ci-dessous on montre au passage une écriture du type \emph{\og opérateur fonct
 \end{latexex}
 
 
-Avec l'option \prefix{d} les parenthèses étant sans utilité on obtient une autre mise en forme. En voici un exemple. Notez au passage qu'ici \prefix{sp} n'apporte rien de nouveau.
+Avec l'option \prefix{d} les parenthèses seules sont sans utilité car on peut obtenir des choses non souhaitées comme $\der[d, p]{u + v}{2}{x}$.
+À la place on utilisera l'option \prefix{bd} où le \prefix{b} est pour \whyprefix{b}{racket} soit \inenglish{crochet}. Notez au passage que \prefix{p} et \prefix{sp} restent utilisables.
 
 \begin{latexex}
- $\der[d,p] {\frac{1}{2}  uv}{2}{x}
-= \der[d,sp]{\dfrac{1}{2} uv}{2}{x}$
+ $\der[bd]   {\frac{1}{2}  uv}{2}{x}
+= \der[bd,p] {\frac{1}{2}  uv}{2}{x}
+= \der[bd,sp]{\dfrac{1}{2} uv}{2}{x}$
 \end{latexex}
 
 
@@ -86,16 +88,20 @@ Avec l'option \prefix{d} les parenthèses étant sans utilité on obtient une au
 
 		\item \prefix{e} est pour \whyprefix{e}{xposant}.
 
-		\item \prefix{d} est pour \whyprefix{d}{ot} soit \inenglish{point}.
-
-		\smallskip
 		\item \prefix{i} est pour \whyprefix{i}{ndice}.
 
+		\item \prefix{d} est pour \whyprefix{d}{ot} soit \inenglish{point}.
+
+		\item \prefix{bd} est pour \whyprefix{b}{racket} \whyprefix{d}{ot} où \inenglish*{bracket} est pour \inenglish{crochet}.
+
+		\medskip
+		
 		\item \prefix{f} est pour \whyprefix{f}{raction} avec aussi \prefix{sf} pour une écriture réduite où \prefix{s} est pour \whyprefix{s}{mall} soit \inenglish{petit}.
 
 		\item \prefix{of} et \prefix{osf} utilisent le préfixe \prefix{o} pour \whyprefix{o}{pérateur}.
 		
-		\smallskip
+		\medskip
+		
 		\item \prefix{p} est pour \whyprefix{p}{arenthèse} : dans ce cas les parenthèses seront extensibles. Le fonctionnement est différent avec l'option \prefix{d} comme nous l'avons vu avant.
 
 		\item \prefix{sp} est pour des parenthèses non extensibles. Là aussi le fonctionnement est différent avec l'option \prefix{d}.
@@ -117,7 +123,7 @@ Avec l'option \prefix{d} les parenthèses étant sans utilité on obtient une au
 
 
 \begin{remark}
-	Voici comment forcer les exposants $1$ si besoin. Fonctionnel mais un peu moche...
+	Voici comment forcer les exposants $1$ si besoin. Fonctionnel mais très moche...
 
 	\begin{latexex}
  $\der[i ]{u}{\,\!1}{x}
@@ -144,30 +150,30 @@ Voici des exemples où de nouveau l'option par défaut \prefix{u} et l'option \p
 \begin{latexex}
  $\sder{f}{1} = \der{f}{1}{x}$
 
- $\sder{f}{1}
-= \sder[e]{f}{1}
-= \sder[d]{f}{1}$
+ $\sder   {f}{3}
+= \sder[e]{f}{3}
+= \sder[d]{f}{3}$
 \end{latexex}
 
 
 \newparaexample{}
 
 \begin{latexex}
- $\sder[sp ]{\dfrac{1}{2} uv}{2}
+ $\sder[sp] {\dfrac{1}{2} uv}{2}
 = \sder[e,p]{\dfrac{1}{2} uv}{2}
-= \sder[d,p]{\dfrac{1}{2} uv}{2}$
+= \sder[bd] {\dfrac{1}{2} uv}{2}$
 \end{latexex}
 
 
 \begin{remark}
-	Ici les seules options disponibles sont \prefix{u}, \prefix{e}, \prefix{p} et \prefix{sp}.
+	Ici les seules options disponibles sont \prefix{u}, \prefix{e}, \prefix{b}, \prefix{bd}, \prefix{p} et \prefix{sp}.
 \end{remark}
 
 
 % ---------------------- %
 
 
-\subsection{L'opérateur de dérivation totale}
+\subsection{L'opérateur de dérivation totale} \label{tnsana-ope-total-der}
 
 Ce qui suit peut rendre service au niveau universitaire.
 Les options possibles sont \verb+f+, valeur par défaut, \verb+sf+ et \verb+i+ avec les mêmes significations que pour la macro \macro{der}.
@@ -179,7 +185,7 @@ Les options possibles sont \verb+f+, valeur par défaut, \verb+sf+ et \verb+i+ a
 \end{latexex}
 
 
-Ici non plus il n'y a pas de uns inutiles.
+Ici non plus il n'y a pas de uns inutiles mais l'astuce \verb+\,\!1+ reste utilisable.
 
 \begin{latexex}
  $\derope    {1}{x}
@@ -205,6 +211,12 @@ Ici non plus il n'y a pas de uns inutiles.
 	
 	\item \verb+i+ : écriture via un indice.
 
+	\item \verb+d+ : écriture pointée à la physicienne \emph{(cf. la dérivation par rapport au temps)}.
+
+	\item \verb+bd+ : écriture pointée avec un crochet entre les points et la fonction.
+
+	\medskip
+	
 	\item \verb+f+ : écriture via une fraction en mode display.
 
 	\item \verb+sf+ : écriture via une fraction en mode non display.
@@ -213,7 +225,8 @@ Ici non plus il n'y a pas de uns inutiles.
 
 	\item \verb+osf+ : écriture via une fraction en mode non display sous la forme d'un opérateur \emph{(la fonction est à côté de la fraction)}.
 
-	\smallskip
+	\medskip
+	
 	\item \verb+p+ : ajout de parenthèses extensibles autour de la fonction.
 
 	\item \verb+sp+ : ajout de parenthèses non extensibles autour de la fonction.
@@ -232,7 +245,7 @@ Ici non plus il n'y a pas de uns inutiles.
 
 \IDmacro{sder}{1}{2} où \quad \mwhyprefix{s}{imple}
 
-\IDoption{} la valeur par défaut est \verb+u+. Les options disponibles sont \verb+u+, \verb+e+, \verb+p+ et \verb+sp+ : voir la fiche technique de \macro{sder} ci-dessus.
+\IDoption{} la valeur par défaut est \verb+u+. Les options disponibles sont \verb+u+, \verb+e+, \verb+d+, \verb+bd+, \verb+p+ et \verb+sp+ : voir la fiche technique de \macro{sder} ci-dessus.
 
 \IDarg{1} la fonction à dériver.
 

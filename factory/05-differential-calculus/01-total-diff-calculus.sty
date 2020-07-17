@@ -7,6 +7,7 @@
 \RequirePackage{etoolbox}
 \RequirePackage{forloop}
 \RequirePackage{ifmtarg}
+\RequirePackage{xparse}
 \RequirePackage{xstring}
 
 \RequirePackage{tnscom}
@@ -19,7 +20,8 @@
 %    * http://forum.mathematex.net/latex-f6/derivee-avec-un-d-droit-et-espace-t12932.html#p124930
 %    * http://forum.mathematex.net/latex-f6/remplacer-des-espaces-par-autre-chose-t12952.html#p125062
 %    * http://forum.mathematex.net/latex-f6/probleme-de-remplacement-de-cdots-t13047.html#p125782
-%     * https://tex.stackexchange.com/a/42445/6880
+%    * https://tex.stackexchange.com/a/42445/6880
+%    * https://tex.stackexchange.com/a/553843/6880
 
 
 % dd, partial and pp useful operators
@@ -30,7 +32,7 @@
 % Argument #4: space before exponent
 % Argument #5: space after exponent
 
-\newcommand{\tnsana@diffOpe}[5]{%
+\newcommand{\tnsana@diff@ope}[5]{%
     #3%
     \ifx0#1\else%
         ^{\kern#4#1\kern#5}\!%
@@ -44,7 +46,7 @@
 }
 
 
-\newcommand\dd[2][0]{\tnsana@diffOpe{#1}{#2}{\@dder}{.05ex}{0.15ex}}
+\newcommand\dd[2][0]{\tnsana@diff@ope{#1}{#2}{\@dder}{.05ex}{0.15ex}}
 
 
 \let\tnsana@original@partial\partial
@@ -54,7 +56,7 @@
 }
 
 
-\newcommand\pp[2][0]{\tnsana@diffOpe{#1}{#2}{\partial}{.15ex}{0.15ex}}
+\newcommand\pp[2][0]{\tnsana@diff@ope{#1}{#2}{\partial}{.15ex}{0.15ex}}
 
 
 % Common tools
@@ -73,19 +75,20 @@
     ( #1 )%
 }
 
-\newcommand\tnsana@der@func@over@bracket[1]{%
+\newcommand\tnsana@der@func@under@bracket[1]{%
     \overbracket[.75pt]{#1}%
 }
 
 
-
-
 \newbool{tnsana@der@option@u}
 \newbool{tnsana@der@option@e}
-\newbool{tnsana@der@option@i}
-\newbool{tnsana@der@option@f}
 \newbool{tnsana@der@option@d}
+\newbool{tnsana@der@option@bd}
 
+\newbool{tnsana@der@option@i}
+\newbool{tnsana@der@option@ei}
+
+\newbool{tnsana@der@option@f}
 \newbool{tnsana@der@option@of}
 \newbool{tnsana@der@option@sf}
 \newbool{tnsana@der@option@osf}
@@ -129,6 +132,12 @@
         }%
     }%
 }
+
+
+\newcommand\tnsana@der@bracket@dot[3]{%
+    \tnsana@der@dot{\tnsana@der@func@under@bracket}{#1{#2}}{#3}%
+}
+
 
 
 \newcommand\tnsana@der@sub[3]{
@@ -185,11 +194,12 @@
         {u}{\booltrue{tnsana@der@option@u}}%
         {e}{\booltrue{tnsana@der@option@e}}%
         {d}{\booltrue{tnsana@der@option@d}}%
+        {bd}{\booltrue{tnsana@der@option@bd}}%
         {p}{\booltrue{tnsana@der@option@p}}%
         {sp}{\booltrue{tnsana@der@option@sp}}%
     }[%
         \PackageError{tnsana}{unknown option}%
-                             {you can use u (default), e , t , p and sp}%
+                             {you can use u (default), e , t , d , bd , p and sp}%
     ]%
 }
 
@@ -198,6 +208,7 @@
     \boolfalse{tnsana@der@option@u}%
     \boolfalse{tnsana@der@option@e}%
     \boolfalse{tnsana@der@option@d}%
+    \boolfalse{tnsana@der@option@bd}%
     \boolfalse{tnsana@der@option@p}%
     \boolfalse{tnsana@der@option@sp}%
     %
@@ -208,24 +219,18 @@
             bool {tnsana@der@option@e}
             or
             bool {tnsana@der@option@d}
+            or
+            bool {tnsana@der@option@bd}
         )
     }{%
         \booltrue{tnsana@der@option@u}%
     }{}%   
     %
     \ifbool{tnsana@der@option@p}{%
-    	\ifbool{tnsana@der@option@d}{%
-	        \let\parithere\tnsana@der@func@over@bracket%
-	    }{%
-	    	\let\parithere\tnsana@der@func@ext@par%
-	    }%
+    	\let\parithere\tnsana@der@func@ext@par%
     }{%
         \ifbool{tnsana@der@option@sp}{%
-    		\ifbool{tnsana@der@option@d}{%
-	        	\let\parithere\tnsana@der@func@over@bracket%
-	    	}{%
-	    		\let\parithere\tnsana@der@func@no@ext@par%
-	        }%
+    		\let\parithere\tnsana@der@func@no@ext@par%
         }{%
             \let\parithere\tnsana@der@func@no@par%
         }%
@@ -237,7 +242,11 @@
         \ifbool{tnsana@der@option@e}{%
             \let\callithere\tnsana@der@exp%
         }{%
-            \let\callithere\tnsana@der@dot%
+        	\ifbool{tnsana@der@option@d}{%
+            	\let\callithere\tnsana@der@dot%
+			}{%
+				\let\callithere\tnsana@der@bracket@dot%
+			}%
         }%
     }%
     \callithere{\parithere}{#2}{#3}%
@@ -251,6 +260,7 @@
         {u}{\booltrue{tnsana@der@option@u}}%
         {e}{\booltrue{tnsana@der@option@e}}%
         {d}{\booltrue{tnsana@der@option@d}}%
+        {bd}{\booltrue{tnsana@der@option@bd}}%
         {i}{\booltrue{tnsana@der@option@i}}%
         {f}{\booltrue{tnsana@der@option@f}}%
         {of}{\booltrue{tnsana@der@option@of}}%
@@ -269,6 +279,7 @@
     \boolfalse{tnsana@der@option@u}%
     \boolfalse{tnsana@der@option@e}%
     \boolfalse{tnsana@der@option@d}%
+    \boolfalse{tnsana@der@option@bd}%
     \boolfalse{tnsana@der@option@i}%
     \boolfalse{tnsana@der@option@f}%
     \boolfalse{tnsana@der@option@of}%
@@ -284,6 +295,8 @@
             bool {tnsana@der@option@e}
             or
             bool {tnsana@der@option@d}
+            or
+            bool {tnsana@der@option@bd}
             or
             bool {tnsana@der@option@i}
             or
@@ -305,6 +318,8 @@
         bool {tnsana@der@option@e}
         or
         bool {tnsana@der@option@d}
+        or
+        bool {tnsana@der@option@bd}
     }{%
         \sder[#1]{#2}{#3}
     }{%    
@@ -377,156 +392,3 @@
     \der[#1]{}{#2}{#3}%
 }
 
-
-
-% Total derivate
-
-%     + Abstraction
-
-\newcommand\tnsana@pder@abstract@frac[4]{%
-    #1{%
-        \pp[#4]{#2}%
-    }{%
-% ARG 1 = Separator: |
-% ARG 2 = All parts: what the user types !
-% ARG 3 = Before   : nothing here
-% ARG 4 = Between  : ;
-% ARG 5 = After    : nothing here
-        \tns@multi@args{|}{#3}{\partial}{\,\partial}{}%
-    }
-}
-
-\newcommand\tnsana@pder@dfrac[3]{%
-    \tnsana@pder@abstract@frac{\dfrac}{#1}{#2}{#3}%
-}
-
-\newcommand\tnsana@pder@frac[3]{%
-    \tnsana@pder@abstract@frac{\frac}{#1}{#2}{#3}%
-}
-
-\newcommand\tnsana@pder@ope@dfrac[3]{%
-    \tnsana@pder@abstract@frac{\dfrac}{}{#2}{#3}#1%
-}
-
-\newcommand\tnsana@pder@ope@frac[3]{%
-    \tnsana@pder@abstract@frac{\frac}{}{#2}{#3}#1%
-}
-
-
-\newcommand\tnsana@pder@sub[3]{
-% The following command works because xstring traits {...} like a single character.
-    \noexpandarg
-    \StrSubstitute{#2}{^}{\tnsana@der@func@no@ext@par}[\@index]
-    \partial%
-    ^{\kern.15ex#3\kern.15ex}%
-    _{\expandafter\StrSubstitute\expandafter{\@index}{|}{\kern.05em,\kern.05em}}%
-    #1%
-    \expandarg
-}
-
-
-%     + With the function given
-
-\newcommand\tnsana@validate@pder@option[1]{
-    \IfEqCase{#1}{%
-        {f}{\booltrue{tnsana@der@option@f}}%
-        {of}{\booltrue{tnsana@der@option@of}}%
-        {sf}{\booltrue{tnsana@der@option@sf}}%
-        {osf}{\booltrue{tnsana@der@option@osf}}%
-        {i}{\booltrue{tnsana@der@option@i}}%
-        {p}{\booltrue{tnsana@der@option@p}}%
-        {sp}{\booltrue{tnsana@der@option@sp}}%
-    }[%
-        \PackageError{tnsana}{unknown option}%
-                             {you can use f (default), sf, of, osf, i, p and sp}%
-    ]%
-}
-
-
-\newcommand\pder[4][f]{%
-    \boolfalse{tnsana@der@option@f}%
-    \boolfalse{tnsana@der@option@of}%
-    \boolfalse{tnsana@der@option@sf}%
-    \boolfalse{tnsana@der@option@osf}%
-    \boolfalse{tnsana@der@option@i}%
-    \boolfalse{tnsana@der@option@p}%
-    \boolfalse{tnsana@der@option@sp}%
-    %
-    \DoWithCSL\tnsana@validate@pder@option{#1}
-    %
-    %
-    \ifboolexpr{
-        not(
-            bool {tnsana@der@option@of}
-            or
-            bool {tnsana@der@option@sf}
-            or
-            bool {tnsana@der@option@osf}
-            or
-            bool {tnsana@der@option@i}
-        )
-    }{%
-        \booltrue{tnsana@der@option@f}%
-    }{}%
-    % Parentheses or not
-    \ifbool{tnsana@der@option@p}{%
-        \let\parithere\tnsana@der@func@ext@par%
-    }{%
-        \ifbool{tnsana@der@option@sp}{%
-            \let\parithere\tnsana@der@func@no@ext@par%
-        }{%
-            \let\parithere\tnsana@der@func@no@par%
-        }%
-    }%
-    % Expo total
-    \IfStrEq{#4}{1}{%
-        \def\expotot{}
-    }{%
-        \def\expotot{#4}
-    }%
-    % Big frac
-    \ifbool{tnsana@der@option@f}{%
-        \let\callithere\tnsana@pder@dfrac%
-    }{%
-    % Big frac ope
-        \ifbool{tnsana@der@option@of}{%
-            \let\callithere\tnsana@pder@ope@dfrac%
-        }{%
-    % Small frac
-            \ifbool{tnsana@der@option@sf}{%
-                \let\callithere\tnsana@pder@frac%
-            }{%
-    % Small frac ope
-                \ifbool{tnsana@der@option@osf}{%
-                    \let\callithere\tnsana@pder@ope@frac%
-                }{%
-    % Indice
-                    \ifbool{tnsana@der@option@i}{%
-                        \let\callithere\tnsana@pder@sub%
-                    }{}%
-                }%
-            }%
-        }%
-    }%
-    % Let's do the job
-    \callithere{\parithere{#2}}{#3}{\expotot}%
-}
-
-
-
-%     + Operator for partiaal derivations
-
-\newcommand\pderope[3][f]{%
-    \boolfalse{tnsana@der@option@f}%
-    \boolfalse{tnsana@der@option@sf}%
-    \boolfalse{tnsana@der@option@i}%
-    %
-    \DoWithCSL\tnsana@validate@der@operator@option{#1}
-    %
-    \ifbool{tnsana@der@option@sf}{}{%
-        \ifbool{tnsana@der@option@i}{}{%
-            \booltrue{tnsana@der@option@f}%
-        }%
-    }%
-    \pder[#1]{}{#2}{#3}%
-}

@@ -1,29 +1,47 @@
 ==========
-2020-07-16
+2020-07-17
 ==========
 
-**Derivation :** the dot version of the total derivation with known exponent has been added.
+**New minor version version::``0.3.0-beta`` of ¨tnsana:** see all the new features below.
+
+
+**Derivation :** two new features have been added.
+
+    1) Two dot versions of the total derivation can be used thanks to the options `b` and `db` of `\der`.
+
+    1) Physicist notation ``u_xxx`` can be printed by using the option `ei` of `\pder`.
+
+
+**Table of signs or variations :** here are the last changes.
+
+    1) A new global setting is used : the double spacing of double vertcial rule is `3pt` now.
+
+    1) A new macro ``\backLine`` allows to change the background color of several lines.
+
+    1) ``\graphSign`` use thicker curves and can plot the reference functions `x^2`, `sqrt x`, `1/x`, `abs x`, `exp x` and `ln x`.
+
+
+**Documentation :** the ¨tikz examples have been put outside the ¨tex files.
 
 
 ==========
 2020-07-15
 ==========
 
-**New minor version version::``0.2.0-beta`` of ¨tnsana:** see the changes below.
+**New minor version version::``0.2.0-beta`` of ¨tnsana:** see the new feature below.
 
 
-**Symbolic variable :** one new macro `\symvar` can be used to indicate variables in functional operators for example (this macro comes from ¨tnscom).
+**Symbolic variable :** one new macro `\symvar` can be used to indicate variables in functional operators for example (this macro comes directly from ¨tnscom).
 
 
 ==========
 2020-07-12
 ==========
 
-**New minor version version::``0.1.0-beta`` of ¨tnsana:** here are the changes.
+**New minor version version::``0.1.0-beta`` of ¨tnsana:** see the new feature below.
 
-    1) The french named functions `ppcm` and `pgcd` have been moved to ¨tnsarith.
 
-    1) All the labels use the prefix ``tnsarith`` to avoid conflicts when building ¨tnsmath.
+**Named function :** the french named functions `ppcm` and `pgcd` have been moved to ¨tnsarith and `lcm`has been added because this is not included in ¨latex by default.
 
 
 ==========
