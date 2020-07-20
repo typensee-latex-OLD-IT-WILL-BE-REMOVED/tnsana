@@ -23,7 +23,7 @@
 Considérons le tableau suivant et imaginons que nous voulions l'expliquer à un débutant.
 
 \begin{center}
-	\input{examples/deco-basic-1.tkz}
+	\input{tikz/deco-basic-1.tkz}
 \end{center}
 
 Deux options s'offrent à nous pour justifier comment a été rempli le tableau.
@@ -42,7 +42,7 @@ Deux options s'offrent à nous pour justifier comment a été rempli le tableau.
 \end{enumerate}
 
 \begin{center}
-	\input{examples/deco-basic-2.tkz}
+	\input{tikz/deco-basic-2.tkz}
 \end{center}
 
 
@@ -58,7 +58,7 @@ il a fallu ajouter les lignes données ci-dessous où sont utilisées les macros
 
 \medskip
 
-\inputlatexexalone{examples/deco-basic-2-short.tkz}
+\inputlatexexalone{tikz/deco-basic-2-short.tkz}
 
 
 \begin{remark}
@@ -133,7 +133,7 @@ Pour le moment, la macro \macro{graphSign} propose différents types de graphiqu
 Avant de voir ce qui est proposé rappelons que la convention est de prendre $0$ pour numéro de la toute 1\iere{} ligne contenant les valeurs utiles de la variable.
 
 \begin{enumerate}
-    \item \textbf{\itshape Fonctions affines non constantes avec des contraintes.}
+    \item \textbf{\itshape Fonctions affines non constantes avec une contrainte.}
           
           \smallskip
 
@@ -172,7 +172,7 @@ Avant de voir ce qui est proposé rappelons que la convention est de prendre $0$
 
 
     \bigskip
-    \item \textbf{\itshape Fonctions trinômiales du 2\ieme{} degré avec des contraintes.}
+    \item \textbf{\itshape Fonctions trinômiales du 2\ieme{} degré avec deux contraintes.}
           
           \smallskip
 
@@ -225,20 +225,27 @@ Avant de voir ce qui est proposé rappelons que la convention est de prendre $0$
           \smallskip
 
           Voici ce qui est disponible via \verb#\graphSign{noligne}{codefonc}# où les valeurs possibles de \verb#codefonc# sont les suivantes.
-		  %
-          \begin{itemize}[label=\small\textbullet, itemsep=.25em]
-          		\item \verb#x2# produira le graphique de $f(x) = x^2$.
-
-          		\item \verb#sqrt# produira le graphique de $f(x) = \sqrt{x}$.
-
-          		\item \verb#1/x# produira le graphique de $f(x) = \frac{1}{x}$.
-
-          		\item \verb#abs# produira le graphique de $f(x) = \abs{x}$.
-
-          		\item \verb#exp# produira le graphique de $f(x) = \exp x$.
-
-          		\item \verb#ln# produira le graphique de $f(x) = \ln x$.
-          \end{itemize}
+          
+		  \begin{center}
+		  	  \begin{tabular}{r|c|c|c|c|c|c}
+				  \verb+code+
+				      &  \verb#x2#
+				      &  \verb#sqrt#
+				      &  \verb#1/x#
+				      &  \verb#abs#
+				      &  \verb#exp#
+				      &  \verb#ln#
+				  \\
+				  \hline
+				  $f(x)$
+				      &  $x^{2\vphantom{X^{X^X}}}$
+				      &  $\sqrt x$
+				      &  $\frac1x$
+				      &  $\abs x$
+				      &  $\exp x$
+				      &  $\ln x$ 
+		  	  \end{tabular}
+		  \end{center}
 \end{enumerate}
 
 \end{document}

@@ -29,11 +29,12 @@ PYFORMAT = MultiReplace({
 })
 
 
+DECO = " "*4
+
+
 # ----------- #
 # -- TOOLS -- #
 # ----------- #
-
-DECO = " "*4
 
 MYFRAME = lambda x: withframe(
     text  = x,

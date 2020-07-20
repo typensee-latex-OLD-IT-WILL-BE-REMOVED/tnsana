@@ -7,7 +7,6 @@ import re
 from mistool.latex_use import about
 from mistool.os_use import PPath
 from mistool.string_use import between
-from mistool.term_use import ALL_FRAMES, withframe
 
 
 # --------------- #
@@ -18,14 +17,6 @@ THIS_DIR = PPath(__file__).parent
 
 JSON_DEP_PATH = THIS_DIR / "x-dep-x.json"
 
-
-DECO = " "*4
-
-MYFRAME = lambda x: withframe(
-    text  = x,
-    frame = ALL_FRAMES['latex_pretty']
-)
-
 PATTERN_CMD_NAME = re.compile("^\\\([a-zA-Z]+)")
 PATTERN_OPTIONS  = re.compile("^\\[(.+?)\\]")
 PATTERN_IN_CURLY = re.compile("^\\{(.+?)\\}(.*)$")
@@ -33,6 +24,8 @@ PATTERN_IN_CURLY = re.compile("^\\{(.+?)\\}(.*)$")
 ABOUT_LATEX = about()
 
 PACKAGE_ID, TIKZLIB_ID, KIND_ID, NAMES_ID, OPTIONS_ID = range(5)
+
+DECO = " "*4
 
 
 # ----------- #

@@ -17,13 +17,13 @@
 
 
 \begin{tikzpicture}
-    \tkzTabInit{
+    \tkzTabInit[lgt=4]{
         Comment     / 1   ,
         Comment Bis / 1.5
     }{ , }
     
 % COMMENTS
-    \comLine      {0}{Commentaire par défaut}
+    \comLine     {0}{Commentaire par défaut}
     \comLine[gray]{1}{Commentaire gris}
 \end{tikzpicture}
 
@@ -34,9 +34,9 @@
 \subsection{Affines}
 
 \begin{tikzpicture}
-    \tkzTabInit{
-        Line ap  / 1.5 ,
-        Line an  / 1.5
+    \tkzTabInit[lgt=4]{
+        {ax+b, ap}  / 1.5 ,
+        {ax+b, an}  / 1.5
     }{ , }
 
 % LINES
@@ -51,15 +51,15 @@
 \subsection{2nd degré}
 
 \begin{tikzpicture}
-    \tkzTabInit{
-        Parabola ap dp / 1.5 ,
-        Parabola an dp / 1.5 ,
+    \tkzTabInit[lgt=4]{
+        {ax2+bx+c, ap, dp} / 1.5 ,
+        {ax2+bx+c, an, dp} / 1.5 ,
         %
-        Parabola ap dz / 1.5 ,
-        Parabola an dz / 1.5 ,
+        {ax2+bx+c, ap, dz} / 1.5 ,
+        {ax2+bx+c, an, dz} / 1.5 ,
         %
-        Parabola ap dn / 1.5 ,
-        Parabola an dn / 1.5
+        {ax2+bx+c, ap, dn} / 1.5 ,
+        {ax2+bx+c, an, dn} / 1.5
     }{ , }
     
 % PARABOLAS  delta > 0
@@ -82,13 +82,13 @@
 \subsection{Fonctions de réf.}
 
 \begin{tikzpicture}
-    \tkzTabInit{
-        $x^2$      / 1.5 ,
-        $\sqrt{x}$ / 1.5 ,
-        $\frac1x$  / 1.5 ,
-        $|x|$      / 1.5 ,
-        $\exp(x)$  / 1.5 ,
-        $\ln(x)$   / 1.5
+    \tkzTabInit[lgt=4]{
+        x2    / 1.5 ,
+        sqrt  / 1.5 ,
+        {1/x} / 1.5 ,
+        abs   / 1.5 ,
+        exp   / 1.5 ,
+        ln    / 1.5
     }{ , }
     
 % REFERENCE FUNCTIONS
