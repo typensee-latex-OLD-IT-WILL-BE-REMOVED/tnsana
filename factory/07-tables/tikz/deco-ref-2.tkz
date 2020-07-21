@@ -3,18 +3,18 @@
         lgt   = 3   , % Il faut de la place pour le dernier produit !
         espcl = 2.5   % On réduit la largeur des colonnes pour les signes.
     ]{
-        $x$                        / 0.5 ,
-        $\frac{1}{x}$              / 1.5 ,
-        $\abs{x}$                  / 1.5 ,
-        $\ln x$                    / 1.5 ,
-        $\frac{\abs{x} \ln x}{x}$  / 1.5
+        $x$                         / 0.5 ,
+        $\frac{1}{x}$               / 1.5 ,
+        $\abs{x}$                   / 1.5 ,
+        $\ln x$                     / 1.5 ,
+        $\frac{\abs{x}}{x  \ln x}$  / 1.5
     }{
                 $0$     , 1     , $+\infty$
     }
     \tkzTabLine{ d  , + , t , + ,          }
     \tkzTabLine{ z  , + , t , + ,          }
     \tkzTabLine{ d  , - , z , + ,          }
-    \tkzTabLine{ d  , - , z , + ,          }
+    \tkzTabLine{ d  , - , d , + ,          }
 
     \graphSign        {1}{1/x}
     \graphSign[purple]{2}{abs}

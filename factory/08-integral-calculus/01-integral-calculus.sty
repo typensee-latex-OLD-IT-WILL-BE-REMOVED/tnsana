@@ -67,11 +67,11 @@
 \newcommand\integrate{\@ifstar{\tnsana@integrate@star}{\tnsana@integrate@no@star}}
 
 \newcommand\tnsana@integrate@star[4]{%
-	\int_{#1}^{#2} #3 \dd{#4}%
+	\int_{#3}^{#4} #1 \dd{#2}%
 }
 
 \newcommand\tnsana@integrate@no@star[4]{%
-	\tnsana@integrate@star{#4\,=\,#1}{#4\,=\,#2}{#3}{#4}%
+	\tnsana@integrate@star{#1}{#2}{#2\,=\,#3}{#2\,=\,#4}%
 }
 
 
@@ -100,34 +100,34 @@
     \IfEqCase{#1}{%
         {b}{%
 			\left[%
-				\tnsana@hook@small@vertical@phantom{#4}%
-				\,#4\,%
+				\tnsana@hook@small@vertical@phantom{#2}%
+				\,#2\,%
 			\right]%
         }{sb}{%
 			\left[%
 				\tnsana@hook@big@vertical@phantom \right. \!\!%
-				\,#4\,%
+				\,#2\,%
 				\left. \tnsana@hook@big@vertical@phantom \!\!%
 			\right]%
         }{r}{%
-            \left. #4\, \right\rvert%
+            \left. #2\, \right\rvert%
         }{sr}{%
-            #4\, {\text{\relsize{1.5}$\rvert$}}%
+            #2\, {\text{\relsize{1.5}$\rvert$}}%
         }%
     }[
     	\PackageError{tnsana}{unknown option}%
                              {You can use b (default), sb, r or sr.}
     ]%
-	_{\,#2}^{\,#3}%
+	_{\,#3}^{\,#4}%
 }
 
 
 \newcommand\hook{\@ifstar{\tnsana@hook@star}{\tnsana@hook@no@star}}
 
 \newcommand\tnsana@hook@star[5][b]{%
-	\tnsana@hook@abstract[#1]{#2}{#3}{#4}%
+	\tnsana@hook@abstract[#1]{#2}{#4}{#5}%
 }
 
 \newcommand\tnsana@hook@no@star[5][b]{%
-	\tnsana@hook@abstract[#1]{#5\,=\,#2}{#5\,=\,#3}{#4}%
+	\tnsana@hook@abstract[#1]{#2}{#3\,=\,#4}{#3\,=\,#5}%
 }

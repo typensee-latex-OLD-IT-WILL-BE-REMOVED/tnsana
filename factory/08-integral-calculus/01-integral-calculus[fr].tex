@@ -2,7 +2,7 @@
 
 \makeatletter
 	\input{../config/header[fr].sty}
-	\input{../05-differential-calculus/01-differential-calculus.sty}
+	\input{../06-differential-calculus/01-total-diff-calculus.sty}
 
 	\usepackage{01-integral-calculus}
 \makeatother
@@ -65,12 +65,12 @@ Le 1\ier{} exemple qui suit semblera être une hérésie pour les habitués de \
 
 \begin{latexex}
  $\displaystyle
-  \integrate{a}{b}{f(x)}{x}
+  \integrate{f(x)}{x}{a}{b}
 = \int_{x=a}^{x=b} f(x) \dd{x}$
 
  $\displaystyle
-  \integrate*{a}{b}{f(x)}{x}
-= \integrate{a}{b}{f(x)}{x}$
+  \integrate*{f(x)}{x}{a}{b}
+= \integrate{f(x)}{x}{a}{b}$
 \end{latexex}
 
 
@@ -79,8 +79,8 @@ Le 1\ier{} exemple qui suit semblera être une hérésie pour les habitués de \
 La macro \macro{dintegrate*} présentée ci-dessous possède aussi une version non étoilée \macro{dintegrate}.
 
 \begin{latexex}
- $\dintegrate*{a}{b}{f(x)}{x}
-= \integrate*{a}{b}{f(x)}{x}$
+ $\dintegrate*{f(x)}{x}{a}{b}
+= \integrate*{f(x)}{x}{a}{b}$
 \end{latexex}
 
 
@@ -101,13 +101,15 @@ La macro \macro{dintegrate*} présentée ci-dessous possède aussi une version n
 
 \IDmacro*{dintegrate*}{4}  où \quad \mwhyprefix{d}{isplaystyle}
 
-\IDarg{1} ce qui est en bas du symbole $\int_{\symvar}$ .
 
-\IDarg{2} ce qui est en haut du symbole $\int^{\symvar}$ .
+\IDarg{1} la fonction intégrée.
 
-\IDarg{3} la fonction intégrée.
+\IDarg{2} la variable d'intégration.
 
-\IDarg{4} suivant quoi on intègre.
+\IDarg{3} valeur initiale d'intégration qui apparait en bas du symbole $\int_{\symvar}$ .
+
+\IDarg{4} valeur finale d'intégration qui apparait en haut du symbole $\int^{\symvar}$ .
+
 
 
 % ---------------------- %
@@ -118,11 +120,11 @@ La macro \macro{dintegrate*} présentée ci-dessous possède aussi une version n
 \newparaexample{}
 
 \begin{latexex}
- $\hook{a}{b}{F(x)}{x}
+ $\hook{F(x)}{x}{a}{b}
 = F(b) - F(a)$
 
- $\dintegrate*{a}{b}{f(x)}{x}
-= \hook*{a}{b}{F(x)}{x}$
+ $\dintegrate*{f(x)}{x}{a}{b}
+= \hook*{F(x)}{x}{a}{b}$
 
 \end{latexex}
 
@@ -141,11 +143,11 @@ Dans l'exemple suivant, on utilise l'option \prefix{sb} pour \whyprefix{s}{mall}
 
 
 \begin{latexex}
- $\hook*{a}{b}%
-        {\dfrac{x - 1}{5 + x^2}}{x}
+ $\hook*{\dfrac{x - 1}{5 + x^2}}{x}%
+        {a}{b}
 = \hook*[sb]%
-        {a}{b}%
-        {\dfrac{x - 1}{5 + x^2}}{x}$
+        {\dfrac{x - 1}{5 + x^2}}{x}%
+        {a}{b}$
 \end{latexex}
 
 
@@ -157,10 +159,10 @@ Dans l'exemple suivant, on utilise l'option \prefix{sb} pour \whyprefix{s}{mall}
 Via les options \prefix{r} et \prefix{sr} pour \whyprefix{s}{mall} et \whyprefix{r}{ull} soit \inenglish*{petit} et \inenglish{trait}, on obtient ce qui suit.
 
 \begin{latexex}
- $\hook[r]  {a}{b}%
-            {\dfrac{x - 1}{5 + x^2}}{x}
-= \hook*[sr]{a}{b}%
-            {\dfrac{x - 1}{5 + x^2}}{x}$
+ $\hook[r]  {\dfrac{x - 1}{5 + x^2}}{x}%
+            {a}{b}
+= \hook*[sr]{\dfrac{x - 1}{5 + x^2}}{x}%
+            {a}{b}$
 \end{latexex}
 
 
@@ -175,6 +177,7 @@ Via les options \prefix{r} et \prefix{sr} pour \whyprefix{s}{mall} et \whyprefix
 
 \IDmacro{hook*}{1}{4}
 
+
 \IDoption{} la valeur par défaut est \verb+b+. Voici les différentes valeurs possibles.
 \begin{enumerate}
 	\item \verb+b+ : des crochets extensibles sont utilisés.
@@ -186,12 +189,12 @@ Via les options \prefix{r} et \prefix{sr} pour \whyprefix{s}{mall} et \whyprefix
 	\item \verb+sr+ : un unique trait vertical non extensible est utilisé à droite.
 \end{enumerate}
 
-\IDarg{1} ce qui est en bas du crochet fermant.
+\IDarg{1} la fonction sur laquelle effectuer le calcul.
 
-\IDarg{2} ce qui est en haut du crochet fermant.
+\IDarg{2} la variable à affecter pour les calculs.
 
-\IDarg{3} la fonction sur laquelle effectuer le calcul.
+\IDarg{3} valeur initiale à substituer qui apparait en bas du crochet fermant ou de la barre verticale.
 
-\IDarg{4} la variable pour les calculs.
+\IDarg{4} valeur finale à substituer qui apparait en haut du crochet fermant ou de la barre verticale.
 
 \end{document}

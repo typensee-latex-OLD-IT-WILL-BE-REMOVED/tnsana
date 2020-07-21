@@ -227,10 +227,10 @@
 	\\%
 	{\footnotesize Code source disponible sur \url{https://github.com/typensee-latex/tnsana.git}.}%
 	\\%
-    {\footnotesize Version \texttt{0.3.0-beta} développée et testée sur \macosxname{}.}%
+    {\footnotesize Version \texttt{0.4.0-beta} développée et testée sur \macosxname{}.}%
 }
 \author{Christophe BAL}
-\date{2020-07-17}
+\date{2020-07-21}
 
 \maketitle
 
@@ -384,6 +384,60 @@ $\expb{6} y = 6^y$
     \verb+logb{p}+ : $\logb{p}\dots$
 % Table of all - END
 \end{multicols}
+\section{Limite}
+
+\newparaexample{Cas minimaliste}
+
+Notez ci-dessous que le rendu de la limite via \macro{limit} se fait toujours en mode \macro{displaystyle} pour l'opérateur de limite.
+
+\begin{latexex}
+$\limit{f(x)}{x}{0} = \frac{1}{2}$
+\end{latexex}
+
+
+\begin{remark}
+	\verb#\lim\limits_{x \rightarrow 0} f(x)# produit 
+	$\lim\limits_{x \rightarrow 0} f(x)$ contre 
+	$\limit{f(x)}{x}{0}$ ci-dessus.
+\end{remark}
+
+
+
+% ---------------------- %
+
+
+\newparaexample{Avec des conditions}
+
+Ce 2\ieme{} exemple devrait rendre intéressante la macro \macro{limit} qui permet d'ajouter facilement plusieurs conditions comme le montre la 2\ieme{} limite
+\footnote{
+	En pratique, on utilise généralement au maximum une condition.
+}.
+
+\begin{latexex}
+$\limit{f(x)}{x}{0 | x > 0}$ ou
+$\limit{f(z)}{z}%
+       {0 | z \in \Omega | \abs{z} < 3}$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\newparaexample{Ajout de parenthèses}
+
+Les options \verb#p# et \verb#sp# permettent d'ajouter facilement des parenthèses extensibles ou non autour de la fonction. 
+Indiquons que \prefix{sp} est pour \whyprefix{s}{mall} \whyprefix{p}{arenthesis} soit \inenglish{petites parenthèses}.
+
+\begin{latexex}
+$\displaystyle\limit[p] {\frac{1}{x}}{x}
+                        {0 | x > 0}$
+ou
+$\displaystyle\limit[sp]{\frac{1}{x}}{x}
+                        {0 | x > 0}$
+\end{latexex}
+
+
+% ---------------------- %
 \section{Calcul différentiel}
 
 \subsection{\texorpdfstring{Les opérateurs $\pp{}$ et $\dd{}$}%
@@ -411,13 +465,13 @@ Voici plusieurs mises en forme faciles à taper via l'option de \macro{der}.
 Attention bien entendu à n'utiliser l'option par défaut \prefix{u} ou l'option \prefix{d} qu'avec un ordre de dérivation de valeur naturelle connue !
 
 \begin{latexex}
- $\der   {f}{3}{x}
-= \der[e]{f}{3}{x}
-= \der[d]{f}{3}{x}$
+ $\der   {f}{x}{3}
+= \der[e]{f}{x}{3}
+= \der[d]{f}{x}{3}$
 
- $\der[i] {u}{k}{x}
-= \der[f] {u}{k}{x}
-= \der[sf]{u}{k}{x}$
+ $\der[i] {u}{x}{k}
+= \der[f] {u}{x}{k}
+= \der[sf]{u}{x}{k}$
 \end{latexex}
 
 
@@ -425,18 +479,18 @@ On peut aussi ajouter autour de la fonction des parenthèses extensibles ou non 
 Ci-dessous on montre au passage une écriture du type \emph{\og opérateur fonctionnel \fg} : voir la section \ref{tnsana-ope-total-der} page \pageref{tnsana-ope-total-der} à ce sujet.
 
 \begin{latexex}
- $\der[osf,sp]{\frac{1}{2}  uv}{k}{x}
-= \der[of,p]  {\dfrac{1}{2} uv}{k}{x}$
+ $\der[osf,sp]{\frac{1}{2}  uv}{x}{k}
+= \der[of,p]  {\dfrac{1}{2} uv}{x}{k}$
 \end{latexex}
 
 
-Avec l'option \prefix{d} les parenthèses seules sont sans utilité car on peut obtenir des choses non souhaitées comme $\der[d, p]{u + v}{2}{x}$.
+Avec l'option \prefix{d} les parenthèses seules sont sans utilité car on peut obtenir des choses non souhaitées comme $\der[d, p]{u + v}{x}{2}$.
 À la place on utilisera l'option \prefix{bd} où le \prefix{b} est pour \whyprefix{b}{racket} soit \inenglish{crochet}. Notez au passage que \prefix{p} et \prefix{sp} restent utilisables.
 
 \begin{latexex}
- $\der[bd]   {\frac{1}{2}  uv}{2}{x}
-= \der[bd,p] {\frac{1}{2}  uv}{2}{x}
-= \der[bd,sp]{\dfrac{1}{2} uv}{2}{x}$
+ $\der[bd]   {\frac{1}{2}  uv}{x}{2}
+= \der[bd,p] {\frac{1}{2}  uv}{x}{2}
+= \der[bd,sp]{\dfrac{1}{2} uv}{x}{2}$
 \end{latexex}
 
 
@@ -474,10 +528,10 @@ Avec l'option \prefix{d} les parenthèses seules sont sans utilité car on peut 
 \newparaexample{Pas de uns inutiles}
 
 \begin{latexex}
- $\der[i ]{u}{1}{x}
-= \der[f ]{u}{1}{x}
-= \der[sf]{u}{1}{x}
-= \der[of]{u}{1}{x}$
+ $\der[i ]{u}{x}{1}
+= \der[f ]{u}{x}{1}
+= \der[sf]{u}{x}{1}
+= \der[of]{u}{x}{1}$
 \end{latexex}
 
 
@@ -485,10 +539,10 @@ Avec l'option \prefix{d} les parenthèses seules sont sans utilité car on peut 
 	Voici comment forcer les exposants $1$ si besoin. Fonctionnel mais très moche...
 
 	\begin{latexex}
- $\der[i ]{u}{\,\!1}{x}
-= \der[f ]{u}{\,\!1}{x}
-= \der[sf]{u}{\,\!1}{x}
-= \der[of]{u}{\,\!1}{x}$
+ $\der[i ]{u}{x}{\,\!1}
+= \der[f ]{u}{x}{\,\!1}
+= \der[sf]{u}{x}{\,\!1}
+= \der[of]{u}{x}{\,\!1}$
 \end{latexex}
 \end{remark}
 
@@ -507,7 +561,7 @@ Voici des exemples où de nouveau l'option par défaut \prefix{u} et l'option \p
 \newparaexample{}
 
 \begin{latexex}
- $\sder{f}{1} = \der{f}{1}{x}$
+ $\sder{f}{1} = \der{f}{x}{1}$
 
  $\sder   {f}{3}
 = \sder[e]{f}{3}
@@ -538,18 +592,18 @@ Ce qui suit peut rendre service au niveau universitaire.
 Les options possibles sont \verb+f+, valeur par défaut, \verb+sf+ et \verb+i+ avec les mêmes significations que pour la macro \macro{der}.
 
 \begin{latexex}
- $\derope    {k}{x}
-= \derope[sf]{k}{x}
-= \derope[i] {k}{x}$
+ $\derope    {x}{k}
+= \derope[sf]{x}{k}
+= \derope[i] {x}{k}$
 \end{latexex}
 
 
 Ici non plus il n'y a pas de uns inutiles mais l'astuce \verb+\,\!1+ reste utilisable.
 
 \begin{latexex}
- $\derope    {1}{x}
-= \derope[sf]{1}{x}
-= \derope[i] {1}{x}$
+ $\derope    {x}{1}
+= \derope[sf]{x}{1}
+= \derope[i] {x}{1}$
 \end{latexex}
 
 
@@ -1053,7 +1107,7 @@ Avant de voir ce qui est proposé rappelons que la convention est de prendre $0$
           
 		  \begin{center}
 		  	  \begin{tabular}{r|c|c|c|c|c|c}
-				  \verb+code+
+				  \verb+codefonc+
 				      &  \verb#x2#
 				      &  \verb#sqrt#
 				      &  \verb#1/x#
@@ -1181,12 +1235,12 @@ Le 1\ier{} exemple qui suit semblera être une hérésie pour les habitués de \
 
 \begin{latexex}
  $\displaystyle
-  \integrate{a}{b}{f(x)}{x}
+  \integrate{f(x)}{x}{a}{b}
 = \int_{x=a}^{x=b} f(x) \dd{x}$
 
  $\displaystyle
-  \integrate*{a}{b}{f(x)}{x}
-= \integrate{a}{b}{f(x)}{x}$
+  \integrate*{f(x)}{x}{a}{b}
+= \integrate{f(x)}{x}{a}{b}$
 \end{latexex}
 
 
@@ -1195,8 +1249,8 @@ Le 1\ier{} exemple qui suit semblera être une hérésie pour les habitués de \
 La macro \macro{dintegrate*} présentée ci-dessous possède aussi une version non étoilée \macro{dintegrate}.
 
 \begin{latexex}
- $\dintegrate*{a}{b}{f(x)}{x}
-= \integrate*{a}{b}{f(x)}{x}$
+ $\dintegrate*{f(x)}{x}{a}{b}
+= \integrate*{f(x)}{x}{a}{b}$
 \end{latexex}
 
 
@@ -1208,11 +1262,11 @@ La macro \macro{dintegrate*} présentée ci-dessous possède aussi une version n
 \newparaexample{}
 
 \begin{latexex}
- $\hook{a}{b}{F(x)}{x}
+ $\hook{F(x)}{x}{a}{b}
 = F(b) - F(a)$
 
- $\dintegrate*{a}{b}{f(x)}{x}
-= \hook*{a}{b}{F(x)}{x}$
+ $\dintegrate*{f(x)}{x}{a}{b}
+= \hook*{F(x)}{x}{a}{b}$
 
 \end{latexex}
 
@@ -1231,11 +1285,11 @@ Dans l'exemple suivant, on utilise l'option \prefix{sb} pour \whyprefix{s}{mall}
 
 
 \begin{latexex}
- $\hook*{a}{b}%
-        {\dfrac{x - 1}{5 + x^2}}{x}
+ $\hook*{\dfrac{x - 1}{5 + x^2}}{x}%
+        {a}{b}
 = \hook*[sb]%
-        {a}{b}%
-        {\dfrac{x - 1}{5 + x^2}}{x}$
+        {\dfrac{x - 1}{5 + x^2}}{x}%
+        {a}{b}$
 \end{latexex}
 
 
@@ -1247,10 +1301,10 @@ Dans l'exemple suivant, on utilise l'option \prefix{sb} pour \whyprefix{s}{mall}
 Via les options \prefix{r} et \prefix{sr} pour \whyprefix{s}{mall} et \whyprefix{r}{ull} soit \inenglish*{petit} et \inenglish{trait}, on obtient ce qui suit.
 
 \begin{latexex}
- $\hook[r]  {a}{b}%
-            {\dfrac{x - 1}{5 + x^2}}{x}
-= \hook*[sr]{a}{b}%
-            {\dfrac{x - 1}{5 + x^2}}{x}$
+ $\hook[r]  {\dfrac{x - 1}{5 + x^2}}{x}%
+            {a}{b}
+= \hook*[sr]{\dfrac{x - 1}{5 + x^2}}{x}%
+            {a}{b}$
 \end{latexex}
 
 
@@ -1270,6 +1324,35 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 % Changes shown - START
 
     \medskip
+    \item[2020-07-21] Nouvelle version mineure \verb+0.4.0-beta+.
+    
+    \begin{itemize}[itemsep=.5em]
+        \item \topic*{Limite}
+              ajout de \macro{limit} pour l'écriture de limites de fonctions à une seule variable.
+    
+    % ------------------------ %
+    
+        \separation
+    
+        \item \topic*{Dérivation}
+              par souci de cohérence, il faudra taper \verb#\der{f}{x}{n}# au lieu de l'ancien \verb#\der{f}{n}{x}#.
+    
+    % ------------------------ %
+    
+        \separation
+    
+        \item \topic*{Intégration}
+              par souci de cohérence, il faudra taper \verb#\integrate{f}{x}{a}{b}# au lieu de l'ancien \verb#\integrate{a}{b}{f}{x}#.
+              Il en va de même pour \macro{hook}.
+    
+    % ------------------------ %
+    
+        \separation
+    \end{itemize}
+
+% ------------------------ %
+
+    \medskip
     \item[2020-07-17] Nouvelle version mineure \verb+0.3.0-beta+.
     
     \begin{itemize}[itemsep=.5em]
@@ -1277,7 +1360,7 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
         \begin{itemize}[itemsep=.5em]
             \item Dérivation pointée à la physicienne via \verb+d+ et \verb+bd+ deux nouvelles options de \macro{der}.
     
-            \item Dérivation partielle indexée du type $u_{xxx}$ à la physicienne via \verb+ei+ une nouvelle option de \macro{pder}.
+            \item La dérivation partielle indexée du type $u_{xxy}$ à la physicienne via \verb+ei+ une nouvelle option de \macro{pder}.
         \end{itemize}
     
     % ------------------------ %
@@ -1444,6 +1527,26 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 
 
 % ---------------------- %
+\subsection{Limite}
+
+\IDmacro{limit}{1}{3}
+
+
+\IDoption{}  la valeur par défaut \verb+asit+ n'a pas lieu d'être utilisée. 
+\begin{enumerate}
+	\item \verb+asit+ : rien n'est appliqué sur la fonction qui reste donc tel quelle.
+	
+	\item \verb+p+ : ajout de parenthèses extensibles autour de la fonction.
+
+	\item \verb+sp+ : ajout de parenthèses non extensibles autour de la fonction.
+\end{enumerate}
+
+
+\IDarg{1} la fonction dont on indique la limite.
+
+\IDarg{2} la variable qui va tendre vers quelque chose.
+
+\IDarg{3} la valeur limite suivie éventuellement de conditions en utilisant la barre verticale \verb+|+ pour séparer ces différentes informations.
 \subsection{Calcul différentiel}
 
 \subsubsection{Calcul différentiel}
@@ -1497,9 +1600,9 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 
 \IDarg{1} la fonction à dériver.
 
-\IDarg{2} l'ordre de dérivation.
+\IDarg{2} la variable de dérivation.
 
-\IDarg{3} la variable de dérivation.
+\IDarg{3} l'ordre de dérivation.
 
 
 \separation
@@ -1680,13 +1783,15 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 
 \IDmacro*{dintegrate*}{4}  où \quad \mwhyprefix{d}{isplaystyle}
 
-\IDarg{1} ce qui est en bas du symbole $\int_{\symvar}$ .
 
-\IDarg{2} ce qui est en haut du symbole $\int^{\symvar}$ .
+\IDarg{1} la fonction intégrée.
 
-\IDarg{3} la fonction intégrée.
+\IDarg{2} la variable d'intégration.
 
-\IDarg{4} suivant quoi on intègre.
+\IDarg{3} valeur initiale d'intégration qui apparait en bas du symbole $\int_{\symvar}$ .
+
+\IDarg{4} valeur finale d'intégration qui apparait en haut du symbole $\int^{\symvar}$ .
+
 
 
 % ---------------------- %
@@ -1699,6 +1804,7 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 
 \IDmacro{hook*}{1}{4}
 
+
 \IDoption{} la valeur par défaut est \verb+b+. Voici les différentes valeurs possibles.
 \begin{enumerate}
 	\item \verb+b+ : des crochets extensibles sont utilisés.
@@ -1710,13 +1816,13 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 	\item \verb+sr+ : un unique trait vertical non extensible est utilisé à droite.
 \end{enumerate}
 
-\IDarg{1} ce qui est en bas du crochet fermant.
+\IDarg{1} la fonction sur laquelle effectuer le calcul.
 
-\IDarg{2} ce qui est en haut du crochet fermant.
+\IDarg{2} la variable à affecter pour les calculs.
 
-\IDarg{3} la fonction sur laquelle effectuer le calcul.
+\IDarg{3} valeur initiale à substituer qui apparait en bas du crochet fermant ou de la barre verticale.
 
-\IDarg{4} la variable pour les calculs.
+\IDarg{4} valeur finale à substituer qui apparait en haut du crochet fermant ou de la barre verticale.
 \newpage
 
 \end{document}

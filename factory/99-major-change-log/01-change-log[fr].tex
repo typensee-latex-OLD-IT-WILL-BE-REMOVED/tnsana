@@ -22,6 +22,35 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 % Changes shown - START
 
     \medskip
+    \item[2020-07-21] Nouvelle version mineure \verb+0.4.0-beta+.
+    
+    \begin{itemize}[itemsep=.5em]
+        \item \topic*{Limite}
+              ajout de \macro{limit} pour l'écriture de limites de fonctions à une seule variable.
+    
+    % ------------------------ %
+    
+        \separation
+    
+        \item \topic*{Dérivation}
+              par souci de cohérence, il faudra taper \verb#\der{f}{x}{n}# au lieu de l'ancien \verb#\der{f}{n}{x}#.
+    
+    % ------------------------ %
+    
+        \separation
+    
+        \item \topic*{Intégration}
+              par souci de cohérence, il faudra taper \verb#\integrate{f}{x}{a}{b}# au lieu de l'ancien \verb#\integrate{a}{b}{f}{x}#.
+              Il en va de même pour \macro{hook}.
+    
+    % ------------------------ %
+    
+        \separation
+    \end{itemize}
+
+% ------------------------ %
+
+    \medskip
     \item[2020-07-17] Nouvelle version mineure \verb+0.3.0-beta+.
     
     \begin{itemize}[itemsep=.5em]
@@ -29,7 +58,7 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
         \begin{itemize}[itemsep=.5em]
             \item Dérivation pointée à la physicienne via \verb+d+ et \verb+bd+ deux nouvelles options de \macro{der}.
     
-            \item Dérivation partielle indexée du type $u_{xxx}$ à la physicienne via \verb+ei+ une nouvelle option de \macro{pder}.
+            \item La dérivation partielle indexée du type $u_{xxy}$ à la physicienne via \verb+ei+ une nouvelle option de \macro{pder}.
         \end{itemize}
     
     % ------------------------ %

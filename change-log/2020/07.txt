@@ -1,4 +1,24 @@
 ==========
+2020-07-21
+==========
+
+**New minor version version::``0.4.0-beta`` of ¨tnsana:** see the new feature and two little bacward incompatibilities just below.
+
+
+**Limit :** this new feature is just for single variable functions.
+
+
+**Integration:** for the sake of consistency, two signatures have changed.
+
+    1) ``\integrate{f}{x}{a}{b}`` must be used instead of ``\integrate{a}{b}{f}{x}``.
+
+    1) ``\hook{f}{x}{a}{b}`` must be used instead of ``\hook{a}{b}{f}{x}``.
+
+
+**Differential calculus:** for the sake of consistency, the signature of ``\der`` has moved from ``\der{f}{n}{x}`` to ``\der{f}{x}{n}``.
+
+
+==========
 2020-07-17
 ==========
 

@@ -11,6 +11,8 @@
 \RequirePackage{ifmtarg}
 % M
 \RequirePackage{mathtools}
+% N
+\RequirePackage{nicematrix}
 % P
 \RequirePackage{pgfplots}
 % R
@@ -22,14 +24,13 @@
 \RequirePackage{upgreek}
 \PassOptionsToPackage{Symbolsmallscale}{upgreek}
 % X
-\RequirePackage{xparse}
 \RequirePackage{xstring}
 
 % TikZ libraries
+\usetikzlibrary{backgrounds}
 \usetikzlibrary{calc}
 \usetikzlibrary{babel}
 \usetikzlibrary{arrows.meta}
-\usetikzlibrary{backgrounds}
 
 
 % --------------- %
@@ -100,6 +101,67 @@
 \newcommand\logb[1]{\log_{#1}}
 
 % Classical functions - END
+
+
+% ----------- %
+% -- LIMIT -- %
+% ----------- %
+
+% Note: some macros in the STY for total derivation are used.
+
+\newbool{tnsana@lim@option@asit}
+\newbool{tnsana@lim@option@p}
+\newbool{tnsana@lim@option@sp}
+
+
+% Argument #1: parenthesis or not
+% Argument #2: function
+% Argument #3: variable
+% Argument #4: multi-argument
+
+\newcommand\tnsana@limit@abstract[4]{%
+    \lim\limits_{%
+		\scriptsize%
+		\tns@multi@args{|}%
+		               {#3\kern0.25ex{\rightarrow}\kern0.25ex#4}%
+		               {\begin{NiceArray}{c}}%
+		               {\\ }%
+		               {\end{NiceArray}}%
+	}#1{#2}%
+}
+
+
+% Argument #1: option s or sp
+% Argument #2: function
+% Argument #3: variable
+% Argument #4: multi-argument
+
+\newcommand\limit[4][asit]{%
+    \boolfalse{tnsana@lim@option@asit}%
+    \boolfalse{tnsana@lim@option@p}%
+    \boolfalse{tnsana@lim@option@sp}%
+    %
+    \IfEqCase{#1}{%
+        {asit}{\booltrue{tnsana@lim@option@asit}}%
+        {p}{\booltrue{tnsana@lim@option@p}}%
+        {sp}{\booltrue{tnsana@lim@option@sp}}%
+    }[%
+        \PackageError{tnsana}{unknown option}%
+                             {you can use asit (default), p and sp}%
+    ]%
+    %
+    \ifbool{tnsana@lim@option@p}{%
+    	\let\parithere\tnsana@der@func@ext@par%
+    }{%
+        \ifbool{tnsana@lim@option@sp}{%
+    		\let\parithere\tnsana@der@func@no@ext@par%
+        }{%
+            \let\parithere\tnsana@der@func@no@par%
+        }%
+    }%
+    %
+	\tnsana@limit@abstract{\parithere}{#2}{#3}{#4}%
+}
 
 
 % ------------------------- %
@@ -191,6 +253,10 @@
 % Total derivate
 
 %     + Abstraction
+%
+%    #1 : macro applied to the function
+%    #2 : the function
+%    #3 : order of derivation
 
 \newcommand\tnsana@der@usual[3]{%
     #1{#2}^{%
@@ -233,30 +299,39 @@
 
 \newcommand\tnsana@der@sub[3]{
     \@dder%
-    \IfStrEq{#2}{1}{}{%
-        ^{\kern.15ex#2\kern.15ex}%
+    \IfStrEq{#3}{1}{}{%
+        ^{\kern.15ex#3\kern.15ex}%
     }%
-    _{\kern.15ex#3\kern.15ex} #1%
+    _{\kern.15ex#2\kern.15ex} #1%
 }
 
 
+%    #1 : \frac or \dfrac 
+%    #2 : the function
+%    #3 : the variable
+%    #4 : order of derivation
+
 \newcommand\tnsana@der@abstract@frac[4]{%
     #1{%
-        \IfStrEq{#3}{1}{%
+        \IfStrEq{#4}{1}{%
             \dd{#2}%
         }{%
-            \dd[#3]{#2}%
+            \dd[#4]{#2}%
         }%
     }{%
         {%
-            \dd{#4}%
-            \IfStrEq{#3}{1}{}{%
-                ^{#3}%
+            \dd{#3}%
+            \IfStrEq{#4}{1}{}{%
+                ^{#4}%
             }%
         }%
     }%
 }
 
+
+%    #1 : the function
+%    #2 : the variable
+%    #3 : order of derivation
 
 \newcommand\tnsana@der@dfrac[3]{%
     \tnsana@der@abstract@frac{\dfrac}{#1}{#2}{#3}%
@@ -294,6 +369,10 @@
     ]%
 }
 
+
+%    #1 : option of formating
+%    #2 : the  function (no var. here)
+%    #3 : order of derivation
 
 \newcommand\sder[3][u]{%
     \boolfalse{tnsana@der@option@u}%
@@ -412,7 +491,7 @@
         or
         bool {tnsana@der@option@bd}
     }{%
-        \sder[#1]{#2}{#3}
+        \sder[#1]{#2}{#4}
     }{%    
     % Indice or fraction like
         \ifbool{tnsana@der@option@p}{%
@@ -1339,11 +1418,11 @@
 \newcommand\integrate{\@ifstar{\tnsana@integrate@star}{\tnsana@integrate@no@star}}
 
 \newcommand\tnsana@integrate@star[4]{%
-	\int_{#1}^{#2} #3 \dd{#4}%
+	\int_{#3}^{#4} #1 \dd{#2}%
 }
 
 \newcommand\tnsana@integrate@no@star[4]{%
-	\tnsana@integrate@star{#4\,=\,#1}{#4\,=\,#2}{#3}{#4}%
+	\tnsana@integrate@star{#1}{#2}{#2\,=\,#3}{#2\,=\,#4}%
 }
 
 
@@ -1372,34 +1451,34 @@
     \IfEqCase{#1}{%
         {b}{%
 			\left[%
-				\tnsana@hook@small@vertical@phantom{#4}%
-				\,#4\,%
+				\tnsana@hook@small@vertical@phantom{#2}%
+				\,#2\,%
 			\right]%
         }{sb}{%
 			\left[%
 				\tnsana@hook@big@vertical@phantom \right. \!\!%
-				\,#4\,%
+				\,#2\,%
 				\left. \tnsana@hook@big@vertical@phantom \!\!%
 			\right]%
         }{r}{%
-            \left. #4\, \right\rvert%
+            \left. #2\, \right\rvert%
         }{sr}{%
-            #4\, {\text{\relsize{1.5}$\rvert$}}%
+            #2\, {\text{\relsize{1.5}$\rvert$}}%
         }%
     }[
     	\PackageError{tnsana}{unknown option}%
                              {You can use b (default), sb, r or sr.}
     ]%
-	_{\,#2}^{\,#3}%
+	_{\,#3}^{\,#4}%
 }
 
 
 \newcommand\hook{\@ifstar{\tnsana@hook@star}{\tnsana@hook@no@star}}
 
 \newcommand\tnsana@hook@star[5][b]{%
-	\tnsana@hook@abstract[#1]{#2}{#3}{#4}%
+	\tnsana@hook@abstract[#1]{#2}{#4}{#5}%
 }
 
 \newcommand\tnsana@hook@no@star[5][b]{%
-	\tnsana@hook@abstract[#1]{#5\,=\,#2}{#5\,=\,#3}{#4}%
+	\tnsana@hook@abstract[#1]{#2}{#3\,=\,#4}{#3\,=\,#5}%
 }
