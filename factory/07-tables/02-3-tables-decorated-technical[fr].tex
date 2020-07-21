@@ -18,7 +18,7 @@
 
 \section{Fiche technique}
 
-\paragraph{Tableaux de signes -- Couleur de fond, commentaire et graphique explicatif}
+\subsection{Coloriser le fond}
 
 \IDmacro{backLine}{1}{1}  où \quad \mwhyprefix{back}{ground}
 
@@ -30,8 +30,10 @@
 \IDarg{1} les numéros de ligne séparés par des virgules, $0$ étant le 1\ier{} numéro.
 
 
-\separation
+% ---------------------- %
 
+
+\subsection{Commentaires}
 
 \IDmacro{comLine}{1}{2}  où \quad \mwhyprefix{com}{ment}
 
@@ -45,8 +47,10 @@
 \IDarg{2} le texte du commentaire.
 
 
-\separation
+% ---------------------- %
 
+
+\subsection{Graphiques explicatifs}
 
 \IDmacro{graphSign}{1}{2..4}
 
@@ -61,23 +65,23 @@
 \IDarg{2} le type de fonctions avec des contraintes éventuelles en utilisant la virgule comme séparateur d'informations.
 
 \begin{enumerate}
-	\item \verb@x2@ sans espace indique $f(x) = x^2$.
+	\item \verb@x2  @ sans espace indique $f(x) = x^2$.
 
 	\item \verb@srqt@ sans espace indique $f(x) = \sqrt{x}$.
 
-	\item \verb@1/x@ sans espace indique $f(x) = \frac{1}{x}$.
+	\item \verb@1/x @ sans espace indique $f(x) = \frac{1}{x}$.
 
-	\item \verb@abs@ sans espace indique $f(x) = \abs{x}$.
+	\item \verb@abs @ sans espace indique $f(x) = \abs{x}$.
 
-	\item \verb@exp@ sans espace indique $f(x) = \exp x$.
+	\item \verb@exp @ sans espace indique $f(x) = \exp x$.
 
-	\item \verb@ln@ sans espace indique $f(x) = \ln x$.
+	\item \verb@ln  @ sans espace indique $f(x) = \ln x$.
 
     % ==================== %
 
 	\medskip
 	
-	\item \verb@ax+b@ sans espace indique $f(x) = ax + b$ avec $a \neq 0$ à caractériser.
+	\item \verb@ax+b    @ sans espace indique $f(x) = ax + b$ avec $a \neq 0$ à caractériser.
 
 	\item \verb@ax2+bx+c@ sans espace indique $f(x) = ax^2 + bx + c$ avec $a \neq 0$ et le discriminant $d$ à caractériser.
 

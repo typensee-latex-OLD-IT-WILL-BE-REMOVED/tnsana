@@ -1,0 +1,5 @@
+$\displaystyle\limit[p] {\frac{1}{x}}{x}
+                        {0 | x > 0}$
+ou
+$\displaystyle\limit[sp]{\frac{1}{x}}{x}
+                        {0 | x > 0}$

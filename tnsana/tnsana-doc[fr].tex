@@ -440,7 +440,7 @@ $\displaystyle\limit[sp]{\frac{1}{x}}{x}
 % ---------------------- %
 \section{Calcul différentiel}
 
-\subsection{\texorpdfstring{Les opérateurs $\pp{}$ et $\dd{}$}%
+\subsection{\texorpdfstring{Les opérateurs $\pp{}$ et $\dd{}$}%                           {Les opérateurs "d rond" et "d droit"}}
                            {Les opérateurs "d rond" et "d droit"}}
 
 Voici deux opérateurs utiles aussi bien pour du calcul différentiel que du calcul intégral. 
@@ -455,7 +455,7 @@ $\pp{t} = \pp[1]{t}$ ou $\pp[n]{x}$
 % ---------------------- %
 
 
-\subsection{Dérivations totales d'une fonction -- Version longue mais polymorphe}
+\subsection{Dérivations totales d'une fonction -- Version longue avec une variable}
 
 \newparaexample{Différentes écritures possibles}
 
@@ -546,11 +546,10 @@ Avec l'option \prefix{d} les parenthèses seules sont sans utilité car on peut 
 \end{latexex}
 \end{remark}
 
-
 % ---------------------- %
 
 
-\subsection{Dérivations totales d'une fonction -- Version courte pour les écritures standard} \label{tnsana-short-der}
+\subsection{Dérivations totales d'une fonction -- Version courte sans variable} \label{tnsana-short-der}
 
 Dans l'exemple suivant le code manque de sémantique car on n'indique pas la variable de dérivation.
 Ceci étant dit à l'usage la macro \macro{sder} rend de grands services.
@@ -612,7 +611,7 @@ Ici non plus il n'y a pas de uns inutiles mais l'astuce \verb+\,\!1+ reste utili
 
 \subsection{Dérivations partielles}
 
-\newparaexample{Différentes écritures possibles}
+\newparaexample{Différentes écritures}
 
 La macro \macro{pder}
 \footnote{
@@ -1196,7 +1195,7 @@ Voici un exemple possible d'utilisation où les retours à la ligne ont été ob
 %\section{Tableaux de variation et de signe}
 \section{Calcul intégral}
 
-\subsection{Intégrales multiples}
+\subsection{Le symbole standard revisité}
 
 Commençons par un point important : le package réduit les espacements entres des symboles $\int$ successifs. Voici un exemple.
 
@@ -1257,7 +1256,7 @@ La macro \macro{dintegrate*} présentée ci-dessous possède aussi une version n
 % ---------------------- %
 
 
-\subsection{L'opérateur crochet}
+\subsection{L'opérateur \og crochet \fg}
 
 \newparaexample{}
 
@@ -1418,10 +1417,11 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 \newpage
 \section{Toutes les fiches techniques} \label{techincal-ids}
 
-\subsection{Introduction}
+
 \subsection{Constantes et paramètres}
 
 \subsubsection{Constantes classiques}
+
 
 \vspace{-1em}
 \begin{multicols}{2}
@@ -1441,22 +1441,20 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 % ---------------------- %
 
 
-
 \subsubsection{Constantes latines personnelles}
+
 
 \IDmacro*{param}{1}
 
 \IDarg{} un texte utilisant l'alphabet latin.
 \subsection{Une variable \og symbolique \fg{}}
 
-\subsubsection{Symbole pour les opérateurs fonctionnels}
 
-\IDmacro*{symvar}{0}
+\IDmacro*{symvar }{0}
 
 \IDmacro*{symvar*}{0}
 \subsection{La fonction valeur absolue}
 
-\subsubsection{Valeur absolue}
 
 \IDmacro*{abs}{1}
 
@@ -1465,7 +1463,8 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 \IDarg{} l'expression sur laquelle appliquer la fonction valeur absolue.
 \subsection{Fonctions nommées spéciales}
 
-\subsubsection{Fonctions nommées sans paramètre}
+\subsubsection{Sans paramètre}
+
 
 % List of functions without parameter - START
 
@@ -1508,8 +1507,8 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 % ---------------------- %
 
 
+\subsubsection{Avec un paramètre}
 
-\subsubsection{Fonctions nommées avec un paramètre}
 
 % List of functions with parameters - START
 
@@ -1528,6 +1527,7 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 
 % ---------------------- %
 \subsection{Limite}
+
 
 \IDmacro{limit}{1}{3}
 
@@ -1549,7 +1549,9 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 \IDarg{3} la valeur limite suivie éventuellement de conditions en utilisant la barre verticale \verb+|+ pour séparer ces différentes informations.
 \subsection{Calcul différentiel}
 
-\subsubsection{Calcul différentiel}
+\subsubsection{\texorpdfstring{Les opérateurs $\pp{}$ et $\dd{}$}%
+                           {Les opérateurs "d rond" et "d droit"}}
+
 
 \IDmacro{dd}{1}{1}
 
@@ -1563,8 +1565,8 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 % ---------------------- %
 
 
+\subsubsection{Dérivations totales d'une fonction -- Version longue avec une variable}
 
-\subsubsection{Dérivation totale}
 
 \IDmacro{der}{1}{3}
 
@@ -1605,7 +1607,10 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 \IDarg{3} l'ordre de dérivation.
 
 
-\separation
+% ---------------------- %
+
+
+\subsubsection{Dérivations totales d'une fonction -- Version courte sans variable} \label{tnsana-short-der}
 
 
 \IDmacro{sder}{1}{2} où \quad \mwhyprefix{s}{imple}
@@ -1620,7 +1625,8 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 % ---------------------- %
 
 
-\subsubsection{Dérivation totale -- Opérateur fonctionnel}
+\subsubsection{L'opérateur de dérivation totale} \label{tnsana-ope-total-der}
+
 
 \IDmacro{derope}{1}{2} où \quad \mwhyprefix{ope}{rator}
 
@@ -1629,7 +1635,8 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 \IDarg{1} la fonction à dériver.
 
 \IDarg{2} l'ordre de dérivation.
-\subsubsection{Dérivation partielle}
+\subsubsection{Dérivations partielles}
+
 
 \IDmacro{pder}{1}{2} où \quad \mwhyprefix{p}{artial}
 
@@ -1667,7 +1674,8 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 % ---------------------- %
 
 
-\subsubsection{Dérivation partielle - Opérateur fonctionnel}
+\subsubsection{L'opérateur de dérivation partielle} \label{tnsana-ope-partial-der}
+
 
 \IDmacro{pderope}{1}{2} où \quad \mwhyprefix{p}{artial}
                               et \mwhyprefix{ope}{rator}
@@ -1680,7 +1688,10 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 
 
 
-\subsubsection{Tableaux de signes -- Couleur de fond, commentaire et graphique explicatif}
+\subsection{Tableaux de variation et de signe}
+
+
+\subsubsection{Coloriser le fond}
 
 \IDmacro{backLine}{1}{1}  où \quad \mwhyprefix{back}{ground}
 
@@ -1692,8 +1703,10 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 \IDarg{1} les numéros de ligne séparés par des virgules, $0$ étant le 1\ier{} numéro.
 
 
-\separation
+% ---------------------- %
 
+
+\subsubsection{Commentaires}
 
 \IDmacro{comLine}{1}{2}  où \quad \mwhyprefix{com}{ment}
 
@@ -1707,8 +1720,10 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 \IDarg{2} le texte du commentaire.
 
 
-\separation
+% ---------------------- %
 
+
+\subsubsection{Graphiques explicatifs}
 
 \IDmacro{graphSign}{1}{2..4}
 
@@ -1723,23 +1738,23 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 \IDarg{2} le type de fonctions avec des contraintes éventuelles en utilisant la virgule comme séparateur d'informations.
 
 \begin{enumerate}
-	\item \verb@x2@ sans espace indique $f(x) = x^2$.
+	\item \verb@x2  @ sans espace indique $f(x) = x^2$.
 
 	\item \verb@srqt@ sans espace indique $f(x) = \sqrt{x}$.
 
-	\item \verb@1/x@ sans espace indique $f(x) = \frac{1}{x}$.
+	\item \verb@1/x @ sans espace indique $f(x) = \frac{1}{x}$.
 
-	\item \verb@abs@ sans espace indique $f(x) = \abs{x}$.
+	\item \verb@abs @ sans espace indique $f(x) = \abs{x}$.
 
-	\item \verb@exp@ sans espace indique $f(x) = \exp x$.
+	\item \verb@exp @ sans espace indique $f(x) = \exp x$.
 
-	\item \verb@ln@ sans espace indique $f(x) = \ln x$.
+	\item \verb@ln  @ sans espace indique $f(x) = \ln x$.
 
     % ==================== %
 
 	\medskip
 	
-	\item \verb@ax+b@ sans espace indique $f(x) = ax + b$ avec $a \neq 0$ à caractériser.
+	\item \verb@ax+b    @ sans espace indique $f(x) = ax + b$ avec $a \neq 0$ à caractériser.
 
 	\item \verb@ax2+bx+c@ sans espace indique $f(x) = ax^2 + bx + c$ avec $a \neq 0$ et le discriminant $d$ à caractériser.
 
@@ -1762,24 +1777,25 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 }.
 \subsection{Calcul intégral}
 
-\subsubsection{Intégration -- Le symbole standard}
+\subsubsection{Le symbole standard revisité}
 
-\IDmacro*{stdint}{0}
+
+\IDmacro*{stdint}{0} (pour retrouver le comportement par défaut)
 
 
 % ---------------------- %
 
 
+\subsubsection{Un opérateur d'intégration clés en main}
 
-\subsubsection{Intégration -- Fonctionnelle d'intégration}
 
-\IDmacro*{integrate}{4}
+\IDmacro*{integrate  }{4}
 
-\IDmacro*{integrate*}{4}
+\IDmacro*{integrate* }{4}
 
 \extraspace
 
-\IDmacro*{dintegrate}{4}   où \quad \mwhyprefix{d}{isplaystyle}
+\IDmacro*{dintegrate }{4}  où \quad \mwhyprefix{d}{isplaystyle}
 
 \IDmacro*{dintegrate*}{4}  où \quad \mwhyprefix{d}{isplaystyle}
 
@@ -1797,10 +1813,10 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 % ---------------------- %
 
 
+\subsubsection{L'opérateur \og crochet \fg}
 
-\subsubsection{Intégration -- L'opérateur crochet}
 
-\IDmacro{hook}{1}{4}
+\IDmacro{hook }{1}{4}
 
 \IDmacro{hook*}{1}{4}
 
@@ -1823,6 +1839,6 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 \IDarg{3} valeur initiale à substituer qui apparait en bas du crochet fermant ou de la barre verticale.
 
 \IDarg{4} valeur finale à substituer qui apparait en haut du crochet fermant ou de la barre verticale.
-\newpage
+
 
 \end{document}

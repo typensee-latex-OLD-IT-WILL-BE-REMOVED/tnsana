@@ -24,8 +24,8 @@ SUFFIX_CFG = {
 }
 
 EXT_2_CMDS = {
-    "py"  : 'python',
-    "bash": 'bash'
+    "py": 'python',
+    "sh": 'bash'
 }
 
 PPATH_PATTERNS = [
@@ -104,8 +104,7 @@ for onepath in allpaths:
     for option, suffix in option2suffix.items():
         if getattr(ARGS, option) \
         and filename.endswith(suffix):
-            print(f"- No suffix {suffix}")
-            print(f'  Ignoring  "{filename}"')
+            print(f"- No suffix {suffix} : << {filename} >> ignored.")
 
             nolaunch = True
 
