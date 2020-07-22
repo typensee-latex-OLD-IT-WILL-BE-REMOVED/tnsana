@@ -1391,14 +1391,10 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
     
     % ------------------------ %
     
-        \separation
-    
         \item \topic*{Dérivation}
               par souci de cohérence, il faudra taper \verb#\der{f}{x}{n}# au lieu de l'ancien \verb#\der{f}{n}{x}#.
     
     % ------------------------ %
-    
-        \separation
     
         \item \topic*{Intégration}
               par souci de cohérence, il faudra taper \verb#\integrate{f}{x}{a}{b}# au lieu de l'ancien \verb#\integrate{a}{b}{f}{x}#.
@@ -1424,10 +1420,6 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
     
     % ------------------------ %
     
-    
-        \separation
-    
-    
         \item \topic{Tableaux de signe et de variation}
         \begin{itemize}[itemsep=.5em]
             \item Ajout de \macro{backLine} pour changer la couleur de fond d'une ou plusieurs lignes.
@@ -1437,7 +1429,6 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
         \end{itemize}
     
     % ------------------------ %
-    
     
         \separation
     \end{itemize}
@@ -1459,10 +1450,12 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
         
     \begin{itemize}[itemsep=.5em]
         \item \topic*{Fonctions nommées} \macro{ppcm} et \macro{pgcd} ont été déplacées dans \texttt{tnsarith} disponible sur \url{https://github.com/typensee-latex/tnsarith.git}.
+    
+    % ------------------------ %
+    
+        \separation
     \end{itemize}
-    
-    
-    \separation
+
 % ------------------------ %
 
     \medskip
@@ -1528,7 +1521,7 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 
 
 
-\IDmacro*{abs}{1}
+\IDmacro*{abs }{1}
 
 \IDmacro*{abs*}{1}
 
@@ -1639,13 +1632,13 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 \IDmacro{limit}{1}{3}
 
 
-\IDoption{}  la valeur par défaut \verb+asit+ n'a pas lieu d'être utilisée. 
+\IDoption{}  la valeur par défaut \verb+asit+ n'a pas vocation à être utilisée. 
 \begin{enumerate}
 	\item \verb+asit+ : rien n'est appliqué sur la fonction qui reste donc tel quelle.
 	
-	\item \verb+p+ : ajout de parenthèses extensibles autour de la fonction.
+	\item \verb+p   + : ajout de parenthèses extensibles autour de la fonction.
 
-	\item \verb+sp+ : ajout de parenthèses non extensibles autour de la fonction.
+	\item \verb+sp  + : ajout de parenthèses non extensibles autour de la fonction.
 \end{enumerate}
 
 
@@ -1683,31 +1676,31 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 
 \IDoption{} la valeur par défaut est \verb+u+. 
 \begin{enumerate}
-	\item \verb+u+ : écriture usuelle avec des primes \emph{(ceci nécessite d'avoir une valeur entière naturelle connue du nombre de dérivations successives)}.
+	\item \verb+u  + : écriture usuelle avec des primes \emph{(ceci nécessite d'avoir une valeur entière naturelle connue du nombre de dérivations successives)}.
 
-	\item \verb+e+ : écriture via un exposant entre des parenthèses.
+	\item \verb+e  + : écriture via un exposant entre des parenthèses.
 	
-	\item \verb+i+ : écriture via un indice.
+	\item \verb+i  + : écriture via un indice.
 
-	\item \verb+d+ : écriture pointée à la physicienne \emph{(cf. la dérivation par rapport au temps)}.
+	\item \verb+d  + : écriture pointée à la physicienne \emph{(cf. la dérivation par rapport au temps)}.
 
-	\item \verb+bd+ : écriture pointée avec un crochet entre les points et la fonction.
+	\item \verb+bd + : écriture pointée avec un crochet entre les points et la fonction.
 
 	\medskip
 	
-	\item \verb+f+ : écriture via une fraction en mode display.
+	\item \verb+f  + : écriture via une fraction en mode display.
 
-	\item \verb+sf+ : écriture via une fraction en mode non display.
+	\item \verb+sf + : écriture via une fraction en mode non display.
 
-	\item \verb+of+ : écriture via une fraction en mode display sous la forme d'un opérateur \emph{(la fonction est à côté de la fraction)}.
+	\item \verb+of + : écriture via une fraction en mode display sous la forme d'un opérateur \emph{(la fonction est à côté de la fraction)}.
 
 	\item \verb+osf+ : écriture via une fraction en mode non display sous la forme d'un opérateur \emph{(la fonction est à côté de la fraction)}.
 
 	\medskip
 	
-	\item \verb+p+ : ajout de parenthèses extensibles autour de la fonction.
+	\item \verb+p  + : ajout de parenthèses extensibles autour de la fonction.
 
-	\item \verb+sp+ : ajout de parenthèses non extensibles autour de la fonction.
+	\item \verb+sp + : ajout de parenthèses non extensibles autour de la fonction.
 \end{enumerate}
 
 
@@ -1758,25 +1751,25 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 
 \IDoption{} la valeur par défaut est \verb+f+. 
 \begin{enumerate}
-	\item \verb+f+ : écriture via une fraction en mode display.
+	\item \verb+f  + : écriture via une fraction en mode display.
 
-	\item \verb+sf+ : écriture via une fraction en mode non display.
+	\item \verb+sf + : écriture via une fraction en mode non display.
 
-	\item \verb+of+ : écriture via une fraction en mode display sous la forme d'un opérateur \emph{(la fonction est à côté de la fraction)}.
+	\item \verb+of + : écriture via une fraction en mode display sous la forme d'un opérateur \emph{(la fonction est à côté de la fraction)}.
 
 	\item \verb+osf+ : écriture via une fraction en mode non display sous la forme d'un opérateur \emph{(la fonction est à côté de la fraction)}.
 
 	\medskip
 
-	\item \verb+i+ : écriture via un indice.
+	\item \verb+i  + : écriture via un indice.
 
-	\item \verb+ei+ : écriture via un indice mais en \emph{\og développant \fg}.
+	\item \verb+ei + : écriture via un indice mais en \emph{\og développant \fg}.
 
 	\medskip
 
-	\item \verb+p+ : ajout de parenthèses extensibles autour de la fonction.
+	\item \verb+p  + : ajout de parenthèses extensibles autour de la fonction.
 
-	\item \verb+sp+ : ajout de parenthèses non extensibles autour de la fonction.
+	\item \verb+sp + : ajout de parenthèses non extensibles autour de la fonction.
 \end{enumerate}
 
 
@@ -1954,11 +1947,11 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 
 \IDoption{} la valeur par défaut est \verb+b+. Voici les différentes valeurs possibles.
 \begin{enumerate}
-	\item \verb+b+ : des crochets extensibles sont utilisés.
+	\item \verb+b + : des crochets extensibles sont utilisés.
 
 	\item \verb+sb+ : des crochets non extensibles sont utilisés.
 
-	\item \verb+r+ : un unique trait vertical extensible est utilisé à droite.
+	\item \verb+r + : un unique trait vertical extensible est utilisé à droite.
 
 	\item \verb+sr+ : un unique trait vertical non extensible est utilisé à droite.
 \end{enumerate}
