@@ -227,10 +227,10 @@
 	\\%
 	{\footnotesize Code source disponible sur \url{https://github.com/typensee-latex/tnsana.git}.}%
 	\\%
-    {\footnotesize Version \texttt{0.4.0-beta} développée et testée sur \macosxname{}.}%
+    {\footnotesize Version \texttt{0.5.0-beta} développée et testée sur \macosxname{}.}%
 }
 \author{Christophe BAL}
-\date{2020-07-21}
+\date{2020-07-22}
 
 \maketitle
 
@@ -384,6 +384,49 @@ $\expb{6} y = 6^y$
     \verb+logb{p}+ : $\logb{p}\dots$
 % Table of all - END
 \end{multicols}
+\section{Définition explicite d'une fonction}
+
+\newparaexample{Écriture par défaut}
+
+\begin{latexex}
+$\funcdef{f}{x}{x^2 + 3}%
+            {I}{J}$
+\end{latexex}
+
+
+\begin{remark}
+	Même si cela est peu utile, vous pouvez utilisez la mise en forme dans du texte pour obtenir
+	$\funcdef{f}{x}{x^2 + 3}%
+            {I}{J}$
+    mais c'est un peu affreux.
+\end{remark}
+
+% ---------------------- %
+
+
+\newparaexample{Écriture alternative}
+
+On peut cacher le trait vertical via l'option \prefix{s} pour \whyprefix{s}{hort} soit \inenglish{court}.
+
+\begin{latexex}
+$\funcdef[s]{f}{x}{x^2 + 3}%
+               {I}{J}$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\newparaexample{Écriture en ligne}
+
+Pour avoir tout sur une ligne, ce qui est l'idéal pour une insertion dans du texte, il suffit d'utiliser l'option \prefix{h} pour \whyprefix{h}{orizontal}.
+\begin{latexex}
+Soit $\funcdef[h]{f}{x}{x^2 + 3}%
+                    {I}{J}$.
+\end{latexex}
+
+
+% ---------------------- %
 \section{Limite}
 
 \newparaexample{Cas minimaliste}
@@ -1323,6 +1366,17 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 % Changes shown - START
 
     \medskip
+    \item[2020-07-22] Nouvelle version mineure \verb+0.5.0-beta+.
+    
+    \begin{itemize}[itemsep=.5em]
+        \item \topic*{Définition explicite d'une fonction}
+              ajout de \macro{funcdef}.
+    
+        \separation
+    \end{itemize}
+% ------------------------ %
+
+    \medskip
     \item[2020-07-21] Nouvelle version mineure \verb+0.4.0-beta+.
     
     \begin{itemize}[itemsep=.5em]
@@ -1526,6 +1580,31 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 
 
 % ---------------------- %
+\subsection{Définition explicite d'une fonction}
+
+
+\IDmacro{funcdef}{1}{5}
+
+
+\IDoption{}  la valeur par défaut \verb+u+. 
+\begin{enumerate}
+	\item \verb+u+ : écriture empilée avec un trait vertical.
+	
+	\item \verb+s+ : écriture empilée sans trait vertical.
+
+	\item \verb+h+ : écriture horizontale en ligne.
+\end{enumerate}
+
+
+\IDarg{1} la fonction.
+
+\IDarg{2} la variable.
+
+\IDarg{3} la formule de définition.
+
+\IDarg{4} ensemble de départ.
+
+\IDarg{5} ensemble d'arrivée.
 \subsection{Limite}
 
 

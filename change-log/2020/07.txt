@@ -1,4 +1,14 @@
 ==========
+2020-07-22
+==========
+
+**New minor version version::``0.5.0-beta`` of ¨tnsana:** see the new feature below.
+
+
+**Explicit definition of a function:** three kinds of formatting are proposed.
+
+
+==========
 2020-07-21
 ==========
 
@@ -18,7 +28,7 @@
 **Differential calculus:** for the sake of consistency, the signature of ``\der`` has moved from ``\der{f}{n}{x}`` to ``\der{f}{x}{n}``.
 
 
-**Internal machinery for the technical ¨infos:** the builder is better but stil not the best...
+**Internal machinery for the technical ¨infos:** the builder is better but still not the best...
 
 
 ==========
