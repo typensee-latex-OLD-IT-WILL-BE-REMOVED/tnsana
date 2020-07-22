@@ -28,7 +28,7 @@
 **Differential calculus:** for the sake of consistency, the signature of ``\der`` has moved from ``\der{f}{n}{x}`` to ``\der{f}{x}{n}``.
 
 
-**Internal machinery for the technical ¨infos:** the builder is better but still not the best...
+**Internal machinery for the technical ¨infos:** the builder is better but still not the best one...
 
 
 ==========
