@@ -173,7 +173,7 @@ template_tex = text_start + f"""
 
 \\foreach \\k in {{{", ".join(allmacros)}}}{{
 
-	\\IDmacro*{{\k}}{{0}}
+	\\IDope{{\k}}
 
 }}
 """ + "\n" + text_end

@@ -12,6 +12,8 @@
 \usepackage[top=2cm, bottom=2cm, left=1.5cm, right=1.5cm]{geometry}
 \usepackage{enumitem}
 
+\usepackage{pgffor}
+
 \usepackage{multicol}
 
 \usepackage{makecell}
@@ -35,7 +37,7 @@
 
 \usepackage{ifthen}
 
-\usepackage{cbdevtool}
+\usepackage{macroenvsign}
 
 
 % Sections numbering
@@ -262,9 +264,9 @@ Le package \verb+tnsana+ propose des macros pour écrire de l'analyse mathémati
 \end{remark}
 \section{Constantes et paramètres}
 
-\subsection{Constantes classiques}
+\subsection{Constantes classiques ajoutées}
 
-\paragraph{La liste complète}
+Les macros ci-dessous ne nécessitent pas d'accolades.
 
 % List of classical constants - START
 
@@ -430,6 +432,18 @@ Pour avoir tout sur une ligne, ce qui est l'idéal pour une insertion dans du te
 Soit $\funcdef[h]{f}{x}{x^2 + 3}%
                     {I}{J}$.
 \end{latexex}
+
+
+%% ---------------------- %
+%
+%
+%\newparaexample{Écriture en ligne sans ensemble}
+%
+%Pour avoir tout sur une ligne, ce qui est l'idéal pour une insertion dans du texte, il suffit d'utiliser l'option \prefix{h} pour \whyprefix{h}{orizontal}.
+%\begin{latexex}
+%Soit $\funcdef[h]{f}{x}{x^2 + 3}%
+%                    {I}{J}$.
+%\end{latexex}
 
 
 % ---------------------- %
@@ -1471,7 +1485,7 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 
 \subsection{Constantes et paramètres}
 
-\subsubsection{Constantes classiques}
+\subsubsection{Constantes classiques ajoutées}
 
 
 
@@ -1481,7 +1495,7 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 
 \foreach \k in {ggamma, ppi, ttau, ee, ii, jj, kk}{
 
-	\IDmacro*{\k}{0}
+	\IDope{\k}
 
 }
 
@@ -1506,9 +1520,9 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 
 
 
-\IDmacro*{symvar }{0}
+\IDmacro**{symvar }
 
-\IDmacro*{symvar*}{0}
+\IDmacro**{symvar*}
 
 
 \subsection{La fonction valeur absolue}
@@ -1532,35 +1546,35 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 
 \foreach \k in {acos, asin, atan}{
 
-    \IDmacro*{\k}{0}
+    \IDope{\k} 
 }
                 
 \separation
 
 \foreach \k in {arccosh, arcsinh, arctanh}{
 
-    \IDmacro*{\k}{0}
+    \IDope{\k} 
 }
                 
 \separation
 
 \foreach \k in {acosh, asinh, atanh}{
 
-    \IDmacro*{\k}{0}
+    \IDope{\k} 
 }
                 
 \separation
 
 \foreach \k in {fch, fsh, fth}{
 
-    \IDmacro*{\k}{0}  où \quad \mwhyprefix{{f}}{{rench}}
+    \IDope{\k} \hfill \mwhyprefix{{f}}{{rench}}
 }
                 
 \separation
 
 \foreach \k in {afch, afsh, afth}{
 
-    \IDmacro*{\k}{0}
+    \IDope{\k} 
 }
 
 % List of functions without parameter - END
@@ -1614,7 +1628,7 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 
 \IDarg{3} la formule de définition.
 
-\IDarg{4} ensemble de départ.
+\IDarg{4} ensemble de départ. Cet argument peut être vide si le mode \verb+h+ est activé
 
 \IDarg{5} ensemble d'arrivée.
 
@@ -1712,7 +1726,7 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 
 
 
-\IDmacro{sder}{1}{2} où \quad \mwhyprefix{s}{imple}
+\IDmacro{sder}{1}{2} \hfill \mwhyprefix{s}{imple}
 
 \IDoption{} la valeur par défaut est \verb+u+. Les options disponibles sont \verb+u+, \verb+e+, \verb+d+, \verb+bd+, \verb+p+ et \verb+sp+ : voir la fiche technique de \macro{sder} ci-dessus.
 
@@ -1728,7 +1742,7 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 
 
 
-\IDmacro{derope}{1}{2} où \quad \mwhyprefix{ope}{rator}
+\IDmacro{derope}{1}{2} \hfill \mwhyprefix{ope}{rator}
 
 \IDoption{} la valeur par défaut est \verb+f+. Les options disponibles sont \verb+f+, \verb+sf+ et \verb+i+ : voir la fiche technique de \macro{der} donnée un peu plus haut.
 
@@ -1741,7 +1755,7 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 
 
 
-\IDmacro{pder}{1}{2} où \quad \mwhyprefix{p}{artial}
+\IDmacro{pder}{1}{2} \hfill \mwhyprefix{p}{artial}
 
 \IDoption{} la valeur par défaut est \verb+f+. 
 \begin{enumerate}
@@ -1781,8 +1795,8 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 
 
 
-\IDmacro{pderope}{1}{2} où \quad \mwhyprefix{p}{artial}
-                              et \mwhyprefix{ope}{rator}
+\IDmacro{pderope}{1}{2} \hfill \mwhyprefix{p}{artial}
+                            et \mwhyprefix{ope}{rator}
 
 \IDoption{} la valeur par défaut est \verb+f+. Les options disponibles sont \verb+f+, \verb+sf+ et \verb+i+ : voir la fiche technique de \macro{pder} juste avant.
 
@@ -1806,7 +1820,7 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 
 \subsubsection{Coloriser le fond}
 
-\IDmacro{backLine}{1}{1}  où \quad \mwhyprefix{back}{ground}
+\IDmacro{backLine}{1}{1} \hfill \mwhyprefix{back}{ground}
 
 
 \IDoption{} couleur au format TikZ.
@@ -1821,7 +1835,7 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 
 \subsubsection{Commentaires}
 
-\IDmacro{comLine}{1}{2}  où \quad \mwhyprefix{com}{ment}
+\IDmacro{comLine}{1}{2} \hfill \mwhyprefix{com}{ment}
 
 
 \IDoption{} couleur au format TikZ.
@@ -1838,7 +1852,7 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 
 \subsubsection{Graphiques explicatifs}
 
-\IDmacro{graphSign}{1}{2..4}
+\IDmacro{graphSign}{1}{4}
 
 
 \IDoption{} couleur au format TikZ.
@@ -1896,7 +1910,7 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 
 
 
-\IDmacro*{stdint}{0} (pour retrouver le comportement par défaut)
+\IDope{stdint} (pour retrouver le comportement par défaut)
 
 
 % ---------------------- %
@@ -1912,9 +1926,9 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 
 \extraspace
 
-\IDmacro*{dintegrate }{4}  où \quad \mwhyprefix{d}{isplaystyle}
+\IDmacro*{dintegrate }{4} \hfill \mwhyprefix{d}{isplaystyle}
 
-\IDmacro*{dintegrate*}{4}  où \quad \mwhyprefix{d}{isplaystyle}
+\IDmacro*{dintegrate*}{4} \hfill \mwhyprefix{d}{isplaystyle}
 
 
 \IDarg{1} la fonction intégrée.
