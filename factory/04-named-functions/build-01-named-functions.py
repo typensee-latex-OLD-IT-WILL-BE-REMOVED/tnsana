@@ -220,7 +220,7 @@ for name, infos in functions['parameter'].items():
 
     docinfos += [
         "\\separation",
-        f"\\IDmacro*{{{name}}}{{{nbparam}}}"
+        f"\\IDmacro[a]{{{name}}}{{{nbparam}}}"
     ]
 
     desc = infos["desc"]
