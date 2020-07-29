@@ -790,7 +790,7 @@ Reportez vous à la documentation de \verb+tkz-tab+ pour des compléments d'info
 
 \newparaexample{Avec des signes}
 
-\inputlatexexcodeafter{tikz/cos-sign.tkz}
+\inputlatexexcodeafter{tikz/tabsignvar-cos-sign.tkz}
 
 
 % ---------------------- %
@@ -798,7 +798,7 @@ Reportez vous à la documentation de \verb+tkz-tab+ pour des compléments d'info
 
 \newparaexample{Avec des variations (sans cadre)}
 
-\inputlatexexcodeafter{tikz/basic-var.tkz}
+\inputlatexexcodeafter{tikz/tabsignvar-basic-var.tkz}
 
 
 % ---------------------- %
@@ -806,7 +806,7 @@ Reportez vous à la documentation de \verb+tkz-tab+ pour des compléments d'info
 
 \newparaexample{Variations via une dérivée (sans cadre)}
 
-\inputlatexexcodeafter{tikz/sin-var-via-cos.tkz}
+\inputlatexexcodeafter{tikz/tabsignvar-sin-var-via-cos.tkz}
 
 
 % ---------------------- %
@@ -814,7 +814,7 @@ Reportez vous à la documentation de \verb+tkz-tab+ pour des compléments d'info
 
 \newparaexample{Une image intermédiaire avec une seule flèche}
 
-\inputlatexexcodeafter{tikz/inter-img.tkz}
+\inputlatexexcodeafter{tikz/tabsignvar-inter-img.tkz}
 
 
 % ---------------------- %
@@ -822,12 +822,12 @@ Reportez vous à la documentation de \verb+tkz-tab+ pour des compléments d'info
 
 \newparaexample{Valeurs interdites et valeurs supplémentaires}
 
-\inputlatexexcodeafter{tikz/illegal-n-inter-img-1.tkz}
+\inputlatexexcodeafter{tikz/tabsignvar-illegal-n-inter-img-1.tkz}
 
 
 Voici un autre exemple pour comprendre comment utiliser \macro{tkzTabVal} avec en plus l'option \verb+draw+ qui peut rendre service.
 
-\inputlatexexcodeafter{tikz/illegal-n-inter-img-2.tkz}
+\inputlatexexcodeafter{tikz/tabsignvar-illegal-n-inter-img-2.tkz}
 
 
 % ---------------------- %
@@ -838,13 +838,13 @@ Voici un autre exemple pour comprendre comment utiliser \macro{tkzTabVal} avec e
 Il est assez facile de produire des choses très utiles pédagogiquement comme ce qui suit en se salissant un peu les mains avec du code TikZ.
 
 \begin{center}
-	\input{tikz/align-sign-from-var-1.tkz}
+	\input{tikz/tabsignvar-align-sign-from-var-1.tkz}
 \end{center}
 
 On déduit du tableau précédent le signe de la fonction $f$.
 
 \begin{center}
-	\input{tikz/align-sign-from-var-2.tkz}
+	\input{tikz/tabsignvar-align-sign-from-var-2.tkz}
 \end{center}
 
 
@@ -852,7 +852,7 @@ Voici le code du 1\ier{} tableau où le placement de la valeur $3$ au milieu ent
 
 \medskip
 
-\inputlatexexalone{tikz/align-sign-from-var-1.tkz}
+\inputlatexexalone{tikz/tabsignvar-align-sign-from-var-1.tkz}
 
 
 Pour produire le code du 2\ieme{} tableau il a fallu utiliser au préalable ce qui suit en activant l'option \verb@help@ qui demande à \verb@tkz-tab@ d'afficher les noms de noeuds au sens TikZ qui ont été créés.
@@ -862,13 +862,13 @@ Ceci permet alors d'utiliser ces noeuds pour des dessins TikZ faits maison
 }.
 	
 
-\inputlatexexcodeafter{tikz/node-name.tkz}
+\inputlatexexcodeafter{tikz/tabsignvar-node-name.tkz}
 
 
 Maintenant que les noms des noeuds sont connus, il devient facile de produire le code ci-après.
 Bien noter l'usage de valeurs utiles \og vides \fg{} de $x$ ainsi que les mystiques \verb@\node at ($(A)!0.5!(B)$)@ permettant de placer un noeud au milieu entre les deux noeuds \verb@A@ et \verb@B@. 
 
-\inputlatexexalone{tikz/align-sign-from-var-2.tkz}
+\inputlatexexalone{tikz/tabsignvar-align-sign-from-var-2.tkz}
 
 
 % ---------------------- %
@@ -964,7 +964,7 @@ Le code utilisé est le suivant.
 Considérons le tableau suivant et imaginons que nous voulions l'expliquer à un débutant.
 
 \begin{center}
-	\input{tikz/deco-basic-1.tkz}
+	\input{tikz/tabsignvar-deco-basic-1.tkz}
 \end{center}
 
 Deux options s'offrent à nous pour justifier comment a été rempli le tableau.
@@ -983,7 +983,7 @@ Deux options s'offrent à nous pour justifier comment a été rempli le tableau.
 \end{enumerate}
 
 \begin{center}
-	\input{tikz/deco-basic-2.tkz}
+	\input{tikz/tabsignvar-deco-basic-2.tkz}
 \end{center}
 
 
@@ -999,7 +999,7 @@ il a fallu ajouter les lignes données ci-dessous où sont utilisées les macros
 
 \medskip
 
-\inputlatexexalone{tikz/deco-basic-2-short.tkz}
+\inputlatexexalone{tikz/tabsignvar-deco-basic-2-short.tkz}
 
 
 \begin{remark}
@@ -1199,7 +1199,7 @@ Avant de voir ce qui est proposé rappelons que la convention est de prendre $0$
 Il devient très facile de proposer un tableau décoré comme le suivant.
 
 \begin{center}
-	\input{tikz/deco-parabola.tkz}
+	\input{tikz/tabsignvar-deco-parabola.tkz}
 \end{center}
 
 
@@ -1207,7 +1207,7 @@ En plus des deux exemples de schémas de paraboles, il faut noter dans le code s
 
 \medskip
 
-\inputlatexexalone{tikz/deco-parabola-short.tkz}
+\inputlatexexalone{tikz/tabsignvar-deco-parabola-short.tkz}
 
 
 % ---------------------- %
@@ -1218,28 +1218,28 @@ En plus des deux exemples de schémas de paraboles, il faut noter dans le code s
 Voici un 1\ier{} tableau avec certaines des fonctions sans paramètre.
 
 \begin{center}
-	\input{tikz/deco-ref-1.tkz}
+	\input{tikz/tabsignvar-deco-ref-1.tkz}
 \end{center}
 
 Le code correspondant est le suivant.
 
 \medskip
 
-\inputlatexexalone{tikz/deco-ref-1-short.tkz}
+\inputlatexexalone{tikz/tabsignvar-deco-ref-1-short.tkz}
 
 \medskip
 
 Voici un 2\ieme{} tableau avec les fonctions sans paramètre manquantes ci-dessus.
 
 \begin{center}
-	\input{tikz/deco-ref-2.tkz}
+	\input{tikz/tabsignvar-deco-ref-2.tkz}
 \end{center}
 
 Le code correspondant est le suivant.
 
 \medskip
 
-\inputlatexexalone{tikz/deco-ref-2-short.tkz}
+\inputlatexexalone{tikz/tabsignvar-deco-ref-2-short.tkz}
 
 
 % ---------------------- %
@@ -1251,7 +1251,7 @@ Pour finir, indiquons que les outils de décoration marchent aussi pour les tabl
 Voici un exemple possible d'utilisation où les retours à la ligne ont été obtenus affreusement, ou pas, via \verb#\parbox{11.5em}{...}#.
 
 \begin{center}
-	\input{tikz/deco-var.tkz}
+	\input{tikz/tabsignvar-deco-var.tkz}
 \end{center}
 %% \section{Analysis}
 %
