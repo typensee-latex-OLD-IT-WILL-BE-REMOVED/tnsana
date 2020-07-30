@@ -1,18 +1,7 @@
 % == PACKAGES USED == %
 
-\RequirePackage{etoolbox}
-
 
 % == DEFINITIONS == %
-
-
-% Source 
-%	* http://forum.mathematex.net/latex-f6/ecrire-une-fonction-en-latex-t1447.html#p11632
-
-\newbool{tnsana@func@def@option@u}
-\newbool{tnsana@func@def@option@s}
-\newbool{tnsana@func@def@option@h}
-
 
 % Argument #1: option s or sp
 % Argument #2: function
@@ -22,28 +11,15 @@
 % Argument #6: final set
 
 \newcommand\funcdef[6][u]{%
-    \boolfalse{tnsana@func@def@option@u}%
-    \boolfalse{tnsana@func@def@option@s}%
-    \boolfalse{tnsana@func@def@option@h}%
     %
     \IfEqCase{#1}{%
-        {u}{\booltrue{tnsana@func@def@option@u}}%
-        {s}{\booltrue{tnsana@func@def@option@s}}%
-        {h}{\booltrue{tnsana@func@def@option@h}}%
+        {u}{\let\callit\tnsana@func@def@usual}%
+        {s}{\let\callit\tnsana@func@def@no@vrule}%
+        {h}{\let\callit\tnsana@func@def@inline}%
     }[%
         \PackageError{tnsana}{unknown option}%
                              {you can use u (default), s and h}%
     ]%
-    %
-    \ifbool{tnsana@func@def@option@u}{%
-    	\let\callit\tnsana@func@def@usual%
-    }{%
-        \ifbool{tnsana@func@def@option@s}{%
-    		\let\callit\tnsana@func@def@no@vrule%
-        }{%
-            \let\callit\tnsana@func@def@inline%
-        }%
-    }%
     %
 	\callit{#2}{#3}{#4}{#5}{#6}%
 }
@@ -56,7 +32,24 @@
 % Argument #5: final set
 
 \newcommand\tnsana@func@def@inline[5]{%
-	#1 : #2 \in #4 \mapsto #3 \in #5%
+	#1 : #2%
+	\if\relax\detokenize{#4}\relax\else%
+		\in #4%
+	\fi%
+	\mapsto #3%
+	\if\relax\detokenize{#5}\relax\else%
+		\in #5%
+	\fi%
+}
+
+\newcommand\txtfuncdef[5]{%
+	$#1(#2) = #3$%
+	\if\relax\detokenize{#4}\relax\else%
+		\ pour $#2 \in #4$%
+	\fi%
+	\if\relax\detokenize{#5}\relax\else%
+		\ \emph{(on sait que $#1\left(#2\right) \in #5$)}%
+	\fi%
 }
 
 

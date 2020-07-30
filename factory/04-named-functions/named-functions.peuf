@@ -27,6 +27,6 @@ no-parameter::
 
 parameter::
 // Specifications :
-// nb parameter ; LaTeX code
-    expb = 1 ; \exp_{#1} ; la base de l'exponentielle
-    logb = 1 ; \log_{#1} ; la base du logarithme
+// nb parameter ; tech infos
+    exp = 1 ; la base de l'exponentielle
+    log = 1 ; la base du logarithme

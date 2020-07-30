@@ -235,10 +235,10 @@
 	\\%
 	{\footnotesize Code source disponible sur \url{https://github.com/typensee-latex/tnsana.git}.}%
 	\\%
-    {\footnotesize Version \texttt{0.5.0-beta} développée et testée sur \macosxname{}.}%
+    {\footnotesize Version \texttt{0.6.0-beta} développée et testée sur \macosxname{}.}%
 }
 \author{Christophe BAL}
-\date{2020-07-22}
+\date{2020-07-30}
 
 \maketitle
 
@@ -259,9 +259,32 @@
 
 Le package \verb+tnsana+ propose des macros pour écrire de l'analyse mathématique basique via un codage sémantique simple.
 
-\begin{remark}
-	Ce package s'appuie sur \verb+tnscom+ disponible sur \url{https://github.com/typensee-latex/tnscom.git}.
-\end{remark}
+% tnscom used - START
+\section{Beta-dépendance}
+
+\verb#tnscom# qui est disponible sur \url{https://github.com/typensee-latex/tnscom.git} est un package utilisé en coulisse.
+% tnscom used - END
+% List of packages - START
+\section{Packages utilisés}
+
+La roue ayant déjà été inventée, le package \verb#tnsana# réutilise les packages suivants sans aucun scrupule.
+
+\begin{multicols}{4}
+    \begin{itemize}
+        \item \verb#circledsteps#
+        \item \verb#commado#
+        \item \verb#forloop#
+        \item \verb#ifmtarg#
+        \item \verb#mathtools#
+        \item \verb#nicematrix#
+        \item \verb#pgfplots#
+        \item \verb#relsize#
+        \item \verb#tkz-tab#
+        \item \verb#upgreek#
+        \item \verb#xstring#
+    \end{itemize}
+\end{multicols}
+% List of packages - END
 \section{Constantes et paramètres}
 
 \subsection{Constantes classiques ajoutées}
@@ -301,7 +324,15 @@ $a x^2 + b x + c$
 % ---------------------- %
 \section{Une variable \og symbolique \fg{}}
 
-Le package \verb+tnscom+ propose les macros \macro{symvar} et \macro{symvar*} qui produisent les symboles $\symvar$ et $\symvar*$ . Le nom utilisé vient de \prefix{symvar} pour \whyprefix{symb}{olic} \whyprefix{var}{iable} soit \inenglish{variable symbolique}.
+Le package \verb+tnscom+, chargé en coulisse, propose la macro \macro{symvar} qui produit différents symboles donnés ci-dessous.
+
+\begin{latexex}
+$\symvar = \symvar[1]$ ou
+$\symvar[2]$ ou
+$\symvar[3]$
+\end{latexex}
+
+Le nom \prefix{symvar} vient de \whyprefix{symb}{olic} \whyprefix{var}{iable} soit \inenglish{variable symbolique}.
 Ces symboles sont utiles pour indiquer un argument symboliquement sans faire référence précisément à une ou des variables nommées.
 
 
@@ -327,11 +358,11 @@ $\abs*{\dfrac{3}{5}}$
 
 \subsection{Sans paramètre}
 
-Quelques fonctions nommées supplémentaires où le \prefix{f} dans \prefix{fch} est pour \whyprefix{f}{rench} soit \inenglish{français} \emph{(ce choix a été fait pour éviter des incompatibilités avec quelques autres packages)}. La liste complète des fonctions nommées est donnée un peu plus bas dans la section  \ref{tnsana-all-named-functions}.
+Quelques fonctions nommées ont été ajoutées en plus de celles fournies par le package \verb#amsmath#  qui est chargé en coulisse et propose par exemple $\lg x$ et $\ln x$ via les macros \macro{lg} et \macro{ln}.
+Ci-dessous le \prefix{f} dans \prefix{fch} est pour \whyprefix{f}{rench} soit \inenglish{français} \emph{(ce choix sert à éviter des incompatibilités avec d'autres packages)}. La liste complète des fonctions nommées est donnée plus bas dans la section  \ref{tnsana-all-named-functions}
 
 \begin{latexex}
-$\fch x = \cosh x$ ou
-$\lg x$
+$\fch x = \cosh x$ ou $\acos x$
 \end{latexex}
 
 
@@ -340,11 +371,11 @@ $\lg x$
 
 \subsection{Avec un paramètre}
 
-Pour le moment il y a juste deux fonctions avec un paramètre. Les voici.
+Pour le moment il y a juste deux fonctions utilisables avec un paramètre optionnel. Les voici.
 
 \begin{latexex}
-$\logb{2} x = \lg x$ ou
-$\expb{6} y = 6^y$
+$\log[2] x = \lg x$ ou
+$\exp[6] y = 6^y$
 \end{latexex}
 
 
@@ -357,39 +388,43 @@ $\expb{6} y = 6^y$
 
 \begin{multicols}{2}
 % Table of all - START
-    \verb+acos+ : $\acos\dots$
+    \macro{acos x} : $\acos x$
 
-    \verb+asin+ : $\asin\dots$
+    \macro{asin x} : $\asin x$
 
-    \verb+atan+ : $\atan\dots$
+    \macro{atan x} : $\atan x$
 
-    \verb+arccosh+ : $\arccosh\dots$
+    \macro{arccosh x} : $\arccosh x$
 
-    \verb+arcsinh+ : $\arcsinh\dots$
+    \macro{arcsinh x} : $\arcsinh x$
 
-    \verb+arctanh+ : $\arctanh\dots$
+    \macro{arctanh x} : $\arctanh x$
 
-    \verb+acosh+ : $\acosh\dots$
+    \macro{acosh x} : $\acosh x$
 
-    \verb+asinh+ : $\asinh\dots$
+    \macro{asinh x} : $\asinh x$
 
-    \verb+atanh+ : $\atanh\dots$
+    \macro{atanh x} : $\atanh x$
 
-    \verb+fch+ : $\fch\dots$
+    \macro{fch x} : $\fch x$
 
-    \verb+fsh+ : $\fsh\dots$
+    \macro{fsh x} : $\fsh x$
 
-    \verb+fth+ : $\fth\dots$
+    \macro{fth x} : $\fth x$
 
-    \verb+afch+ : $\afch\dots$
+    \macro{afch x} : $\afch x$
 
-    \verb+afsh+ : $\afsh\dots$
+    \macro{afsh x} : $\afsh x$
 
-    \verb+afth+ : $\afth\dots$
+    \macro{afth x} : $\afth x$
 
-    \verb+expb{p}+ : $\expb{p}\dots$
+    \macro{exp x} : $\exp x$
 
-    \verb+logb{p}+ : $\logb{p}\dots$
+    \macro{exp[p] x} : $\exp[p] x$
+
+    \macro{log x} : $\log x$
+
+    \macro{log[p] x} : $\log[p] x$
 % Table of all - END
 \end{multicols}
 \section{Définition explicite d'une fonction}
@@ -397,14 +432,14 @@ $\expb{6} y = 6^y$
 \newparaexample{Écriture par défaut}
 
 \begin{latexex}
-$\funcdef{f}{x}{x^2 + 3}%
+$\funcdef{f}{x}{x^2}%
             {I}{J}$
 \end{latexex}
 
 
 \begin{remark}
 	Même si cela est peu utile, vous pouvez utiliser la mise en forme dans du texte pour obtenir
-	$\funcdef{f}{x}{x^2 + 3}%
+	$\funcdef{f}{x}{x^2}%
             {I}{J}$
     mais c'est un peu affreux.
 \end{remark}
@@ -417,7 +452,7 @@ $\funcdef{f}{x}{x^2 + 3}%
 On peut cacher le trait vertical via l'option \prefix{s} pour \whyprefix{s}{hort} soit \inenglish{court}.
 
 \begin{latexex}
-$\funcdef[s]{f}{x}{x^2 + 3}%
+$\funcdef[s]{f}{x}{x^2}%
                {I}{J}$
 \end{latexex}
 
@@ -429,21 +464,45 @@ $\funcdef[s]{f}{x}{x^2 + 3}%
 
 Pour avoir tout sur une ligne, ce qui est l'idéal pour une insertion dans du texte, il suffit d'utiliser l'option \prefix{h} pour \whyprefix{h}{orizontal}.
 \begin{latexex}
-Soit $\funcdef[h]{f}{x}{x^2 + 3}%
-                    {I}{J}$.
+Soit $\funcdef[h]{f}{x}{x^2}%
+                    {I}{J}$ ...
 \end{latexex}
 
 
-%% ---------------------- %
-%
-%
-%\newparaexample{Écriture en ligne sans ensemble}
-%
-%Pour avoir tout sur une ligne, ce qui est l'idéal pour une insertion dans du texte, il suffit d'utiliser l'option \prefix{h} pour \whyprefix{h}{orizontal}.
-%\begin{latexex}
-%Soit $\funcdef[h]{f}{x}{x^2 + 3}%
-%                    {I}{J}$.
-%\end{latexex}
+% ---------------------- %
+
+
+\newparaexample{Écriture en ligne incomplète}
+
+En mode horizontal, les ensembles peuvent être de valeur vide pour ne pas les indiquer.
+
+\begin{latexex}
+$\funcdef[h]{f}{x}{x^2}{}{J}$
+
+$\funcdef[h]{f}{x}{x^2}{I}{}$
+
+$\funcdef[h]{f}{x}{x^2}{}{}$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\newparaexample{Écriture textuelle}
+
+On peut enfin obtenir une version \emph{\og textuelle \fg} via la macro \macro{txtfuncdef} qui ne s'utilise pas en mode mathématique où \prefix{txt} est pour \prefix{texte}.
+Ici aussi on peut omettre des ensembles.
+
+\begin{latexex}
+\txtfuncdef{f}{x}{x^2}{I}{J}
+
+\txtfuncdef{f}{x}{x^2}{}{J}
+
+\txtfuncdef{f}{x}{x^2}{I}{}
+
+\txtfuncdef{f}{x}{x^2}{}{}
+\end{latexex}
+
 
 
 % ---------------------- %
@@ -462,6 +521,7 @@ $\limit{f(x)}{x}{0} = \frac{1}{2}$
 	\verb#\lim\limits_{x \rightarrow 0} f(x)# produit 
 	$\lim\limits_{x \rightarrow 0} f(x)$ contre 
 	$\limit{f(x)}{x}{0}$ ci-dessus.
+	La version \macro{limit} utilise un petit peu plus d'espace sous le mot lim.
 \end{remark}
 
 
@@ -471,10 +531,11 @@ $\limit{f(x)}{x}{0} = \frac{1}{2}$
 
 \newparaexample{Avec des conditions}
 
-Ce 2\ieme{} exemple devrait rendre intéressante la macro \macro{limit} qui permet d'ajouter facilement plusieurs conditions comme le montre la 2\ieme{} limite
+Ce 2\ieme{} exemple devrait rendre intéressante la macro \macro{limit} qui permet d'ajouter facilement plusieurs conditions
 \footnote{
 	En pratique, on utilise généralement au maximum une condition.
-}.
+}
+comme le montre la 2\ieme{} limite ci-après.
 
 \begin{latexex}
 $\limit{f(x)}{x}{0 | x > 0}$ ou
@@ -700,9 +761,15 @@ Notez qu'avec l'option \verb+ei+ l'exposant total n'est pas imprimé et que les 
 \end{latexex}
 
 
-\begin{remark}
-	L'option \verb+ei+ ne marche pas avec des variables indicées pour le moment.
-\end{remark}
+\medskip
+
+
+Les options \verb+i+ et \verb+ei+ marchent avec des variables indicées à condition de bien mettre les dites variables entre des accolades.
+
+\begin{latexex}
+ $\pder[i] {f}{x_1 | {x_2}^2}{3}
+= \pder[ei]{f}{x_1 | {x_2}^2}{3}$
+\end{latexex}
 
 
 \medskip
@@ -713,8 +780,10 @@ Ci-dessous on montre aussi une écriture du type \emph{\og opérateur fonctionne
 
 \begin{latexex}
  $\pder[of,sp] {u + v}{x | y^2}{}
-= \pder[osf,sp]{u + v}{x | y^2}{}
-= \pder[i,sp]  {u + v}{x | y^2}{}$
+= \pder[osf,sp]{u + v}{x | y^2}{}$
+
+ $\pder[i,sp]  {u + v}{x | y^2}{}
+= \pder[ei,sp] {u + v}{x | y^2}{}$
 \end{latexex}
 
 
@@ -1386,6 +1455,32 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 % Changes shown - START
 
     \medskip
+    \item[2020-07-30] Nouvelle version mineure \verb+0.6.0-beta+.
+    
+    \begin{itemize}[itemsep=.5em]
+        \item \topic{Définition explicite d'une fonction}
+        \begin{itemize}[itemsep=.5em]
+            \item Une nouvelle macro \macro{txfuncdef} produit une version textuelle courte.
+    
+            \item Omission possible des ensembles, via des arguments vides, quand on utilise \macro{funcdef[h]} ou \macro{txfuncdef}.
+        \end{itemize}
+    
+    % ------------------------ %
+    
+        \item \topic*{Fonctions avec un paramètre}
+              les macros \macro{expb} et \macro{logb} ont été remplacées par \macro{exp} et \macro{log} qui ont un argument optionnel pour indiquer éventuellement une base.
+    
+    % ------------------------ %
+    
+        \item \topic*{Dérivation partielle}
+              \macro{pder[ei]} fonctionne maintenant aussi avec des variables indexées.
+              
+    \end{itemize}
+    
+    \separation
+% ------------------------ %
+
+    \medskip
     \item[2020-07-22] Nouvelle version mineure \verb+0.5.0-beta+.
     
     \begin{itemize}[itemsep=.5em]
@@ -1483,6 +1578,9 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 
 
 
+
+
+
 \subsection{Constantes et paramètres}
 
 \subsubsection{Constantes classiques ajoutées}
@@ -1520,9 +1618,15 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 
 
 
-\IDmacro[n]{symvar }
+\IDmacro[o]{symvar}{1}
 
-\IDmacro[n]{symvar*}
+\IDoption{} le numéro du symbole qui vaut \verb#1# par défaut.
+\begin{itemize}
+	\item \verb#1# donne $\symvar[1]$ .
+	\item \verb#2# donne $\symvar[2]$ .
+	\item \verb#3# donne $\symvar[3]$ .
+%	\item \verb#4# donne $\symvar[4]$ .
+\end{itemize}
 
 
 \subsection{La fonction valeur absolue}
@@ -1589,15 +1693,15 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 
 % List of functions with parameters - START
 
-\IDmacro[a]{expb}{1}
+\IDmacro[o]{exp}{1}
 
-\IDarg{} la base de l'exponentielle
+\IDoption{} la base de l'exponentielle
 
 \separation
 
-\IDmacro[a]{logb}{1}
+\IDmacro[o]{log}{1}
 
-\IDarg{} la base du logarithme
+\IDoption{} la base du logarithme
 
 % List of functions with parameters - END
 
@@ -1626,11 +1730,20 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 
 \IDarg{2} la variable.
 
-\IDarg{3} la formule de définition.
+\IDarg{3} la formule explicite de définition.
 
-\IDarg{4} ensemble de départ. Cet argument peut être vide si le mode \verb+h+ est activé
+\IDarg{4} l'ensemble de départ. Cet argument peut être vide si le mode \verb+h+ est activé
 
-\IDarg{5} ensemble d'arrivée.
+\IDarg{5} l'ensemble d'arrivée.
+
+
+\separation
+
+
+\IDmacro[a]{txtfuncdef}{5}
+
+
+\IDargs{1..5} voir les explications données ci-dessus pour la macro \macro{funcdef}.
 
 
 \subsection{Limite}

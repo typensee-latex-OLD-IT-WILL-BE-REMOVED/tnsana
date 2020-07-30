@@ -25,6 +25,18 @@ PATTERN_FOR_PEUF = re.compile("\d+-(.*)")
 match            = re.search(PATTERN_FOR_PEUF, STY_FILE.stem)
 PEUF_FILE        = STY_FILE.parent / (match.group(1).strip() + ".peuf")
 
+
+TEMP_LATEX_PARAM_FUNC = """
+\\let\\std{name}\\{name}
+\\renewcommand\\{name}[1][]{{%
+	\\std{name}%
+	\\if\\relax\\detokenize{{#1}}\\relax\\else%
+		_{{#1}}%
+	\\fi%
+}}
+""".lstrip()
+
+
 DECO = " "*4
 
 
@@ -43,12 +55,11 @@ with ReadBlock(
             functions['no-parameter'][k] = k
 
     for k, v in functions['parameter'].items():
-        nbparam, latex, *desc = v.split(";")
+        nbparam, desc = v.split(";")
 
         functions['parameter'][k] = {
             'nbparam': nbparam.strip(),
-            'latex'  : latex.strip(),
-            'desc'   : [d.strip() for d in desc],
+            'desc'   : desc.strip(),
         }
 
 
@@ -95,11 +106,8 @@ macro_defs = [
     ),
     "",
     "\n".join(
-        r"\newcommand\{0}[{1[nbparam]}]{{{1[latex]}}}".format(
-            name,
-            infos
-        )
-        for name, infos in functions['parameter'].items()
+        TEMP_LATEX_PARAM_FUNC.format(name = name)
+        for name in functions['parameter']
     )
 ]
 
@@ -123,10 +131,12 @@ text_start, _, text_end = between(
 )
 
 tabletex = [
-    f"    \\verb+{name}+ : $\\{name}\dots$"
+    f"    \\macro{{{name} x}} : $\\{name} x$"
     for name in list(functions['no-parameter'])
 ] + [
-    f"    \\verb+{name}{{p}}+ : $\\{name}{{p}}\dots$"
+    f"    \\macro{{{name} x}} : $\\{name} x$"
+	+ "\n"*2 +
+	f"    \\macro{{{name}[p] x}} : $\\{name}[p] x$"""
     for name in list(functions['parameter'])
 ]
 
@@ -220,17 +230,11 @@ for name, infos in functions['parameter'].items():
 
     docinfos += [
         "\\separation",
-        f"\\IDmacro[a]{{{name}}}{{{nbparam}}}"
+        f"\\IDmacro[o]{{{name}}}{{{nbparam}}}"
     ]
 
     desc = infos["desc"]
-
-    if len(desc) == 1:
-        docinfos.append(f"\\IDarg{{}} {desc[0]}")
-
-    else:
-        for i, d in enumerate(desc, 1):
-            docinfos.append(f"\\IDarg{{{i}}} {d}")
+    docinfos.append(f"\\IDoption{{}} {desc}")
 
 
 if docinfos:

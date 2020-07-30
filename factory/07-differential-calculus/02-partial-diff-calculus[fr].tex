@@ -8,6 +8,9 @@
 \makeatother
 
 
+
+
+
 \begin{document}
 
 %\section{Calcul différentiel}
@@ -40,9 +43,15 @@ Notez qu'avec l'option \verb+ei+ l'exposant total n'est pas imprimé et que les 
 \end{latexex}
 
 
-\begin{remark}
-	L'option \verb+ei+ ne marche pas avec des variables indicées pour le moment.
-\end{remark}
+\medskip
+
+
+Les options \verb+i+ et \verb+ei+ marchent avec des variables indicées à condition de bien mettre les dites variables entre des accolades.
+
+\begin{latexex}
+ $\pder[i] {f}{x_1 | {x_2}^2}{3}
+= \pder[ei]{f}{x_1 | {x_2}^2}{3}$
+\end{latexex}
 
 
 \medskip
@@ -53,8 +62,10 @@ Ci-dessous on montre aussi une écriture du type \emph{\og opérateur fonctionne
 
 \begin{latexex}
  $\pder[of,sp] {u + v}{x | y^2}{}
-= \pder[osf,sp]{u + v}{x | y^2}{}
-= \pder[i,sp]  {u + v}{x | y^2}{}$
+= \pder[osf,sp]{u + v}{x | y^2}{}$
+
+ $\pder[i,sp]  {u + v}{x | y^2}{}
+= \pder[ei,sp] {u + v}{x | y^2}{}$
 \end{latexex}
 
 

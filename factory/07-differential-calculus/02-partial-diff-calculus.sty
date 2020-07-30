@@ -1,5 +1,7 @@
 % == PACKAGES USED == %
 
+\RequirePackage{forloop}
+
 
 % == DEFINITIONS == %
 
@@ -37,6 +39,7 @@
 }
 
 
+
 \newcommand\tnsana@pder@sub[3]{
 % The following command works because xstring traits {...} like a single character.
     \noexpandarg%
@@ -50,41 +53,40 @@
 
 
 
-\newcommand\tnsana@hack@subit[2]{%
-	{#1}_{#2\kern-.075em}%
+\newcommand\tnsana@pder@exp@sub[3]{%
+	#1^{\,\prime}_{\kern.25ex\tnsana@pder@multi@expansion{#2}}%
 }
 
-\ExplSyntaxOn
-	\NewDocumentCommand\tnsana@pder@expanded@sub{mmm}{
-		\tnsana@hack@subit{#1}{%
-			\projetmbc_test:n{\expandafter\StrSubstitute\expandafter{#2}{|}{\kern.075em}}%
-		}%
-	}
 
-	\tl_new:N \l__projetmbc_test_tl
+\newcommand\tnsana@pder@multi@expansion[1]{%
+	\tnsana@pder@multi@split#1|\nil%
+}
 
-	\cs_new_protected:Nn \projetmbc_test:n {
-  		\tl_set:Nn \l__projetmbc_test_tl { #1 }
-  		\regex_replace_all:nnN
-   			{ (\cB. .*? \cE.|[[:alpha:]])\^ } % search a braced group or single letter followed by ^
-   			{ \c{projetmbc_power:nn} \1 } % prepend \projetmbc_power:nn and remove ^
-   		\l__projetmbc_test_tl
-   		\ensuremath { \tl_use:N \l__projetmbc_test_tl }
- 	}
+\def\tnsana@pder@multi@split#1|#2\nil{%
+	\tnsana@pder@expand@var#1^\nil%
+	\if\relax\detokenize{#2}\relax\else%
+		\,\tnsana@pder@multi@split#2\nil%
+	\fi%
+}
 
-	\cs_new:Nn \projetmbc_power:nn {
-  		\prg_replicate:nn { #2 } { #1\kern.075em }
- 	}
-\ExplSyntaxOff
+\def\tnsana@pder@expand@var#1^#2\nil{%
+	#1%
+	\if\relax\detokenize{#2}\relax\else%
+		\tnsana@pder@repeat@var{#1}{\tnsana@pder@extract@expo#2\nil}%
+	\fi%
+}
 
+\def\tnsana@pder@extract@expo#1^\nil{%
+	#1%
+}
 
+\newcounter{tnsana@pder@exp@sub} 
 
-
-
-
-
-
-
+\newcommand\tnsana@pder@repeat@var[2]{%
+	\forloop{tnsana@pder@exp@sub}%
+	        {1}{\value{tnsana@pder@exp@sub} < #2}%
+	        {\,#1}%
+}
 
 
 
@@ -171,7 +173,7 @@
                     \ifbool{tnsana@der@option@i}{%
                         \let\callithere\tnsana@pder@sub%
                     }{%
-                    	\let\callithere\tnsana@pder@expanded@sub%
+                    	\let\callithere\tnsana@pder@exp@sub%
                     }%
                 }%
             }%

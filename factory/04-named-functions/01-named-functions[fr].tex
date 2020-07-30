@@ -7,18 +7,17 @@
 \makeatother
 
 
-
 \begin{document}
 
 \section{Fonctions nommées spéciales}
 
 \subsection{Sans paramètre}
 
-Quelques fonctions nommées supplémentaires où le \prefix{f} dans \prefix{fch} est pour \whyprefix{f}{rench} soit \inenglish{français} \emph{(ce choix a été fait pour éviter des incompatibilités avec quelques autres packages)}. La liste complète des fonctions nommées est donnée un peu plus bas dans la section  \ref{tnsana-all-named-functions}.
+Quelques fonctions nommées ont été ajoutées en plus de celles fournies par le package \verb#amsmath#  qui est chargé en coulisse et propose par exemple $\lg x$ et $\ln x$ via les macros \macro{lg} et \macro{ln}.
+Ci-dessous le \prefix{f} dans \prefix{fch} est pour \whyprefix{f}{rench} soit \inenglish{français} \emph{(ce choix sert à éviter des incompatibilités avec d'autres packages)}. La liste complète des fonctions nommées est donnée plus bas dans la section  \ref{tnsana-all-named-functions}
 
 \begin{latexex}
-$\fch x = \cosh x$ ou
-$\lg x$
+$\fch x = \cosh x$ ou $\acos x$
 \end{latexex}
 
 
@@ -70,11 +69,11 @@ $\lg x$
 
 \subsection{Avec un paramètre}
 
-Pour le moment il y a juste deux fonctions avec un paramètre. Les voici.
+Pour le moment il y a juste deux fonctions utilisables avec un paramètre optionnel. Les voici.
 
 \begin{latexex}
-$\logb{2} x = \lg x$ ou
-$\expb{6} y = 6^y$
+$\log[2] x = \lg x$ ou
+$\exp[6] y = 6^y$
 \end{latexex}
 
 
@@ -85,15 +84,15 @@ $\expb{6} y = 6^y$
 
 % List of functions with parameters - START
 
-\IDmacro[a]{expb}{1}
+\IDmacro[o]{exp}{1}
 
-\IDarg{} la base de l'exponentielle
+\IDoption{} la base de l'exponentielle
 
 \separation
 
-\IDmacro[a]{logb}{1}
+\IDmacro[o]{log}{1}
 
-\IDarg{} la base du logarithme
+\IDoption{} la base du logarithme
 
 % List of functions with parameters - END
 
@@ -107,39 +106,43 @@ $\expb{6} y = 6^y$
 
 \begin{multicols}{2}
 % Table of all - START
-    \verb+acos+ : $\acos\dots$
+    \macro{acos x} : $\acos x$
 
-    \verb+asin+ : $\asin\dots$
+    \macro{asin x} : $\asin x$
 
-    \verb+atan+ : $\atan\dots$
+    \macro{atan x} : $\atan x$
 
-    \verb+arccosh+ : $\arccosh\dots$
+    \macro{arccosh x} : $\arccosh x$
 
-    \verb+arcsinh+ : $\arcsinh\dots$
+    \macro{arcsinh x} : $\arcsinh x$
 
-    \verb+arctanh+ : $\arctanh\dots$
+    \macro{arctanh x} : $\arctanh x$
 
-    \verb+acosh+ : $\acosh\dots$
+    \macro{acosh x} : $\acosh x$
 
-    \verb+asinh+ : $\asinh\dots$
+    \macro{asinh x} : $\asinh x$
 
-    \verb+atanh+ : $\atanh\dots$
+    \macro{atanh x} : $\atanh x$
 
-    \verb+fch+ : $\fch\dots$
+    \macro{fch x} : $\fch x$
 
-    \verb+fsh+ : $\fsh\dots$
+    \macro{fsh x} : $\fsh x$
 
-    \verb+fth+ : $\fth\dots$
+    \macro{fth x} : $\fth x$
 
-    \verb+afch+ : $\afch\dots$
+    \macro{afch x} : $\afch x$
 
-    \verb+afsh+ : $\afsh\dots$
+    \macro{afsh x} : $\afsh x$
 
-    \verb+afth+ : $\afth\dots$
+    \macro{afth x} : $\afth x$
 
-    \verb+expb{p}+ : $\expb{p}\dots$
+    \macro{exp x} : $\exp x$
 
-    \verb+logb{p}+ : $\logb{p}\dots$
+    \macro{exp[p] x} : $\exp[p] x$
+
+    \macro{log x} : $\log x$
+
+    \macro{log[p] x} : $\log[p] x$
 % Table of all - END
 \end{multicols}
 

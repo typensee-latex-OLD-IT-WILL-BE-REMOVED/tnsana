@@ -17,14 +17,14 @@
 \newparaexample{Écriture par défaut}
 
 \begin{latexex}
-$\funcdef{f}{x}{x^2 + 3}%
+$\funcdef{f}{x}{x^2}%
             {I}{J}$
 \end{latexex}
 
 
 \begin{remark}
 	Même si cela est peu utile, vous pouvez utiliser la mise en forme dans du texte pour obtenir
-	$\funcdef{f}{x}{x^2 + 3}%
+	$\funcdef{f}{x}{x^2}%
             {I}{J}$
     mais c'est un peu affreux.
 \end{remark}
@@ -37,7 +37,7 @@ $\funcdef{f}{x}{x^2 + 3}%
 On peut cacher le trait vertical via l'option \prefix{s} pour \whyprefix{s}{hort} soit \inenglish{court}.
 
 \begin{latexex}
-$\funcdef[s]{f}{x}{x^2 + 3}%
+$\funcdef[s]{f}{x}{x^2}%
                {I}{J}$
 \end{latexex}
 
@@ -49,21 +49,45 @@ $\funcdef[s]{f}{x}{x^2 + 3}%
 
 Pour avoir tout sur une ligne, ce qui est l'idéal pour une insertion dans du texte, il suffit d'utiliser l'option \prefix{h} pour \whyprefix{h}{orizontal}.
 \begin{latexex}
-Soit $\funcdef[h]{f}{x}{x^2 + 3}%
-                    {I}{J}$.
+Soit $\funcdef[h]{f}{x}{x^2}%
+                    {I}{J}$ ...
 \end{latexex}
 
 
-%% ---------------------- %
-%
-%
-%\newparaexample{Écriture en ligne sans ensemble}
-%
-%Pour avoir tout sur une ligne, ce qui est l'idéal pour une insertion dans du texte, il suffit d'utiliser l'option \prefix{h} pour \whyprefix{h}{orizontal}.
-%\begin{latexex}
-%Soit $\funcdef[h]{f}{x}{x^2 + 3}%
-%                    {I}{J}$.
-%\end{latexex}
+% ---------------------- %
+
+
+\newparaexample{Écriture en ligne incomplète}
+
+En mode horizontal, les ensembles peuvent être de valeur vide pour ne pas les indiquer.
+
+\begin{latexex}
+$\funcdef[h]{f}{x}{x^2}{}{J}$
+
+$\funcdef[h]{f}{x}{x^2}{I}{}$
+
+$\funcdef[h]{f}{x}{x^2}{}{}$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\newparaexample{Écriture textuelle}
+
+On peut enfin obtenir une version \emph{\og textuelle \fg} via la macro \macro{txtfuncdef} qui ne s'utilise pas en mode mathématique où \prefix{txt} est pour \prefix{texte}.
+Ici aussi on peut omettre des ensembles.
+
+\begin{latexex}
+\txtfuncdef{f}{x}{x^2}{I}{J}
+
+\txtfuncdef{f}{x}{x^2}{}{J}
+
+\txtfuncdef{f}{x}{x^2}{I}{}
+
+\txtfuncdef{f}{x}{x^2}{}{}
+\end{latexex}
+
 
 
 % ---------------------- %
@@ -88,10 +112,20 @@ Soit $\funcdef[h]{f}{x}{x^2 + 3}%
 
 \IDarg{2} la variable.
 
-\IDarg{3} la formule de définition.
+\IDarg{3} la formule explicite de définition.
 
-\IDarg{4} ensemble de départ. Cet argument peut être vide si le mode \verb+h+ est activé
+\IDarg{4} l'ensemble de départ. Cet argument peut être vide si le mode \verb+h+ est activé
 
-\IDarg{5} ensemble d'arrivée.
+\IDarg{5} l'ensemble d'arrivée.
+
+
+\separation
+
+
+\IDmacro[a]{txtfuncdef}{5}
+
+
+\IDargs{1..5} voir les explications données ci-dessus pour la macro \macro{funcdef}.
+
 
 \end{document}
