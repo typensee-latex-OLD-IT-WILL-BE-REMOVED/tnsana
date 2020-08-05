@@ -7,9 +7,9 @@
 
 **Explicit definition of a function:** two new features have been added.
 
-    1) A new macro ``\txfuncdef`` can be used to print a short textual version.
+    1) A new macro ``\txtfuncdef`` can be used to print a short textual version.
 
-    1) Missing sets can be indicated via an empty argument with the macros ``\funcdef[h]`` and ``\txfuncdef``.
+    1) Missing sets can be indicated via an empty argument with the macros ``\funcdef[h]`` and ``\txtfuncdef``.
 
 
 **Parametrized functions:** the macros ``\expb`` and ``\logb`` have been replaced simply by ``\exp`` and ``\log`` which have an optional argument to indicate a base.
