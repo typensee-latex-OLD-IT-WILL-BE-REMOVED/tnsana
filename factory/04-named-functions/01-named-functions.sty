@@ -23,7 +23,20 @@
 \DeclareMathOperator{\afsh}{\operatorname{ash}}
 \DeclareMathOperator{\afth}{\operatorname{ath}}
 
-\newcommand\expb[1]{\exp_{#1}}
-\newcommand\logb[1]{\log_{#1}}
+\let\stdexp\exp
+\renewcommand\exp[1][]{%
+	\stdexp%
+	\if\relax\detokenize{#1}\relax\else%
+		_{#1}%
+	\fi%
+}
+
+\let\stdlog\log
+\renewcommand\log[1][]{%
+	\stdlog%
+	\if\relax\detokenize{#1}\relax\else%
+		_{#1}%
+	\fi%
+}
 
 % Classical functions - END

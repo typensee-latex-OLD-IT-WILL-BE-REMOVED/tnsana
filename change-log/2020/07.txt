@@ -1,4 +1,48 @@
 ==========
+2020-07-30
+==========
+
+**New minor version version::``0.6.0-beta`` of ¨tnsana:** see the new feature below.
+
+
+**Explicit definition of a function:** two new features have been added.
+
+    1) A new macro ``\txtfuncdef`` can be used to print a short textual version.
+
+    1) Missing sets can be indicated via an empty argument with the macros ``\funcdef[h]`` and ``\txtfuncdef``.
+
+
+**Parametrized functions:** the macros ``\expb`` and ``\logb`` have been replaced simply by ``\exp`` and ``\log`` which have an optional argument to indicate a base.
+
+
+**Partial derivation:** it is now possible to use ``\pder[ei]`` with indexed variables.
+
+
+**Internal machinery:** here are the changes.
+
+    1) The use of booleans from ¨etoolbox has been limited for really needed cases.
+
+    2) The draw of axes for decorated tables of signs has been factorized.
+
+
+**Documentation:** the section about symbolic variables has been updated to the last version of ¨tnscom.
+
+
+==========
+2020-07-29
+==========
+
+**Internal machinery for the documentation:** the ¨python file path::``build-01-dep[slow].py`` updates automatically a ¨tex file with all the packages used by ¨tnsana.
+
+
+==========
+2020-07-23
+==========
+
+**Internal machinery for the technical ¨infos:** the printing uses now ¨macroenvsign the new version of ¨cbdevtools (this tool is still in alpha version).
+
+
+==========
 2020-07-22
 ==========
 
@@ -28,7 +72,7 @@
 **Differential calculus:** for the sake of consistency, the signature of ``\der`` has moved from ``\der{f}{n}{x}`` to ``\der{f}{x}{n}``.
 
 
-**Internal machinery for the technical ¨infos:** the builder is better but still not the best...
+**Internal machinery for the technical ¨infos:** the builder is better but still not the best one...
 
 
 ==========

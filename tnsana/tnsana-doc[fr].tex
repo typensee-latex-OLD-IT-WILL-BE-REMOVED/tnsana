@@ -12,6 +12,8 @@
 \usepackage[top=2cm, bottom=2cm, left=1.5cm, right=1.5cm]{geometry}
 \usepackage{enumitem}
 
+\usepackage{pgffor}
+
 \usepackage{multicol}
 
 \usepackage{makecell}
@@ -35,8 +37,14 @@
 
 \usepackage{ifthen}
 
-\usepackage{cbdevtool}
+\usepackage{macroenvsign}
 
+
+% Sections numbering
+
+\renewcommand\thesection{\arabic{section}.}
+\renewcommand\thesubsection{\alph{subsection}.}
+\renewcommand\thesubsubsection{\roman{subsubsection}.}
 
 
 % MISC
@@ -227,10 +235,10 @@
 	\\%
 	{\footnotesize Code source disponible sur \url{https://github.com/typensee-latex/tnsana.git}.}%
 	\\%
-    {\footnotesize Version \texttt{0.5.0-beta} développée et testée sur \macosxname{}.}%
+    {\footnotesize Version \texttt{0.6.0-beta} développée et testée sur \macosxname{}.}%
 }
 \author{Christophe BAL}
-\date{2020-07-22}
+\date{2020-07-30}
 
 \maketitle
 
@@ -251,14 +259,37 @@
 
 Le package \verb+tnsana+ propose des macros pour écrire de l'analyse mathématique basique via un codage sémantique simple.
 
-\begin{remark}
-	Ce package s'appuie sur \verb+tnscom+ disponible sur \url{https://github.com/typensee-latex/tnscom.git}.
-\end{remark}
+% tnscom used - START
+\section{Beta-dépendance}
+
+\verb#tnscom# qui est disponible sur \url{https://github.com/typensee-latex/tnscom.git} est un package utilisé en coulisse.
+% tnscom used - END
+% List of packages - START
+\section{Packages utilisés}
+
+La roue ayant déjà été inventée, le package \verb#tnsana# réutilise les packages suivants sans aucun scrupule.
+
+\begin{multicols}{4}
+    \begin{itemize}
+        \item \verb#circledsteps#
+        \item \verb#commado#
+        \item \verb#forloop#
+        \item \verb#ifmtarg#
+        \item \verb#mathtools#
+        \item \verb#nicematrix#
+        \item \verb#pgfplots#
+        \item \verb#relsize#
+        \item \verb#tkz-tab#
+        \item \verb#upgreek#
+        \item \verb#xstring#
+    \end{itemize}
+\end{multicols}
+% List of packages - END
 \section{Constantes et paramètres}
 
-\subsection{Constantes classiques}
+\subsection{Constantes classiques ajoutées}
 
-\paragraph{La liste complète}
+Les macros ci-dessous ne nécessitent pas d'accolades.
 
 % List of classical constants - START
 
@@ -293,7 +324,15 @@ $a x^2 + b x + c$
 % ---------------------- %
 \section{Une variable \og symbolique \fg{}}
 
-Le package \verb+tnscom+ propose les macros \macro{symvar} et \macro{symvar*} qui produisent les symboles $\symvar$ et $\symvar*$ . Le nom utilisé vient de \prefix{symvar} pour \whyprefix{symb}{olic} \whyprefix{var}{iable} soit \inenglish{variable symbolique}.
+Le package \verb+tnscom+, chargé en coulisse, propose la macro \macro{symvar} qui produit différents symboles donnés ci-dessous.
+
+\begin{latexex}
+$\symvar = \symvar[1]$ ou
+$\symvar[2]$ ou
+$\symvar[3]$
+\end{latexex}
+
+Le nom \prefix{symvar} vient de \whyprefix{symb}{olic} \whyprefix{var}{iable} soit \inenglish{variable symbolique}.
 Ces symboles sont utiles pour indiquer un argument symboliquement sans faire référence précisément à une ou des variables nommées.
 
 
@@ -319,11 +358,11 @@ $\abs*{\dfrac{3}{5}}$
 
 \subsection{Sans paramètre}
 
-Quelques fonctions nommées supplémentaires où le \prefix{f} dans \prefix{fch} est pour \whyprefix{f}{rench} soit \inenglish{français} \emph{(ce choix a été fait pour éviter des incompatibilités avec quelques autres packages)}. La liste complète des fonctions nommées est donnée un peu plus bas dans la section  \ref{tnsana-all-named-functions}.
+Quelques fonctions nommées ont été ajoutées en plus de celles fournies par le package \verb#amsmath#  qui est chargé en coulisse et propose par exemple $\lg x$ et $\ln x$ via les macros \macro{lg} et \macro{ln}.
+Ci-dessous le \prefix{f} dans \prefix{fch} est pour \whyprefix{f}{rench} soit \inenglish{français} \emph{(ce choix sert à éviter des incompatibilités avec d'autres packages)}. La liste complète des fonctions nommées est donnée plus bas dans la section  \ref{tnsana-all-named-functions}
 
 \begin{latexex}
-$\fch x = \cosh x$ ou
-$\lg x$
+$\fch x = \cosh x$ ou $\acos x$
 \end{latexex}
 
 
@@ -332,11 +371,11 @@ $\lg x$
 
 \subsection{Avec un paramètre}
 
-Pour le moment il y a juste deux fonctions avec un paramètre. Les voici.
+Pour le moment il y a juste deux fonctions utilisables avec un paramètre optionnel. Les voici.
 
 \begin{latexex}
-$\logb{2} x = \lg x$ ou
-$\expb{6} y = 6^y$
+$\log[2] x = \lg x$ ou
+$\exp[6] y = 6^y$
 \end{latexex}
 
 
@@ -349,39 +388,43 @@ $\expb{6} y = 6^y$
 
 \begin{multicols}{2}
 % Table of all - START
-    \verb+acos+ : $\acos\dots$
+    \macro{acos x} : $\acos x$
 
-    \verb+asin+ : $\asin\dots$
+    \macro{asin x} : $\asin x$
 
-    \verb+atan+ : $\atan\dots$
+    \macro{atan x} : $\atan x$
 
-    \verb+arccosh+ : $\arccosh\dots$
+    \macro{arccosh x} : $\arccosh x$
 
-    \verb+arcsinh+ : $\arcsinh\dots$
+    \macro{arcsinh x} : $\arcsinh x$
 
-    \verb+arctanh+ : $\arctanh\dots$
+    \macro{arctanh x} : $\arctanh x$
 
-    \verb+acosh+ : $\acosh\dots$
+    \macro{acosh x} : $\acosh x$
 
-    \verb+asinh+ : $\asinh\dots$
+    \macro{asinh x} : $\asinh x$
 
-    \verb+atanh+ : $\atanh\dots$
+    \macro{atanh x} : $\atanh x$
 
-    \verb+fch+ : $\fch\dots$
+    \macro{fch x} : $\fch x$
 
-    \verb+fsh+ : $\fsh\dots$
+    \macro{fsh x} : $\fsh x$
 
-    \verb+fth+ : $\fth\dots$
+    \macro{fth x} : $\fth x$
 
-    \verb+afch+ : $\afch\dots$
+    \macro{afch x} : $\afch x$
 
-    \verb+afsh+ : $\afsh\dots$
+    \macro{afsh x} : $\afsh x$
 
-    \verb+afth+ : $\afth\dots$
+    \macro{afth x} : $\afth x$
 
-    \verb+expb{p}+ : $\expb{p}\dots$
+    \macro{exp x} : $\exp x$
 
-    \verb+logb{p}+ : $\logb{p}\dots$
+    \macro{exp[p] x} : $\exp[p] x$
+
+    \macro{log x} : $\log x$
+
+    \macro{log[p] x} : $\log[p] x$
 % Table of all - END
 \end{multicols}
 \section{Définition explicite d'une fonction}
@@ -389,14 +432,14 @@ $\expb{6} y = 6^y$
 \newparaexample{Écriture par défaut}
 
 \begin{latexex}
-$\funcdef{f}{x}{x^2 + 3}%
+$\funcdef{f}{x}{x^2}%
             {I}{J}$
 \end{latexex}
 
 
 \begin{remark}
-	Même si cela est peu utile, vous pouvez utilisez la mise en forme dans du texte pour obtenir
-	$\funcdef{f}{x}{x^2 + 3}%
+	Même si cela est peu utile, vous pouvez utiliser la mise en forme dans du texte pour obtenir
+	$\funcdef{f}{x}{x^2}%
             {I}{J}$
     mais c'est un peu affreux.
 \end{remark}
@@ -409,7 +452,7 @@ $\funcdef{f}{x}{x^2 + 3}%
 On peut cacher le trait vertical via l'option \prefix{s} pour \whyprefix{s}{hort} soit \inenglish{court}.
 
 \begin{latexex}
-$\funcdef[s]{f}{x}{x^2 + 3}%
+$\funcdef[s]{f}{x}{x^2}%
                {I}{J}$
 \end{latexex}
 
@@ -421,9 +464,45 @@ $\funcdef[s]{f}{x}{x^2 + 3}%
 
 Pour avoir tout sur une ligne, ce qui est l'idéal pour une insertion dans du texte, il suffit d'utiliser l'option \prefix{h} pour \whyprefix{h}{orizontal}.
 \begin{latexex}
-Soit $\funcdef[h]{f}{x}{x^2 + 3}%
-                    {I}{J}$.
+Soit $\funcdef[h]{f}{x}{x^2}%
+                    {I}{J}$ ...
 \end{latexex}
+
+
+% ---------------------- %
+
+
+\newparaexample{Écriture en ligne incomplète}
+
+En mode horizontal, les ensembles peuvent être de valeur vide pour ne pas les indiquer.
+
+\begin{latexex}
+$\funcdef[h]{f}{x}{x^2}{}{J}$
+
+$\funcdef[h]{f}{x}{x^2}{I}{}$
+
+$\funcdef[h]{f}{x}{x^2}{}{}$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\newparaexample{Écriture textuelle}
+
+On peut enfin obtenir une version \emph{\og textuelle \fg} via la macro \macro{txtfuncdef} qui ne s'utilise pas en mode mathématique où \prefix{txt} est pour \prefix{texte}.
+Ici aussi on peut omettre des ensembles.
+
+\begin{latexex}
+\txtfuncdef{f}{x}{x^2}{I}{J}
+
+\txtfuncdef{f}{x}{x^2}{}{J}
+
+\txtfuncdef{f}{x}{x^2}{I}{}
+
+\txtfuncdef{f}{x}{x^2}{}{}
+\end{latexex}
+
 
 
 % ---------------------- %
@@ -442,6 +521,7 @@ $\limit{f(x)}{x}{0} = \frac{1}{2}$
 	\verb#\lim\limits_{x \rightarrow 0} f(x)# produit 
 	$\lim\limits_{x \rightarrow 0} f(x)$ contre 
 	$\limit{f(x)}{x}{0}$ ci-dessus.
+	La version \macro{limit} utilise un petit peu plus d'espace sous le mot lim.
 \end{remark}
 
 
@@ -451,10 +531,11 @@ $\limit{f(x)}{x}{0} = \frac{1}{2}$
 
 \newparaexample{Avec des conditions}
 
-Ce 2\ieme{} exemple devrait rendre intéressante la macro \macro{limit} qui permet d'ajouter facilement plusieurs conditions comme le montre la 2\ieme{} limite
+Ce 2\ieme{} exemple devrait rendre intéressante la macro \macro{limit} qui permet d'ajouter facilement plusieurs conditions
 \footnote{
 	En pratique, on utilise généralement au maximum une condition.
-}.
+}
+comme le montre la 2\ieme{} limite ci-après.
 
 \begin{latexex}
 $\limit{f(x)}{x}{0 | x > 0}$ ou
@@ -680,9 +761,15 @@ Notez qu'avec l'option \verb+ei+ l'exposant total n'est pas imprimé et que les 
 \end{latexex}
 
 
-\begin{remark}
-	L'option \verb+ei+ ne marche pas avec des variables indicées pour le moment.
-\end{remark}
+\medskip
+
+
+Les options \verb+i+ et \verb+ei+ marchent avec des variables indicées à condition de bien mettre les dites variables entre des accolades.
+
+\begin{latexex}
+ $\pder[i] {f}{x_1 | {x_2}^2}{3}
+= \pder[ei]{f}{x_1 | {x_2}^2}{3}$
+\end{latexex}
 
 
 \medskip
@@ -693,8 +780,10 @@ Ci-dessous on montre aussi une écriture du type \emph{\og opérateur fonctionne
 
 \begin{latexex}
  $\pder[of,sp] {u + v}{x | y^2}{}
-= \pder[osf,sp]{u + v}{x | y^2}{}
-= \pder[i,sp]  {u + v}{x | y^2}{}$
+= \pder[osf,sp]{u + v}{x | y^2}{}$
+
+ $\pder[i,sp]  {u + v}{x | y^2}{}
+= \pder[ei,sp] {u + v}{x | y^2}{}$
 \end{latexex}
 
 
@@ -770,7 +859,7 @@ Reportez vous à la documentation de \verb+tkz-tab+ pour des compléments d'info
 
 \newparaexample{Avec des signes}
 
-\inputlatexexcodeafter{tikz/cos-sign.tkz}
+\inputlatexexcodeafter{tikz/tabsignvar-cos-sign.tkz}
 
 
 % ---------------------- %
@@ -778,7 +867,7 @@ Reportez vous à la documentation de \verb+tkz-tab+ pour des compléments d'info
 
 \newparaexample{Avec des variations (sans cadre)}
 
-\inputlatexexcodeafter{tikz/basic-var.tkz}
+\inputlatexexcodeafter{tikz/tabsignvar-basic-var.tkz}
 
 
 % ---------------------- %
@@ -786,7 +875,7 @@ Reportez vous à la documentation de \verb+tkz-tab+ pour des compléments d'info
 
 \newparaexample{Variations via une dérivée (sans cadre)}
 
-\inputlatexexcodeafter{tikz/sin-var-via-cos.tkz}
+\inputlatexexcodeafter{tikz/tabsignvar-sin-var-via-cos.tkz}
 
 
 % ---------------------- %
@@ -794,7 +883,7 @@ Reportez vous à la documentation de \verb+tkz-tab+ pour des compléments d'info
 
 \newparaexample{Une image intermédiaire avec une seule flèche}
 
-\inputlatexexcodeafter{tikz/inter-img.tkz}
+\inputlatexexcodeafter{tikz/tabsignvar-inter-img.tkz}
 
 
 % ---------------------- %
@@ -802,12 +891,12 @@ Reportez vous à la documentation de \verb+tkz-tab+ pour des compléments d'info
 
 \newparaexample{Valeurs interdites et valeurs supplémentaires}
 
-\inputlatexexcodeafter{tikz/illegal-n-inter-img-1.tkz}
+\inputlatexexcodeafter{tikz/tabsignvar-illegal-n-inter-img-1.tkz}
 
 
 Voici un autre exemple pour comprendre comment utiliser \macro{tkzTabVal} avec en plus l'option \verb+draw+ qui peut rendre service.
 
-\inputlatexexcodeafter{tikz/illegal-n-inter-img-2.tkz}
+\inputlatexexcodeafter{tikz/tabsignvar-illegal-n-inter-img-2.tkz}
 
 
 % ---------------------- %
@@ -818,13 +907,13 @@ Voici un autre exemple pour comprendre comment utiliser \macro{tkzTabVal} avec e
 Il est assez facile de produire des choses très utiles pédagogiquement comme ce qui suit en se salissant un peu les mains avec du code TikZ.
 
 \begin{center}
-	\input{tikz/align-sign-from-var-1.tkz}
+	\input{tikz/tabsignvar-align-sign-from-var-1.tkz}
 \end{center}
 
 On déduit du tableau précédent le signe de la fonction $f$.
 
 \begin{center}
-	\input{tikz/align-sign-from-var-2.tkz}
+	\input{tikz/tabsignvar-align-sign-from-var-2.tkz}
 \end{center}
 
 
@@ -832,7 +921,7 @@ Voici le code du 1\ier{} tableau où le placement de la valeur $3$ au milieu ent
 
 \medskip
 
-\inputlatexexalone{tikz/align-sign-from-var-1.tkz}
+\inputlatexexalone{tikz/tabsignvar-align-sign-from-var-1.tkz}
 
 
 Pour produire le code du 2\ieme{} tableau il a fallu utiliser au préalable ce qui suit en activant l'option \verb@help@ qui demande à \verb@tkz-tab@ d'afficher les noms de noeuds au sens TikZ qui ont été créés.
@@ -842,13 +931,13 @@ Ceci permet alors d'utiliser ces noeuds pour des dessins TikZ faits maison
 }.
 	
 
-\inputlatexexcodeafter{tikz/node-name.tkz}
+\inputlatexexcodeafter{tikz/tabsignvar-node-name.tkz}
 
 
 Maintenant que les noms des noeuds sont connus, il devient facile de produire le code ci-après.
 Bien noter l'usage de valeurs utiles \og vides \fg{} de $x$ ainsi que les mystiques \verb@\node at ($(A)!0.5!(B)$)@ permettant de placer un noeud au milieu entre les deux noeuds \verb@A@ et \verb@B@. 
 
-\inputlatexexalone{tikz/align-sign-from-var-2.tkz}
+\inputlatexexalone{tikz/tabsignvar-align-sign-from-var-2.tkz}
 
 
 % ---------------------- %
@@ -944,7 +1033,7 @@ Le code utilisé est le suivant.
 Considérons le tableau suivant et imaginons que nous voulions l'expliquer à un débutant.
 
 \begin{center}
-	\input{tikz/deco-basic-1.tkz}
+	\input{tikz/tabsignvar-deco-basic-1.tkz}
 \end{center}
 
 Deux options s'offrent à nous pour justifier comment a été rempli le tableau.
@@ -963,7 +1052,7 @@ Deux options s'offrent à nous pour justifier comment a été rempli le tableau.
 \end{enumerate}
 
 \begin{center}
-	\input{tikz/deco-basic-2.tkz}
+	\input{tikz/tabsignvar-deco-basic-2.tkz}
 \end{center}
 
 
@@ -979,7 +1068,7 @@ il a fallu ajouter les lignes données ci-dessous où sont utilisées les macros
 
 \medskip
 
-\inputlatexexalone{tikz/deco-basic-2-short.tkz}
+\inputlatexexalone{tikz/tabsignvar-deco-basic-2-short.tkz}
 
 
 \begin{remark}
@@ -1179,7 +1268,7 @@ Avant de voir ce qui est proposé rappelons que la convention est de prendre $0$
 Il devient très facile de proposer un tableau décoré comme le suivant.
 
 \begin{center}
-	\input{tikz/deco-parabola.tkz}
+	\input{tikz/tabsignvar-deco-parabola.tkz}
 \end{center}
 
 
@@ -1187,7 +1276,7 @@ En plus des deux exemples de schémas de paraboles, il faut noter dans le code s
 
 \medskip
 
-\inputlatexexalone{tikz/deco-parabola-short.tkz}
+\inputlatexexalone{tikz/tabsignvar-deco-parabola-short.tkz}
 
 
 % ---------------------- %
@@ -1198,28 +1287,28 @@ En plus des deux exemples de schémas de paraboles, il faut noter dans le code s
 Voici un 1\ier{} tableau avec certaines des fonctions sans paramètre.
 
 \begin{center}
-	\input{tikz/deco-ref-1.tkz}
+	\input{tikz/tabsignvar-deco-ref-1.tkz}
 \end{center}
 
 Le code correspondant est le suivant.
 
 \medskip
 
-\inputlatexexalone{tikz/deco-ref-1-short.tkz}
+\inputlatexexalone{tikz/tabsignvar-deco-ref-1-short.tkz}
 
 \medskip
 
 Voici un 2\ieme{} tableau avec les fonctions sans paramètre manquantes ci-dessus.
 
 \begin{center}
-	\input{tikz/deco-ref-2.tkz}
+	\input{tikz/tabsignvar-deco-ref-2.tkz}
 \end{center}
 
 Le code correspondant est le suivant.
 
 \medskip
 
-\inputlatexexalone{tikz/deco-ref-2-short.tkz}
+\inputlatexexalone{tikz/tabsignvar-deco-ref-2-short.tkz}
 
 
 % ---------------------- %
@@ -1231,7 +1320,7 @@ Pour finir, indiquons que les outils de décoration marchent aussi pour les tabl
 Voici un exemple possible d'utilisation où les retours à la ligne ont été obtenus affreusement, ou pas, via \verb#\parbox{11.5em}{...}#.
 
 \begin{center}
-	\input{tikz/deco-var.tkz}
+	\input{tikz/tabsignvar-deco-var.tkz}
 \end{center}
 %% \section{Analysis}
 %
@@ -1366,14 +1455,40 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 % Changes shown - START
 
     \medskip
+    \item[2020-07-30] Nouvelle version mineure \verb+0.6.0-beta+.
+    
+    \begin{itemize}[itemsep=.5em]
+        \item \topic{Définition explicite d'une fonction}
+        \begin{itemize}[itemsep=.5em]
+            \item Une nouvelle macro \macro{txfuncdef} produit une version textuelle courte.
+    
+            \item Omission possible des ensembles, via des arguments vides, quand on utilise \macro{funcdef[h]} ou \macro{txfuncdef}.
+        \end{itemize}
+    
+    % ------------------------ %
+    
+        \item \topic*{Fonctions avec un paramètre}
+              les macros \macro{expb} et \macro{logb} ont été remplacées par \macro{exp} et \macro{log} qui ont un argument optionnel pour indiquer éventuellement une base.
+    
+    % ------------------------ %
+    
+        \item \topic*{Dérivation partielle}
+              \macro{pder[ei]} fonctionne maintenant aussi avec des variables indexées.
+              
+    \end{itemize}
+    
+    \separation
+% ------------------------ %
+
+    \medskip
     \item[2020-07-22] Nouvelle version mineure \verb+0.5.0-beta+.
     
     \begin{itemize}[itemsep=.5em]
         \item \topic*{Définition explicite d'une fonction}
               ajout de \macro{funcdef}.
-    
-        \separation
     \end{itemize}
+    
+    \separation
 % ------------------------ %
 
     \medskip
@@ -1385,23 +1500,17 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
     
     % ------------------------ %
     
-        \separation
-    
         \item \topic*{Dérivation}
               par souci de cohérence, il faudra taper \verb#\der{f}{x}{n}# au lieu de l'ancien \verb#\der{f}{n}{x}#.
     
     % ------------------------ %
     
-        \separation
-    
         \item \topic*{Intégration}
               par souci de cohérence, il faudra taper \verb#\integrate{f}{x}{a}{b}# au lieu de l'ancien \verb#\integrate{a}{b}{f}{x}#.
               Il en va de même pour \macro{hook}.
-    
-    % ------------------------ %
-    
-        \separation
     \end{itemize}
+    
+    \separation
 
 % ------------------------ %
 
@@ -1418,10 +1527,6 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
     
     % ------------------------ %
     
-    
-        \separation
-    
-    
         \item \topic{Tableaux de signe et de variation}
         \begin{itemize}[itemsep=.5em]
             \item Ajout de \macro{backLine} pour changer la couleur de fond d'une ou plusieurs lignes.
@@ -1429,12 +1534,9 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
     
             \item \macro{graphSign} propose des fonctions de référence \emph{(sans paramètre)}.
         \end{itemize}
-    
-    % ------------------------ %
-    
-    
-        \separation
     \end{itemize}
+    
+    \separation
 
 % ------------------------ %
 
@@ -1443,9 +1545,9 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
     
     \begin{itemize}[itemsep=.5em]
         \item \topic*{Symboles} les nouvelles macros \macro{symvar} et \macro{symvar*} produisent un disque plein et un carré plein permettant par exemple d'indiquer symboliquement une ou des variables.
-        
-        \separation
     \end{itemize}
+    
+    \separation
 % ------------------------ %
 
     \medskip
@@ -1455,8 +1557,8 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
         \item \topic*{Fonctions nommées} \macro{ppcm} et \macro{pgcd} ont été déplacées dans \texttt{tnsarith} disponible sur \url{https://github.com/typensee-latex/tnsarith.git}.
     \end{itemize}
     
-    
     \separation
+
 % ------------------------ %
 
     \medskip
@@ -1472,9 +1574,17 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 \section{Toutes les fiches techniques} \label{techincal-ids}
 
 
+
+
+
+
+
+
+
 \subsection{Constantes et paramètres}
 
-\subsubsection{Constantes classiques}
+\subsubsection{Constantes classiques ajoutées}
+
 
 
 \vspace{-1em}
@@ -1483,7 +1593,7 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 
 \foreach \k in {ggamma, ppi, ttau, ee, ii, jj, kk}{
 
-	\IDmacro*{\k}{0}
+	\IDope{\k}
 
 }
 
@@ -1498,61 +1608,77 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 \subsubsection{Constantes latines personnelles}
 
 
-\IDmacro*{param}{1}
+
+\IDmacro[a]{param}{1}
 
 \IDarg{} un texte utilisant l'alphabet latin.
+
+
 \subsection{Une variable \og symbolique \fg{}}
 
 
-\IDmacro*{symvar }{0}
 
-\IDmacro*{symvar*}{0}
+\IDmacro[o]{symvar}{1}
+
+\IDoption{} le numéro du symbole qui vaut \verb#1# par défaut.
+\begin{itemize}
+	\item \verb#1# donne $\symvar[1]$ .
+	\item \verb#2# donne $\symvar[2]$ .
+	\item \verb#3# donne $\symvar[3]$ .
+%	\item \verb#4# donne $\symvar[4]$ .
+\end{itemize}
+
+
 \subsection{La fonction valeur absolue}
 
 
-\IDmacro*{abs}{1}
 
-\IDmacro*{abs*}{1}
+\IDmacro[a]{abs }{1}
+
+\IDmacro[a]{abs*}{1}
 
 \IDarg{} l'expression sur laquelle appliquer la fonction valeur absolue.
+
+
 \subsection{Fonctions nommées spéciales}
 
 \subsubsection{Sans paramètre}
+
 
 
 % List of functions without parameter - START
 
 \foreach \k in {acos, asin, atan}{
 
-    \IDmacro*{\k}{0}
+    \IDope{\k} 
 }
                 
 \separation
 
 \foreach \k in {arccosh, arcsinh, arctanh}{
 
-    \IDmacro*{\k}{0}
+    \IDope{\k} 
 }
                 
 \separation
 
 \foreach \k in {acosh, asinh, atanh}{
 
-    \IDmacro*{\k}{0}
+    \IDope{\k} 
 }
                 
 \separation
 
 \foreach \k in {fch, fsh, fth}{
 
-    \IDmacro*{\k}{0}  où \quad \mwhyprefix{{f}}{{rench}}
+    \IDope{\k} \hfill \mwhyprefix{{f}}{{rench}}
 }
                 
 \separation
 
 \foreach \k in {afch, afsh, afth}{
 
-    \IDmacro*{\k}{0}
+    \IDope{\k} 
 }
 
 % List of functions without parameter - END
@@ -1564,23 +1690,27 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 \subsubsection{Avec un paramètre}
 
 
+
 % List of functions with parameters - START
 
-\IDmacro*{expb}{1}
+\IDmacro[o]{exp}{1}
 
-\IDarg{} la base de l'exponentielle
+\IDoption{} la base de l'exponentielle
 
 \separation
 
-\IDmacro*{logb}{1}
+\IDmacro[o]{log}{1}
 
-\IDarg{} la base du logarithme
+\IDoption{} la base du logarithme
 
 % List of functions with parameters - END
 
 
 % ---------------------- %
+
+
 \subsection{Définition explicite d'une fonction}
+
 
 
 \IDmacro{funcdef}{1}{5}
@@ -1600,24 +1730,36 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 
 \IDarg{2} la variable.
 
-\IDarg{3} la formule de définition.
+\IDarg{3} la formule explicite de définition.
 
-\IDarg{4} ensemble de départ.
+\IDarg{4} l'ensemble de départ. Cet argument peut être vide si le mode \verb+h+ est activé
 
-\IDarg{5} ensemble d'arrivée.
+\IDarg{5} l'ensemble d'arrivée.
+
+
+\separation
+
+
+\IDmacro[a]{txtfuncdef}{5}
+
+
+\IDargs{1..5} voir les explications données ci-dessus pour la macro \macro{funcdef}.
+
+
 \subsection{Limite}
+
 
 
 \IDmacro{limit}{1}{3}
 
 
-\IDoption{}  la valeur par défaut \verb+asit+ n'a pas lieu d'être utilisée. 
+\IDoption{}  la valeur par défaut \verb+asit+ n'a pas vocation à être utilisée. 
 \begin{enumerate}
 	\item \verb+asit+ : rien n'est appliqué sur la fonction qui reste donc tel quelle.
 	
-	\item \verb+p+ : ajout de parenthèses extensibles autour de la fonction.
+	\item \verb+p   + : ajout de parenthèses extensibles autour de la fonction.
 
-	\item \verb+sp+ : ajout de parenthèses non extensibles autour de la fonction.
+	\item \verb+sp  + : ajout de parenthèses non extensibles autour de la fonction.
 \end{enumerate}
 
 
@@ -1626,10 +1768,13 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 \IDarg{2} la variable qui va tendre vers quelque chose.
 
 \IDarg{3} la valeur limite suivie éventuellement de conditions en utilisant la barre verticale \verb+|+ pour séparer ces différentes informations.
+
+
 \subsection{Calcul différentiel}
 
 \subsubsection{\texorpdfstring{Les opérateurs $\pp{}$ et $\dd{}$}%
                            {Les opérateurs "d rond" et "d droit"}}
+
 
 
 \IDmacro{dd}{1}{1}
@@ -1647,35 +1792,36 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 \subsubsection{Dérivations totales d'une fonction -- Version longue avec une variable}
 
 
+
 \IDmacro{der}{1}{3}
 
 \IDoption{} la valeur par défaut est \verb+u+. 
 \begin{enumerate}
-	\item \verb+u+ : écriture usuelle avec des primes \emph{(ceci nécessite d'avoir une valeur entière naturelle connue du nombre de dérivations successives)}.
+	\item \verb+u  + : écriture usuelle avec des primes \emph{(ceci nécessite d'avoir une valeur entière naturelle connue du nombre de dérivations successives)}.
 
-	\item \verb+e+ : écriture via un exposant entre des parenthèses.
+	\item \verb+e  + : écriture via un exposant entre des parenthèses.
 	
-	\item \verb+i+ : écriture via un indice.
+	\item \verb+i  + : écriture via un indice.
 
-	\item \verb+d+ : écriture pointée à la physicienne \emph{(cf. la dérivation par rapport au temps)}.
+	\item \verb+d  + : écriture pointée à la physicienne \emph{(cf. la dérivation par rapport au temps)}.
 
-	\item \verb+bd+ : écriture pointée avec un crochet entre les points et la fonction.
+	\item \verb+bd + : écriture pointée avec un crochet entre les points et la fonction.
 
 	\medskip
 	
-	\item \verb+f+ : écriture via une fraction en mode display.
+	\item \verb+f  + : écriture via une fraction en mode display.
 
-	\item \verb+sf+ : écriture via une fraction en mode non display.
+	\item \verb+sf + : écriture via une fraction en mode non display.
 
-	\item \verb+of+ : écriture via une fraction en mode display sous la forme d'un opérateur \emph{(la fonction est à côté de la fraction)}.
+	\item \verb+of + : écriture via une fraction en mode display sous la forme d'un opérateur \emph{(la fonction est à côté de la fraction)}.
 
 	\item \verb+osf+ : écriture via une fraction en mode non display sous la forme d'un opérateur \emph{(la fonction est à côté de la fraction)}.
 
 	\medskip
 	
-	\item \verb+p+ : ajout de parenthèses extensibles autour de la fonction.
+	\item \verb+p  + : ajout de parenthèses extensibles autour de la fonction.
 
-	\item \verb+sp+ : ajout de parenthèses non extensibles autour de la fonction.
+	\item \verb+sp + : ajout de parenthèses non extensibles autour de la fonction.
 \end{enumerate}
 
 
@@ -1692,7 +1838,8 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 \subsubsection{Dérivations totales d'une fonction -- Version courte sans variable} \label{tnsana-short-der}
 
 
-\IDmacro{sder}{1}{2} où \quad \mwhyprefix{s}{imple}
+
+\IDmacro{sder}{1}{2} \hfill \mwhyprefix{s}{imple}
 
 \IDoption{} la valeur par défaut est \verb+u+. Les options disponibles sont \verb+u+, \verb+e+, \verb+d+, \verb+bd+, \verb+p+ et \verb+sp+ : voir la fiche technique de \macro{sder} ci-dessus.
 
@@ -1707,39 +1854,43 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 \subsubsection{L'opérateur de dérivation totale} \label{tnsana-ope-total-der}
 
 
-\IDmacro{derope}{1}{2} où \quad \mwhyprefix{ope}{rator}
+
+\IDmacro{derope}{1}{2} \hfill \mwhyprefix{ope}{rator}
 
 \IDoption{} la valeur par défaut est \verb+f+. Les options disponibles sont \verb+f+, \verb+sf+ et \verb+i+ : voir la fiche technique de \macro{der} donnée un peu plus haut.
 
 \IDarg{1} la fonction à dériver.
 
 \IDarg{2} l'ordre de dérivation.
+
+
 \subsubsection{Dérivations partielles}
 
 
-\IDmacro{pder}{1}{2} où \quad \mwhyprefix{p}{artial}
+
+\IDmacro{pder}{1}{2} \hfill \mwhyprefix{p}{artial}
 
 \IDoption{} la valeur par défaut est \verb+f+. 
 \begin{enumerate}
-	\item \verb+f+ : écriture via une fraction en mode display.
+	\item \verb+f  + : écriture via une fraction en mode display.
 
-	\item \verb+sf+ : écriture via une fraction en mode non display.
+	\item \verb+sf + : écriture via une fraction en mode non display.
 
-	\item \verb+of+ : écriture via une fraction en mode display sous la forme d'un opérateur \emph{(la fonction est à côté de la fraction)}.
+	\item \verb+of + : écriture via une fraction en mode display sous la forme d'un opérateur \emph{(la fonction est à côté de la fraction)}.
 
 	\item \verb+osf+ : écriture via une fraction en mode non display sous la forme d'un opérateur \emph{(la fonction est à côté de la fraction)}.
 
 	\medskip
 
-	\item \verb+i+ : écriture via un indice.
+	\item \verb+i  + : écriture via un indice.
 
-	\item \verb+ei+ : écriture via un indice mais en \emph{\og développant \fg}.
+	\item \verb+ei + : écriture via un indice mais en \emph{\og développant \fg}.
 
 	\medskip
 
-	\item \verb+p+ : ajout de parenthèses extensibles autour de la fonction.
+	\item \verb+p  + : ajout de parenthèses extensibles autour de la fonction.
 
-	\item \verb+sp+ : ajout de parenthèses non extensibles autour de la fonction.
+	\item \verb+sp + : ajout de parenthèses non extensibles autour de la fonction.
 \end{enumerate}
 
 
@@ -1756,8 +1907,9 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 \subsubsection{L'opérateur de dérivation partielle} \label{tnsana-ope-partial-der}
 
 
-\IDmacro{pderope}{1}{2} où \quad \mwhyprefix{p}{artial}
-                              et \mwhyprefix{ope}{rator}
+
+\IDmacro{pderope}{1}{2} \hfill \mwhyprefix{p}{artial}
+                            et \mwhyprefix{ope}{rator}
 
 \IDoption{} la valeur par défaut est \verb+f+. Les options disponibles sont \verb+f+, \verb+sf+ et \verb+i+ : voir la fiche technique de \macro{pder} juste avant.
 
@@ -1767,12 +1919,21 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 
 
 
+
+
+
+
+
+
+
+
 \subsection{Tableaux de variation et de signe}
+
 
 
 \subsubsection{Coloriser le fond}
 
-\IDmacro{backLine}{1}{1}  où \quad \mwhyprefix{back}{ground}
+\IDmacro{backLine}{1}{1} \hfill \mwhyprefix{back}{ground}
 
 
 \IDoption{} couleur au format TikZ.
@@ -1787,7 +1948,7 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 
 \subsubsection{Commentaires}
 
-\IDmacro{comLine}{1}{2}  où \quad \mwhyprefix{com}{ment}
+\IDmacro{comLine}{1}{2} \hfill \mwhyprefix{com}{ment}
 
 
 \IDoption{} couleur au format TikZ.
@@ -1804,7 +1965,7 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 
 \subsubsection{Graphiques explicatifs}
 
-\IDmacro{graphSign}{1}{2..4}
+\IDmacro{graphSign}{1}{4}
 
 
 \IDoption{} couleur au format TikZ.
@@ -1854,12 +2015,15 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 \footnote{
 	Notant $\Delta = b^2 - 4 ac$, si $\Delta < 0$ il n'y aura pas d'argument supplémentaire, si $\Delta = 0$ il y en aura un seul et enfin si $\Delta > 0$ il faudra en donner deux, le 1\ier{} étant le plus petit.
 }.
+
+
 \subsection{Calcul intégral}
 
 \subsubsection{Le symbole standard revisité}
 
 
-\IDmacro*{stdint}{0} (pour retrouver le comportement par défaut)
+
+\IDope{stdint} (pour retrouver le comportement par défaut)
 
 
 % ---------------------- %
@@ -1868,15 +2032,16 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 \subsubsection{Un opérateur d'intégration clés en main}
 
 
-\IDmacro*{integrate  }{4}
 
-\IDmacro*{integrate* }{4}
+\IDmacro[a]{integrate  }{4}
+
+\IDmacro[a]{integrate* }{4}
 
 \extraspace
 
-\IDmacro*{dintegrate }{4}  où \quad \mwhyprefix{d}{isplaystyle}
+\IDmacro[a]{dintegrate }{4}  \hfill \mwhyprefix{d}{isplaystyle}
 
-\IDmacro*{dintegrate*}{4}  où \quad \mwhyprefix{d}{isplaystyle}
+\IDmacro[a]{dintegrate*}{4}
 
 
 \IDarg{1} la fonction intégrée.
@@ -1895,6 +2060,7 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 \subsubsection{L'opérateur \og crochet \fg}
 
 
+
 \IDmacro{hook }{1}{4}
 
 \IDmacro{hook*}{1}{4}
@@ -1902,11 +2068,11 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 
 \IDoption{} la valeur par défaut est \verb+b+. Voici les différentes valeurs possibles.
 \begin{enumerate}
-	\item \verb+b+ : des crochets extensibles sont utilisés.
+	\item \verb+b + : des crochets extensibles sont utilisés.
 
 	\item \verb+sb+ : des crochets non extensibles sont utilisés.
 
-	\item \verb+r+ : un unique trait vertical extensible est utilisé à droite.
+	\item \verb+r + : un unique trait vertical extensible est utilisé à droite.
 
 	\item \verb+sr+ : un unique trait vertical non extensible est utilisé à droite.
 \end{enumerate}
@@ -1918,6 +2084,8 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 \IDarg{3} valeur initiale à substituer qui apparait en bas du crochet fermant ou de la barre verticale.
 
 \IDarg{4} valeur finale à substituer qui apparait en haut du crochet fermant ou de la barre verticale.
+
+
 
 
 \end{document}

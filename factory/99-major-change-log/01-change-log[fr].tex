@@ -22,14 +22,40 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 % Changes shown - START
 
     \medskip
+    \item[2020-07-30] Nouvelle version mineure \verb+0.6.0-beta+.
+    
+    \begin{itemize}[itemsep=.5em]
+        \item \topic{Définition explicite d'une fonction}
+        \begin{itemize}[itemsep=.5em]
+            \item Une nouvelle macro \macro{txfuncdef} produit une version textuelle courte.
+    
+            \item Omission possible des ensembles, via des arguments vides, quand on utilise \macro{funcdef[h]} ou \macro{txfuncdef}.
+        \end{itemize}
+    
+    % ------------------------ %
+    
+        \item \topic*{Fonctions avec un paramètre}
+              les macros \macro{expb} et \macro{logb} ont été remplacées par \macro{exp} et \macro{log} qui ont un argument optionnel pour indiquer éventuellement une base.
+    
+    % ------------------------ %
+    
+        \item \topic*{Dérivation partielle}
+              \macro{pder[ei]} fonctionne maintenant aussi avec des variables indexées.
+              
+    \end{itemize}
+    
+    \separation
+% ------------------------ %
+
+    \medskip
     \item[2020-07-22] Nouvelle version mineure \verb+0.5.0-beta+.
     
     \begin{itemize}[itemsep=.5em]
         \item \topic*{Définition explicite d'une fonction}
               ajout de \macro{funcdef}.
-    
-        \separation
     \end{itemize}
+    
+    \separation
 % ------------------------ %
 
     \medskip
@@ -41,23 +67,17 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
     
     % ------------------------ %
     
-        \separation
-    
         \item \topic*{Dérivation}
               par souci de cohérence, il faudra taper \verb#\der{f}{x}{n}# au lieu de l'ancien \verb#\der{f}{n}{x}#.
     
     % ------------------------ %
     
-        \separation
-    
         \item \topic*{Intégration}
               par souci de cohérence, il faudra taper \verb#\integrate{f}{x}{a}{b}# au lieu de l'ancien \verb#\integrate{a}{b}{f}{x}#.
               Il en va de même pour \macro{hook}.
-    
-    % ------------------------ %
-    
-        \separation
     \end{itemize}
+    
+    \separation
 
 % ------------------------ %
 
@@ -74,10 +94,6 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
     
     % ------------------------ %
     
-    
-        \separation
-    
-    
         \item \topic{Tableaux de signe et de variation}
         \begin{itemize}[itemsep=.5em]
             \item Ajout de \macro{backLine} pour changer la couleur de fond d'une ou plusieurs lignes.
@@ -85,12 +101,9 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
     
             \item \macro{graphSign} propose des fonctions de référence \emph{(sans paramètre)}.
         \end{itemize}
-    
-    % ------------------------ %
-    
-    
-        \separation
     \end{itemize}
+    
+    \separation
 
 % ------------------------ %
 
@@ -99,9 +112,9 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
     
     \begin{itemize}[itemsep=.5em]
         \item \topic*{Symboles} les nouvelles macros \macro{symvar} et \macro{symvar*} produisent un disque plein et un carré plein permettant par exemple d'indiquer symboliquement une ou des variables.
-        
-        \separation
     \end{itemize}
+    
+    \separation
 % ------------------------ %
 
     \medskip
@@ -111,8 +124,8 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
         \item \topic*{Fonctions nommées} \macro{ppcm} et \macro{pgcd} ont été déplacées dans \texttt{tnsarith} disponible sur \url{https://github.com/typensee-latex/tnsarith.git}.
     \end{itemize}
     
-    
     \separation
+
 % ------------------------ %
 
     \medskip

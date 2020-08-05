@@ -27,6 +27,7 @@ $\limit{f(x)}{x}{0} = \frac{1}{2}$
 	\verb#\lim\limits_{x \rightarrow 0} f(x)# produit 
 	$\lim\limits_{x \rightarrow 0} f(x)$ contre 
 	$\limit{f(x)}{x}{0}$ ci-dessus.
+	La version \macro{limit} utilise un petit peu plus d'espace sous le mot lim.
 \end{remark}
 
 
@@ -36,10 +37,11 @@ $\limit{f(x)}{x}{0} = \frac{1}{2}$
 
 \newparaexample{Avec des conditions}
 
-Ce 2\ieme{} exemple devrait rendre intéressante la macro \macro{limit} qui permet d'ajouter facilement plusieurs conditions comme le montre la 2\ieme{} limite
+Ce 2\ieme{} exemple devrait rendre intéressante la macro \macro{limit} qui permet d'ajouter facilement plusieurs conditions
 \footnote{
 	En pratique, on utilise généralement au maximum une condition.
-}.
+}
+comme le montre la 2\ieme{} limite ci-après.
 
 \begin{latexex}
 $\limit{f(x)}{x}{0 | x > 0}$ ou
@@ -73,13 +75,13 @@ $\displaystyle\limit[sp]{\frac{1}{x}}{x}
 \IDmacro{limit}{1}{3}
 
 
-\IDoption{}  la valeur par défaut \verb+asit+ n'a pas lieu d'être utilisée. 
+\IDoption{}  la valeur par défaut \verb+asit+ n'a pas vocation à être utilisée. 
 \begin{enumerate}
 	\item \verb+asit+ : rien n'est appliqué sur la fonction qui reste donc tel quelle.
 	
-	\item \verb+p+ : ajout de parenthèses extensibles autour de la fonction.
+	\item \verb+p   + : ajout de parenthèses extensibles autour de la fonction.
 
-	\item \verb+sp+ : ajout de parenthèses non extensibles autour de la fonction.
+	\item \verb+sp  + : ajout de parenthèses non extensibles autour de la fonction.
 \end{enumerate}
 
 
