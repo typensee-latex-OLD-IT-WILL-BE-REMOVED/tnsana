@@ -235,10 +235,10 @@
 	\\%
 	{\footnotesize Code source disponible sur \url{https://github.com/typensee-latex/tnsana.git}.}%
 	\\%
-    {\footnotesize Version \texttt{0.6.0-beta} développée et testée sur \macosxname{}.}%
+    {\footnotesize Version \texttt{0.7.0-beta} développée et testée sur \macosxname{}.}%
 }
 \author{Christophe BAL}
-\date{2020-07-30}
+\date{2020-08-05}
 
 \maketitle
 
@@ -427,85 +427,6 @@ $\exp[6] y = 6^y$
     \macro{log[p] x} : $\log[p] x$
 % Table of all - END
 \end{multicols}
-\section{Définition explicite d'une fonction}
-
-\newparaexample{Écriture par défaut}
-
-\begin{latexex}
-$\funcdef{f}{x}{x^2}%
-            {I}{J}$
-\end{latexex}
-
-
-\begin{remark}
-	Même si cela est peu utile, vous pouvez utiliser la mise en forme dans du texte pour obtenir
-	$\funcdef{f}{x}{x^2}%
-            {I}{J}$
-    mais c'est un peu affreux.
-\end{remark}
-
-% ---------------------- %
-
-
-\newparaexample{Écriture alternative}
-
-On peut cacher le trait vertical via l'option \prefix{s} pour \whyprefix{s}{hort} soit \inenglish{court}.
-
-\begin{latexex}
-$\funcdef[s]{f}{x}{x^2}%
-               {I}{J}$
-\end{latexex}
-
-
-% ---------------------- %
-
-
-\newparaexample{Écriture en ligne}
-
-Pour avoir tout sur une ligne, ce qui est l'idéal pour une insertion dans du texte, il suffit d'utiliser l'option \prefix{h} pour \whyprefix{h}{orizontal}.
-\begin{latexex}
-Soit $\funcdef[h]{f}{x}{x^2}%
-                    {I}{J}$ ...
-\end{latexex}
-
-
-% ---------------------- %
-
-
-\newparaexample{Écriture en ligne incomplète}
-
-En mode horizontal, les ensembles peuvent être de valeur vide pour ne pas les indiquer.
-
-\begin{latexex}
-$\funcdef[h]{f}{x}{x^2}{}{J}$
-
-$\funcdef[h]{f}{x}{x^2}{I}{}$
-
-$\funcdef[h]{f}{x}{x^2}{}{}$
-\end{latexex}
-
-
-% ---------------------- %
-
-
-\newparaexample{Écriture textuelle}
-
-On peut enfin obtenir une version \emph{\og textuelle \fg} via la macro \macro{txtfuncdef} qui ne s'utilise pas en mode mathématique où \prefix{txt} est pour \prefix{texte}.
-Ici aussi on peut omettre des ensembles.
-
-\begin{latexex}
-\txtfuncdef{f}{x}{x^2}{I}{J}
-
-\txtfuncdef{f}{x}{x^2}{}{J}
-
-\txtfuncdef{f}{x}{x^2}{I}{}
-
-\txtfuncdef{f}{x}{x^2}{}{}
-\end{latexex}
-
-
-
-% ---------------------- %
 \section{Limite}
 
 \newparaexample{Cas minimaliste}
@@ -1455,14 +1376,26 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 % Changes shown - START
 
     \medskip
+    \item[2020-08-05] Nouvelle version mineure \verb+0.7.0-beta+.
+    
+    \begin{itemize}[itemsep=.5em]
+        \item \topic*{Définition explicite d'une fonction}
+              les macros \macro{funcdef} et \macro{txtfuncdef} ont été déplacées dans \verb#tnssets# qui est disponible sur \url{https://github.com/typensee-latex/tnssets.git}.
+        
+    \end{itemize}
+    
+    \separation
+% ------------------------ %
+
+    \medskip
     \item[2020-07-30] Nouvelle version mineure \verb+0.6.0-beta+.
     
     \begin{itemize}[itemsep=.5em]
         \item \topic{Définition explicite d'une fonction}
         \begin{itemize}[itemsep=.5em]
-            \item Une nouvelle macro \macro{txfuncdef} produit une version textuelle courte.
+            \item Une nouvelle macro \macro{txtfuncdef} produit une version textuelle courte.
     
-            \item Omission possible des ensembles, via des arguments vides, quand on utilise \macro{funcdef[h]} ou \macro{txfuncdef}.
+            \item Omission possible des ensembles, via des arguments vides, quand on utilise \macro{funcdef[h]} ou \macro{txtfuncdef}.
         \end{itemize}
     
     % ------------------------ %
@@ -1707,43 +1640,6 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 
 
 % ---------------------- %
-
-
-\subsection{Définition explicite d'une fonction}
-
-
-
-\IDmacro{funcdef}{1}{5}
-
-
-\IDoption{}  la valeur par défaut \verb+u+. 
-\begin{enumerate}
-	\item \verb+u+ : écriture empilée avec un trait vertical.
-	
-	\item \verb+s+ : écriture empilée sans trait vertical.
-
-	\item \verb+h+ : écriture horizontale en ligne.
-\end{enumerate}
-
-
-\IDarg{1} la fonction.
-
-\IDarg{2} la variable.
-
-\IDarg{3} la formule explicite de définition.
-
-\IDarg{4} l'ensemble de départ. Cet argument peut être vide si le mode \verb+h+ est activé
-
-\IDarg{5} l'ensemble d'arrivée.
-
-
-\separation
-
-
-\IDmacro[a]{txtfuncdef}{5}
-
-
-\IDargs{1..5} voir les explications données ci-dessus pour la macro \macro{funcdef}.
 
 
 \subsection{Limite}

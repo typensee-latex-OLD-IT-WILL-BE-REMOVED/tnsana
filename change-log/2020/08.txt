@@ -1,0 +1,8 @@
+==========
+2020-08-05
+==========
+
+**New minor version version::``0.7.0-beta`` of ¨tnsana:** see the change below.
+
+
+**Explicit definition of a function:** the two macros ``\funcdef`` and ``\txtfuncdef`` have been moved to ¨tnssets.
