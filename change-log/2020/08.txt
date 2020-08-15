@@ -1,4 +1,11 @@
 ==========
+2020-08-15
+==========   // TODO : updated version next tuime !!!
+
+**Documentation :** the 4th symbolic variable proposed by ¨tnscom has been added.
+
+
+==========
 2020-08-09
 ==========
 
