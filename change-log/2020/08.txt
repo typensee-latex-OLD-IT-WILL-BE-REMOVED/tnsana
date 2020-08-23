@@ -8,7 +8,7 @@
 **Function with an optional paramters :** ``\lg`` and ``\ln`` have an optional argument to indicate a basis.
 
 
-**Backstage machinery:** the too old changelogs are managed automatically now.
+**Backstage machinery:** ¨tnscom has renamed to ``\tns@multi@args`` has been renamed ``\tns@multi@wrap``.
 
 
 
