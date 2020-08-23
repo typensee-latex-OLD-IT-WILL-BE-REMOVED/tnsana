@@ -3,59 +3,48 @@
 
 \makeatletter % Technical doc - START
 
+% ---------------------- %
+% -- GENERAL SETTINGS -- %
+% ---------------------- %
+
+\usepackage[
+	top    = 2cm,
+	bottom = 2cm,
+	left   = 1.5cm,
+	right  = 1.5cm
+]{geometry}
+
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{ucs}
 
 \usepackage[french]{babel,varioref}
 
-\usepackage[top=2cm, bottom=2cm, left=1.5cm, right=1.5cm]{geometry}
-\usepackage{enumitem}
-
-% Source
-%	* https://tex.stackexchange.com/a/558025/6880
-\usepackage{tocbasic}[2020/07/22]% needs KOMA-Script version 3.31
-\DeclareTOCStyleEntries[
-  raggedentrytext,
-  linefill=\hfill,
-  indent=0pt,
-  dynindent,
-  numwidth=0pt,
-  numsep=1ex,
-  dynnumwidth
-]{tocline}{chapter,section,subsection,subsubsection,paragraph,subparagraph}
-\DeclareTOCStyleEntry[indentfollows=chapter]{tocline}{section}
-
-\usepackage{pgffor}
-
-\usepackage{multicol}
-
-\usepackage{makecell}
-
 \usepackage{color}
 \usepackage{hyperref}
 \hypersetup{
     colorlinks,
-    citecolor=black,
-    filecolor=black,
-    linkcolor=black,
-    urlcolor=black
+    citecolor = black,
+    filecolor = black,
+    linkcolor = black,
+    urlcolor  = black
 }
-
 \usepackage[numbered]{bookmark}
-\usepackage{amsthm}
 
-\usepackage{tcolorbox}
-\tcbuselibrary{listingsutf8}
+\usepackage{enumitem}
+\usepackage{multicol}
+\usepackage{makecell}
 
-\usepackage{ifplatform}
-
-\usepackage{ifthen}
-
-\usepackage{macroenvsign}
+\setlength{\parindent}{0cm}
+\setlist{noitemsep}
 
 
-% Sections numbering
+
+% --------------- %
+% -- TOC & Co. -- %
+% --------------- %
+
+\usepackage[raggedright]{titlesec}
 
 %\renewcommand\thechapter{\Alph{chapter}.}
 \renewcommand\thesection{\Roman{section}.}
@@ -63,177 +52,228 @@
 \renewcommand\thesubsubsection{\roman{subsubsection}.}
 
 
-
-% MISC
-
-\newtcblisting{latexex}{%
-	sharp corners,%
-	left=1mm, right=1mm,%
-	bottom=1mm, top=1mm,%
-	colupper=red!75!blue,%
-	listing side text
-}
-
-\newtcbinputlisting{\inputlatexex}[2][]{%
-	listing file={#2},%
-	sharp corners,%
-	left=1mm, right=1mm,%
-	bottom=1mm, top=1mm,%
-	colupper=red!75!blue,%
-	listing side text
-}
-
-
-\newtcblisting{latexex-flat}{%
-	sharp corners,%
-	left=1mm, right=1mm,%
-	bottom=1mm, top=1mm,%
-	colupper=red!75!blue,%
-}
-
-\newtcbinputlisting{\inputlatexexflat}[2][]{%
-	listing file={#2},%
-	sharp corners,%
-	left=1mm, right=1mm,%
-	bottom=1mm, top=1mm,%
-	colupper=red!75!blue,%
-}
-
-
-\newtcblisting{latexex-alone}{%
-	sharp corners,%
-	left=1mm, right=1mm,%
-	bottom=1mm, top=1mm,%
-	colupper=red!75!blue,%
-	listing only
-}
-
-\newtcbinputlisting{\inputlatexexalone}[2][]{%
-	listing file={#2},%
-	sharp corners,%
-	left=1mm, right=1mm,%
-	bottom=1mm, top=1mm,%
-	colupper=red!75!blue,%
-	listing only
-}
-
-
-\newcommand\inputlatexexcodeafter[1]{%
-	\begin{center}
-		\input{#1}
-	\end{center}
-
-	\vspace{-.5em}
-	
-	Le rendu précédent a été obtenu via le code suivant.
-	
-	\inputlatexexalone{#1}
-}
-
-
-\newcommand\inputlatexexcodebefore[1]{%
-	\inputlatexexalone{#1}
-	\vspace{-.75em}
-	\begin{center}
-		\textit{\footnotesize Rendu du code précédent}
-		
-		\medskip
-		
-		\input{#1}
-	\end{center}
-}
-
-
-\newcommand\env[1]{\texttt{#1}}
-\newcommand\macro[1]{\env{\textbackslash{}#1}}
-
-
-
-\setlength{\parindent}{0cm}
-\setlist{noitemsep}
-
-\theoremstyle{definition}
-\newtheorem*{remark}{Remarque}
-
-\usepackage[raggedright]{titlesec}
-
 \titleformat{\paragraph}[hang]{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
 \titlespacing*{\paragraph}{0pt}{3.25ex plus 1ex minus .2ex}{0.5em}
 
 
+% Source
+%    * https://tex.stackexchange.com/a/558025/6880
+\usepackage{tocbasic}[2020/07/22]% needs KOMA-Script version 3.31
+
+\DeclareTOCStyleEntries[
+    raggedentrytext,
+    linefill = \hfill,
+    indent   = 0pt,
+    dynindent,
+    numwidth = 0pt,
+    numsep   = 1ex,
+    dynnumwidth
+]{tocline}{
+	chapter,
+	section,
+	subsection,
+	subsubsection,
+	paragraph,
+	subparagraph
+}
+
+\DeclareTOCStyleEntry[indentfollows = chapter]{tocline}{section}
+
+
+
+% ----------- %
+% -- TOOLS -- %
+% ----------- %
+
+\usepackage{ifplatform}
+\usepackage{ifthen}
+\usepackage{macroenvsign}
+\usepackage{pgffor}
+
+
+
+% ------------------------- %
+% -- SPECIAL FORMATTINGS -- %
+% ------------------------- %
+
+\usepackage{amsthm}
+
+\usepackage{tcolorbox}
+
+
+% -- LISTINGS -- %
+
+%\tcbuselibrary{listingsutf8}
+\tcbuselibrary{minted, breakable}
+
+\newtcblisting{latexex}{%
+    breakable,
+    sharp corners,%
+    left   = 1mm, right = 1mm,%
+    bottom = 1mm, top   = 1mm,%
+    %colupper = red!75!blue,%
+    listing side text
+}
+
+\newtcbinputlisting{\inputlatexex}[2][]{%
+    listing file={#2},%
+    breakable,
+    sharp corners,%
+    left   = 1mm, right = 1mm,%
+    bottom = 1mm, top   = 1mm,%
+    %colupper = red!75!blue,%
+    listing side text
+}
+
+
+\newtcblisting{latexex-flat}{%
+    breakable,
+    sharp corners,%
+    left   = 1mm, right = 1mm,%
+    bottom = 1mm, top   = 1mm,%
+    %colupper = red!75!blue,%
+}
+
+\newtcbinputlisting{\inputlatexexflat}[2][]{%
+    listing file={#2},%
+    breakable,
+    sharp corners,%
+    left   = 1mm, right = 1mm,%
+    bottom = 1mm, top   = 1mm,%
+    %colupper = red!75!blue,%
+}
+
+
+\newtcblisting{latexex-alone}{%
+    breakable,
+    sharp corners,%
+    left   = 1mm, right = 1mm,%
+    bottom = 1mm, top   = 1mm,%
+    %colupper = red!75!blue,%
+    listing only
+}
+
+\newtcbinputlisting{\inputlatexexalone}[2][]{%
+    listing file={#2},%
+    breakable,
+    sharp corners,%
+    left   = 1mm, right = 1mm,%
+    bottom = 1mm, top   = 1mm,%
+    %colupper = red!75!blue,%
+    listing only
+}
+
+
+\newcommand\inputlatexexcodeafter[1]{%
+    \begin{center}
+        \input{#1}
+    \end{center}
+
+    \vspace{-.5em}
+    
+    Le rendu précédent a été obtenu via le code suivant.
+    
+    \inputlatexexalone{#1}
+}
+
+
+\newcommand\inputlatexexcodebefore[1]{%
+    \inputlatexexalone{#1}
+    \vspace{-.75em}
+    \begin{center}
+        \textit{\footnotesize Rendu du code précédent}
+        
+        \medskip
+        
+        \input{#1}
+    \end{center}
+}
+
+
+% -- REMARK -- %
+
+\theoremstyle{definition}
+\newtheorem*{remark}{Remarque}
+
+
+% -- EXAMPLE -- %
+
+\newcounter{paraexample}[subsubsection]
+
+\newcommand\@newexample@abstract[2]{%
+    \paragraph{%
+        #1%
+        \if\relax\detokenize{#2}\relax\else {} -- #2\fi%
+    }%
+}
+
+\newcommand\newparaexample{\@ifstar{\@newparaexample@star}{\@newparaexample@no@star}}
+
+\newcommand\@newparaexample@no@star[1]{%
+    \refstepcounter{paraexample}%
+    \@newexample@abstract{Exemple \theparaexample}{#1}%
+}
+
+\newcommand\@newparaexample@star[1]{%
+    \@newexample@abstract{Exemple}{#1}%
+}
+
+
+% -- CHANGE LOG -- %
+
+\newcommand\topic{\@ifstar{\@topic@star}{\@topic@no@star}}
+
+\newcommand\@topic@no@star[1]{%
+    \textbf{\textsc{#1}.}%
+}
+
+\newcommand\@topic@star[1]{%
+    \textbf{\textsc{#1} :}%
+}
+
+
+% -- ABOUT MACROS & Co. -- %
+
+\newcommand\env[1]{\texttt{#1}}
+\newcommand\macro[1]{\env{\textbackslash{}#1}}
+
 \newcommand\separation{
-	\medskip
-	\hfill\rule{0.5\textwidth}{0.75pt}\hfill
-	\medskip
+    \medskip
+    \hfill\rule{0.5\textwidth}{0.75pt}\hfill
+    \medskip
 }
 
 
 \newcommand\extraspace{
-	\vspace{0.25em}
+    \vspace{0.25em}
 }
 
 
 \newcommand\whyprefix[2]{%
-	\textbf{\prefix{#1}}-#2%
+    \textbf{\prefix{#1}}-#2%
 }
 
 \newcommand\mwhyprefix[2]{%
-	\texttt{#1 = #1-#2}%
+    \texttt{#1 = #1-#2}%
 }
 
 \newcommand\prefix[1]{%
-	\texttt{#1}%
+    \texttt{#1}%
 }
 
 
 \newcommand\inenglish{\@ifstar{\@inenglish@star}{\@inenglish@no@star}}
 
 \newcommand\@inenglish@star[1]{%
-	\emph{\og #1 \fg}%
+    \emph{\og #1 \fg}%
 }
 
 \newcommand\@inenglish@no@star[1]{%
-	\@inenglish@star{#1} en anglais%
+    \@inenglish@star{#1} en anglais%
 }
 
 
 \newcommand\ascii{\texttt{ASCII}}
-
-
-% Example
-\newcounter{paraexample}[subsubsection]
-
-\newcommand\@newexample@abstract[2]{%
-	\paragraph{%
-		#1%
-		\if\relax\detokenize{#2}\relax\else {} -- #2\fi%
-	}%
-}
-
-
-
-\newcommand\newparaexample{\@ifstar{\@newparaexample@star}{\@newparaexample@no@star}}
-
-\newcommand\@newparaexample@no@star[1]{%
-	\refstepcounter{paraexample}%
-	\@newexample@abstract{Exemple \theparaexample}{#1}%
-}
-
-\newcommand\@newparaexample@star[1]{%
-	\@newexample@abstract{Exemple}{#1}%
-}
-
-
-% Change log
-\newcommand\topic{\@ifstar{\@topic@star}{\@topic@no@star}}
-
-\newcommand\@topic@no@star[1]{%
-	\textbf{\textsc{#1}.}%
-}
-
-\newcommand\@topic@star[1]{%
-	\textbf{\textsc{#1} :}%
-}
 
 \makeatother % Technical doc - END
 
@@ -252,10 +292,10 @@
 	\\%
 	{\footnotesize Code source disponible sur \url{https://github.com/typensee-latex/tnsana.git}.}%
 	\\%
-    {\footnotesize Version \texttt{0.7.0-beta} développée et testée sur \macosxname{}.}%
+    {\footnotesize Version \texttt{0.8.0-beta} développée et testée sur \macosxname{}.}%
 }
 \author{Christophe BAL}
-\date{2020-08-05}
+\date{2020-08-23}
 
 \maketitle
 
@@ -344,9 +384,9 @@ $a x^2 + b x + c$
 Le package \verb+tnscom+, chargé en coulisse, propose la macro \macro{symvar} qui produit différents symboles donnés ci-dessous.
 
 \begin{latexex}
-$\symvar = \symvar[1]$ ou
-$\symvar[2]$ ou
-$\symvar[3]$
+$\symvar = \symvar[1]$ ou $\symvar[2]$
+
+$\symvar[3]$ ou $\symvar[4]$
 \end{latexex}
 
 Le nom \prefix{symvar} vient de \whyprefix{symb}{olic} \whyprefix{var}{iable} soit \inenglish{variable symbolique}.
@@ -388,11 +428,12 @@ $\fch x = \cosh x$ ou $\acos x$
 
 \subsection{Avec un paramètre}
 
-Pour le moment il y a juste deux fonctions utilisables avec un paramètre optionnel. Les voici.
+Voici des fonctions utilisables avec un paramètre optionnel.
 
 \begin{latexex}
-$\log[2] x = \lg x$ ou
-$\exp[6] y = 6^y$
+$\exp[6] y = 6^y$   ,
+$\log[2] x = \lg x$ ,
+$\lg[3] x$ et $\ln[4] x$
 \end{latexex}
 
 
@@ -438,6 +479,14 @@ $\exp[6] y = 6^y$
     \macro{exp x} : $\exp x$
 
     \macro{exp[p] x} : $\exp[p] x$
+
+    \macro{lg x} : $\lg x$
+
+    \macro{lg[p] x} : $\lg[p] x$
+
+    \macro{ln x} : $\ln x$
+
+    \macro{ln[p] x} : $\ln[p] x$
 
     \macro{log x} : $\log x$
 
@@ -885,81 +934,7 @@ Bien noter l'usage de valeurs utiles \og vides \fg{} de $x$ ainsi que les mystiq
 
 Voici un autre exemple s'utilisant la machinerie TikZ afin d'indiquer dans les variations la convexité et la concavité via des flèches incurvées \emph{(cette convention est proposée dans la sous-section \emph{\og Exemple utilisant l'option \macro{help} \fg} de la section \emph{\og Gallerie \fg}  de la documentation de \prefix{tkz-tab})}.
 
-\begin{center}
-\begin{tikzpicture}
-    \tkzTabInit[
-        espcl = 3,
-%        help       % <-- Pour voir les noms des noeuds.
-    ]{
-        $x$   / 0.75 ,
-        $f''$ / 1    ,
-        $f'$  / 2    ,
-        $f$   / 3
-    }{
-                $-\infty$          , $0$          , $+\infty$
-    }
-    \tkzTabLine{               , - , z        , + ,              }
-    \tkzTabVar {+ / $+\infty$      , - / $-2$     , + / $+\infty$}
-
-    \tkzTabVal[draw]{1}{2}{.5}{$x_1$}{$0$}
-    \tkzTabVal[draw]{2}{3}{.5}{$x_2$}{$0$}
-
-    \begin{scope}[->, > = triangle 60]
-        \coordinate (Middle1) at ($(N13)!0.5!(N14)$);
-        \coordinate (Middle2) at ($(N23)!0.5!(N24)$);
-        \coordinate (Middle3) at ($(N33)!0.5!(N34)$);
-        \path (N13) -- (N23) node[midway,below=6pt](N){};
-        %
-        \draw ([above=6pt]Middle1)
-              to [bend left=45] ([left=1pt]N);
-        \draw ([right=3pt]N)
-              to [bend left=45] ([above=6pt]Middle2) ;
-        \draw ([below right=3pt]Middle2)
-              to [bend left=-45] ([above=6pt]M24) ;
-        \draw ([above right=6pt]M24)
-              to [bend right=40] ([below left=6pt]Middle3);
-    \end{scope}
-\end{tikzpicture}
-\end{center}
-
-Le code utilisé est le suivant.
-
-\begin{latexex-alone}
-\begin{tikzpicture}
-    \tkzTabInit[
-        espcl = 3,
-%        help       % <-- Pour voir les noms des noeuds.
-    ]{
-        $x$   / 0.75 ,
-        $f''$ / 1    ,
-        $f'$  / 2    ,
-        $f$   / 3
-    }{
-                $-\infty$          , $0$          , $+\infty$
-    }
-    \tkzTabLine{               , - , z        , + ,              }
-    \tkzTabVar {+ / $+\infty$      , - / $-2$     , + / $+\infty$}
-
-    \tkzTabVal[draw]{1}{2}{.5}{$x_1$}{$0$}
-    \tkzTabVal[draw]{2}{3}{.5}{$x_2$}{$0$}
-
-    \begin{scope}[->, > = triangle 60]
-        \coordinate (Middle1) at ($(N13)!0.5!(N14)$);
-        \coordinate (Middle2) at ($(N23)!0.5!(N24)$);
-        \coordinate (Middle3) at ($(N33)!0.5!(N34)$);
-        \path (N13) -- (N23) node[midway,below=6pt](N){};
-        %
-        \draw ([above=6pt]Middle1)
-              to [bend left=45] ([left=1pt]N);
-        \draw ([right=3pt]N)
-              to [bend left=45] ([above=6pt]Middle2) ;
-        \draw ([below right=3pt]Middle2)
-              to [bend left=-45] ([above=6pt]M24) ;
-        \draw ([above right=6pt]M24)
-              to [bend right=40] ([below left=6pt]Middle3);
-    \end{scope}
-\end{tikzpicture}
-\end{latexex-alone}
+\inputlatexexcodeafter{tikz/tabsignvar-convex.tkz}
 %% \section{Analysis}
 %
 %\section{Tableaux de variation et de signe}
@@ -1017,7 +992,7 @@ il a fallu ajouter les lignes données ci-dessous où sont utilisées les macros
 % ---------------------- %
 
 
-\subsubsection{Ajouter une couleur de fond à une ligne}
+\subsubsection{\macro{backLine} -- Ajouter une couleur de fond à une ligne}
 
 La modification de la couleur de fond d'une ligne se fait via la macro \macro{backLine}
 \footnote{
@@ -1047,7 +1022,7 @@ Cette macro possède un argument optionnel et un obligatoire.
 % ---------------------- %
 
 
-\subsubsection{Commenter une ligne}
+\subsubsection{\macro{comLine} -- Commenter une ligne}
 
 L'ajout de commentaires courts se fait via la macro \macro{comLine} pour \whyprefix{com}{ment a} \prefix{line} soit \inenglish{commenter une ligne}.
 Cette macro possède un argument optionnel et deux obligatoires.
@@ -1075,13 +1050,13 @@ Cette macro possède un argument optionnel et deux obligatoires.
 % ---------------------- %
 
 
-\subsubsection{Graphiques pour expliquer des signes}
+\subsubsection{\macro{graphSign} -- Graphiques pour expliquer des signes}
 
 Pour le moment, la macro \macro{graphSign} propose différents types de graphiques de fonctions dites de référence.
 Avant de voir ce qui est proposé rappelons que la convention est de prendre $0$ pour numéro de la toute 1\iere{} ligne contenant les valeurs utiles de la variable.
 
 \begin{enumerate}
-    \item \textbf{\itshape Fonctions affines non constantes avec une contrainte.}
+    \item \textbf{\itshape Fonctions affines $a x + b$.}
           
           \smallskip
 
@@ -1120,7 +1095,7 @@ Avant de voir ce qui est proposé rappelons que la convention est de prendre $0$
 
 
     \bigskip
-    \item \textbf{\itshape Fonctions trinômiales du 2\ieme{} degré avec deux contraintes.}
+    \item \textbf{\itshape Fonctions trinômiales du 2\ieme{} degré  $a x^2 + b x + c$.}
           
           \smallskip
 
@@ -1168,7 +1143,7 @@ Avant de voir ce qui est proposé rappelons que la convention est de prendre $0$
 
 
     \bigskip
-    \item \textbf{\itshape Fonctions sans contrainte.}
+    \item \textbf{\itshape Fonctions de référence.}
           
           \smallskip
 
@@ -1393,6 +1368,18 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 % Changes shown - START
 
     \medskip
+    \item[2020-08-23] Nouvelle version mineure \verb+0.8.0-beta+.
+    
+    \begin{itemize}[itemsep=.5em]
+        \item \topic*{Fonctions avec un paramètre optionnel}
+              les macros \macro{lg} et \macro{ln} peuvent s'utiliser avec une base.
+        
+    \end{itemize}
+    
+    \separation
+% ------------------------ %
+
+    \medskip
     \item[2020-08-05] Nouvelle version mineure \verb+0.7.0-beta+.
     
     \begin{itemize}[itemsep=.5em]
@@ -1575,7 +1562,7 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 	\item \verb#1# donne $\symvar[1]$ .
 	\item \verb#2# donne $\symvar[2]$ .
 	\item \verb#3# donne $\symvar[3]$ .
-%	\item \verb#4# donne $\symvar[4]$ .
+	\item \verb#4# donne $\symvar[4]$ .
 \end{itemize}
 
 
@@ -1648,6 +1635,10 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 \IDoption{} la base de l'exponentielle
 
 \separation
+
+\IDmacro[o]{lg }{1}
+
+\IDmacro[o]{ln }{1}
 
 \IDmacro[o]{log}{1}
 

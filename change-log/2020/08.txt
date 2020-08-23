@@ -1,4 +1,22 @@
 ==========
+2020-08-23
+==========
+
+**New minor version version::``0.8.0-beta`` of ¨tnsana:** see the change below.
+
+
+**Function with an optional paramters :** ``\lg`` and ``\ln`` have an optional argument to indicate a basis.
+
+
+
+==========
+2020-08-15
+==========
+
+**Documentation :** the 4th symbolic variable proposed by ¨tnscom has been added.
+
+
+==========
 2020-08-09
 ==========
 
