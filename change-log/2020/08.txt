@@ -8,6 +8,9 @@
 **Function with an optional paramters :** ``\lg`` and ``\ln`` have an optional argument to indicate a basis.
 
 
+**Backstage machinery:** the too old changelogs are managed automatically now.
+
+
 
 ==========
 2020-08-15
