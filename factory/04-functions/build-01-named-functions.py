@@ -29,10 +29,10 @@ PEUF_FILE        = STY_FILE.parent / (match.group(1).strip() + ".peuf")
 TEMP_LATEX_PARAM_FUNC = """
 \\let\\std{name}\\{name}
 \\renewcommand\\{name}[1][]{{%
-	\\std{name}%
-	\\if\\relax\\detokenize{{#1}}\\relax\\else%
-		_{{#1}}%
-	\\fi%
+    \\std{name}%
+    \\if\\relax\\detokenize{{#1}}\\relax\\else%
+        _{{#1}}%
+    \\fi%
 }}
 """.lstrip()
 
@@ -135,8 +135,8 @@ tabletex = [
     for name in list(functions['no-parameter'])
 ] + [
     f"    \\macro{{{name} x}} : $\\{name} x$"
-	+ "\n"*2 +
-	f"    \\macro{{{name}[p] x}} : $\\{name}[p] x$"""
+    + "\n"*2 +
+    f"    \\macro{{{name}[p] x}} : $\\{name}[p] x$"""
     for name in list(functions['parameter'])
 ]
 
@@ -228,13 +228,17 @@ docinfos = []
 for name, infos in functions['parameter'].items():
     nbparam = int(infos['nbparam'])
 
-    docinfos += [
-        "\\separation",
-        f"\\IDmacro[o]{{{name}}}{{{nbparam}}}"
-    ]
+    if name not in ["ln", "log"]:
+        docinfos.append("\\separation")
 
-    desc = infos["desc"]
-    docinfos.append(f"\\IDoption{{}} {desc}")
+    if name in ["ln", "lg"]:
+        name += " "
+
+    docinfos.append(f"\\IDmacro[o]{{{name}}}{{{nbparam}}}")
+
+    if name.strip() not in ["lg", "ln"]:
+        desc = infos["desc"]
+        docinfos.append(f"\\IDoption{{}} {desc}")
 
 
 if docinfos:

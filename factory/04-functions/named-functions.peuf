@@ -29,4 +29,6 @@ parameter::
 // Specifications :
 // nb parameter ; tech infos
     exp = 1 ; la base de l'exponentielle
+    lg  = 1 ; la base du logarithme
+    ln  = 1 ; la base du logarithme
     log = 1 ; la base du logarithme
