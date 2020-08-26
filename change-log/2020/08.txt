@@ -8,7 +8,7 @@
 **Function with an optional paramters :** ``\lg`` and ``\ln`` have an optional argument to indicate a basis.
 
 
-**Backstage machinery:** ¨tnscom has renamed to ``\tns@multi@args`` has been renamed ``\tns@multi@wrap``.
+**Backstage machinery:** ¨tnscom has renamed ``\tns@multi@args`` to ``\tns@multi@wrap``.
 
 
 
