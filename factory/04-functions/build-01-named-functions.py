@@ -130,19 +130,54 @@ text_start, _, text_end = between(
     keepseps = True
 )
 
-tabletex = [
-    f"    \\macro{{{name} x}} : $\\{name} x$"
+
+tablefuncs = [
+    f"{name} x"
     for name in list(functions['no-parameter'])
-] + [
-    f"    \\macro{{{name} x}} : $\\{name} x$"
-    + "\n"*2 +
-    f"    \\macro{{{name}[p] x}} : $\\{name}[p] x$"""
-    for name in list(functions['parameter'])
 ]
 
-tabletex = '\n\n'.join(tabletex)
+for name in list(functions['parameter']):
+    tablefuncs += [
+        f"{name} x",
+        f"{name}[p] x",
+        ""
+    ]
 
-temp_tex = f"{text_start}\n{tabletex}\n{text_end}"
+
+maxsizes = [0]*3
+
+for i in range(len(tablefuncs) // 3):
+    for j, texcode in enumerate(tablefuncs[3*i: 3*i+3]):
+        l = len(texcode)
+
+        if l > maxsizes[j]:
+            maxsizes[j] = l
+
+
+tabletex = []
+
+for i in range(len(tablefuncs) // 3):
+    oneline = []
+
+    for j, texcode in enumerate(tablefuncs[3*i: 3*i+3]):
+        if texcode:
+            texcode = f"{texcode:{maxsizes[j]}}"
+            texcode = f"\\verb#\\{texcode}# : $\\{texcode}$"
+
+        oneline.append(texcode)
+
+    tabletex.append(" & ".join(oneline))
+
+
+tabletex = '\n\\\\[.75ex]\n'.join(tabletex)
+
+tableformat = "p{0.3\\linewidth}"*3
+
+temp_tex = f"""{text_start}
+\\begin{{longtable}}{{{tableformat}}}
+{tabletex}
+\\end{{longtable}}
+{text_end}"""
 
 
 # ----------------------------------------------- #

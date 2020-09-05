@@ -1,0 +1,11 @@
+==========
+2020-09-05
+==========
+
+**New minor version version::``0.9.0-beta`` of ¨tnsana:** see the change below.
+
+
+**Parameters:** the macro ``\mathop`` is used by ``\param`` to have a spacing around parameters.
+
+
+**Documentation :** a table simplifies the reading of all the named functions.

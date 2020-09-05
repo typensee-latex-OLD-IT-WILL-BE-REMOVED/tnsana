@@ -78,9 +78,11 @@ text_end = text_end.lstrip()
 text_auto = [
     r"""
 \newcommand\param[1]{{%
-    \IfStrEqCase{{#1}}{{%
-        {0}
-    }}[\text{{\textbf{{#1}}}}]
+    \mathop{{{{}}%
+        \IfStrEqCase{{#1}}{{%
+            {0}
+        }}[\text{{\textbf{{#1}}}}]%
+    }}%
 }}
 
 % Classical constants
